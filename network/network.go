@@ -1,5 +1,5 @@
-// Package network provides several
-// types that represent common network
+// Provides several types
+// that represent common network
 // concepts, such as IP addresses,
 // network blocks, or autonomous systems.
 //
