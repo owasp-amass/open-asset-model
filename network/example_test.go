@@ -46,7 +46,7 @@ func ExampleRIROrganization() {
 		RIR:   "ARIN",
 	}
 
-	fmt.Println(riro.Name == "Example")
+	fmt.Println(riro.Name == "Google LLC")
 	fmt.Println(riro.RIRId == "GOGL")
 	fmt.Println(riro.RIR == "ARIN")
 
