@@ -8,7 +8,7 @@ import (
 
 	. "github.com/owasp-amass/open-asset-model/network"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestIPAddress(t *testing.T) {
@@ -33,9 +33,9 @@ func TestIPAddress(t *testing.T) {
 			ip, _ := netip.ParseAddr(tt.ip)
 			ipAddress := IPAddress{Address: ip, Type: tt.netType}
 
-			assert.NotNil(t, ipAddress.Address)
-			assert.Equal(t, tt.ip, ipAddress.Address.String())
-			assert.Equal(t, tt.netType, ipAddress.Type)
+			require.NotNil(t, ipAddress.Address)
+			require.Equal(t, tt.ip, ipAddress.Address.String())
+			require.Equal(t, tt.netType, ipAddress.Type)
 		})
 	}
 
@@ -62,9 +62,8 @@ func TestIPAddress(t *testing.T) {
 
 			jsonData, err := json.Marshal(ipAddress)
 
-			assert.NoError(t, err)
-			assert.Contains(t, string(jsonData), fmt.Sprintf(`"address":"%s"`, tt.ip))
-			assert.Contains(t, string(jsonData), fmt.Sprintf(`"type":"%s"`, tt.netType))
+			require.NoError(t, err)
+			require.JSONEq(t, fmt.Sprintf(`{"address":"%s","type":"%s"}`, tt.ip, tt.netType), string(jsonData))
 		})
 	}
 }

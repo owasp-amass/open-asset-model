@@ -8,7 +8,7 @@ import (
 
 	. "github.com/owasp-amass/open-asset-model/network"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNetblock(t *testing.T) {
@@ -33,8 +33,8 @@ func TestNetblock(t *testing.T) {
 			prefix, _ := netip.ParsePrefix(tt.cidr)
 			netblock := Netblock{Cidr: prefix, Type: tt.netType}
 
-			assert.Equal(t, tt.cidr, netblock.Cidr.String())
-			assert.Equal(t, tt.netType, netblock.Type)
+			require.Equal(t, tt.cidr, netblock.Cidr.String())
+			require.Equal(t, tt.netType, netblock.Type)
 		})
 	}
 
@@ -61,9 +61,8 @@ func TestNetblock(t *testing.T) {
 
 			jsonData, err := json.Marshal(netblock)
 
-			assert.NoError(t, err)
-			assert.Contains(t, string(jsonData), fmt.Sprintf(`"cidr":"%s"`, tt.cidr))
-			assert.Contains(t, string(jsonData), fmt.Sprintf(`"type":"%s"`, tt.netType))
+			require.NoError(t, err)
+			require.JSONEq(t, fmt.Sprintf(`{"cidr":"%s","type":"%s"}`, tt.cidr, tt.netType), string(jsonData))
 		})
 	}
 }
