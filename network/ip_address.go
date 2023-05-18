@@ -1,7 +1,10 @@
 package network
 
 import (
+	"encoding/json"
 	"net/netip"
+
+	model "github.com/owasp-amass/open-asset-model"
 )
 
 // IPAddress represents an IP address.
@@ -13,4 +16,14 @@ type IPAddress struct {
 
 	// Type is the type of IP address, such as "IPv4" or "IPv6".
 	Type string `json:"type"`
+}
+
+// AssetType returns the asset type.
+func (i IPAddress) AssetType() model.AssetType {
+	return model.IPAddress
+}
+
+// JSON returns the JSON encoding of the struct.
+func (i IPAddress) JSON() ([]byte, error) {
+	return json.Marshal(i)
 }

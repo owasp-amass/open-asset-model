@@ -1,15 +1,20 @@
 package network_test
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/netip"
 	"testing"
 
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 
 	"github.com/stretchr/testify/require"
 )
+
+func TestIPAddressImplementsAsset(t *testing.T) {
+	var _ model.Asset = IPAddress{}       // Verify that IPAddress implements Asset interface
+	var _ model.Asset = (*IPAddress)(nil) // Verify that *IPAddress implements Asset interface.
+}
 
 func TestIPAddress(t *testing.T) {
 	tests := []struct {
@@ -36,6 +41,7 @@ func TestIPAddress(t *testing.T) {
 			require.NotNil(t, ipAddress.Address)
 			require.Equal(t, tt.ip, ipAddress.Address.String())
 			require.Equal(t, tt.netType, ipAddress.Type)
+			require.Equal(t, ipAddress.AssetType(), model.IPAddress)
 		})
 	}
 
@@ -60,7 +66,7 @@ func TestIPAddress(t *testing.T) {
 			ip, _ := netip.ParseAddr(tt.ip)
 			ipAddress := IPAddress{Address: ip, Type: tt.netType}
 
-			jsonData, err := json.Marshal(ipAddress)
+			jsonData, err := ipAddress.JSON()
 
 			require.NoError(t, err)
 			require.JSONEq(t, fmt.Sprintf(`{"address":"%s","type":"%s"}`, tt.ip, tt.netType), string(jsonData))
