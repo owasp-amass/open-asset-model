@@ -1,15 +1,20 @@
 package network_test
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/netip"
 	"testing"
 
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 
 	"github.com/stretchr/testify/require"
 )
+
+func TestNetblockImplementsAsset(t *testing.T) {
+	var _ model.Asset = Netblock{}       // Verify that Netblock implements Asset interface
+	var _ model.Asset = (*Netblock)(nil) // Verify that *Netblock implements Asset interface.
+}
 
 func TestNetblock(t *testing.T) {
 	tests := []struct {
@@ -35,6 +40,8 @@ func TestNetblock(t *testing.T) {
 
 			require.Equal(t, tt.cidr, netblock.Cidr.String())
 			require.Equal(t, tt.netType, netblock.Type)
+
+			require.Equal(t, model.Netblock, netblock.AssetType())
 		})
 	}
 
@@ -59,7 +66,7 @@ func TestNetblock(t *testing.T) {
 			prefix, _ := netip.ParsePrefix(tt.cidr)
 			netblock := Netblock{Cidr: prefix, Type: tt.netType}
 
-			jsonData, err := json.Marshal(netblock)
+			jsonData, err := netblock.JSON()
 
 			require.NoError(t, err)
 			require.JSONEq(t, fmt.Sprintf(`{"cidr":"%s","type":"%s"}`, tt.cidr, tt.netType), string(jsonData))

@@ -1,5 +1,11 @@
 package network
 
+import (
+	"encoding/json"
+
+	model "github.com/owasp-amass/open-asset-model"
+)
+
 // RIROrganization represents an organization that is a member
 // of a Regional Internet Registry (RIR). An RIR is an organization
 // that manages the allocation and registration of IP addresses
@@ -16,4 +22,14 @@ type RIROrganization struct {
 	// It should be one of "AFRINIC", "APNIC", "ARIN", "LACNIC", "RIPE".
 	// Leave empty if unknown.
 	RIR string `json:"rir"`
+}
+
+// AssetType returns the asset type.
+func (r RIROrganization) AssetType() model.AssetType {
+	return model.RIROrg
+}
+
+// JSON returns the JSON encoding of the struct.
+func (r RIROrganization) JSON() ([]byte, error) {
+	return json.Marshal(r)
 }

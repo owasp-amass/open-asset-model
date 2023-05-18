@@ -1,7 +1,10 @@
 package network
 
 import (
+	"encoding/json"
 	"net/netip"
+
+	model "github.com/owasp-amass/open-asset-model"
 )
 
 // Netblock represents a block of IP addresses in a network.
@@ -15,4 +18,14 @@ type Netblock struct {
 	// Type is the type of the IP address block,
 	// such as "IPv4" or "IPv6".
 	Type string `json:"type"`
+}
+
+// AssetType returns the asset type.
+func (n Netblock) AssetType() model.AssetType {
+	return model.Netblock
+}
+
+// JSON returns the JSON encoding of the struct.
+func (n Netblock) JSON() ([]byte, error) {
+	return json.Marshal(n)
 }
