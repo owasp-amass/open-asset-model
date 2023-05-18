@@ -5,15 +5,15 @@ import (
 	"net/netip"
 	"testing"
 
-	openAssetModel "github.com/owasp-amass/open-asset-model"
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestIPAddressImplementsAsset(t *testing.T) {
-	var _ openAssetModel.Asset = IPAddress{}       // Verify that IPAddress implements Asset interface
-	var _ openAssetModel.Asset = (*IPAddress)(nil) // Verify that *IPAddress implements Asset interface.
+	var _ model.Asset = IPAddress{}       // Verify that IPAddress implements Asset interface
+	var _ model.Asset = (*IPAddress)(nil) // Verify that *IPAddress implements Asset interface.
 }
 
 func TestIPAddress(t *testing.T) {
@@ -41,7 +41,7 @@ func TestIPAddress(t *testing.T) {
 			require.NotNil(t, ipAddress.Address)
 			require.Equal(t, tt.ip, ipAddress.Address.String())
 			require.Equal(t, tt.netType, ipAddress.Type)
-			require.Equal(t, ipAddress.AssetType(), openAssetModel.IPAddress)
+			require.Equal(t, ipAddress.AssetType(), model.IPAddress)
 		})
 	}
 

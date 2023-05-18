@@ -5,15 +5,15 @@ import (
 	"net/netip"
 	"testing"
 
-	openAssetModel "github.com/owasp-amass/open-asset-model"
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestNetblockImplementsAsset(t *testing.T) {
-	var _ openAssetModel.Asset = Netblock{}       // Verify that Netblock implements Asset interface
-	var _ openAssetModel.Asset = (*Netblock)(nil) // Verify that *Netblock implements Asset interface.
+	var _ model.Asset = Netblock{}       // Verify that Netblock implements Asset interface
+	var _ model.Asset = (*Netblock)(nil) // Verify that *Netblock implements Asset interface.
 }
 
 func TestNetblock(t *testing.T) {
@@ -41,7 +41,7 @@ func TestNetblock(t *testing.T) {
 			require.Equal(t, tt.cidr, netblock.Cidr.String())
 			require.Equal(t, tt.netType, netblock.Type)
 
-			require.Equal(t, openAssetModel.Netblock, netblock.AssetType())
+			require.Equal(t, model.Netblock, netblock.AssetType())
 		})
 	}
 

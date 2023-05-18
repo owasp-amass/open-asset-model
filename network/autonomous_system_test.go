@@ -3,14 +3,14 @@ package network_test
 import (
 	"testing"
 
-	openAssetModel "github.com/owasp-amass/open-asset-model"
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 	"github.com/stretchr/testify/require"
 )
 
 func TestAutonomousSystemImplementsAsset(t *testing.T) {
-	var _ openAssetModel.Asset = AutonomousSystem{}       // Verify that AutonomousSystem implements Asset interface
-	var _ openAssetModel.Asset = (*AutonomousSystem)(nil) // Verify that *AutonomousSystem implements Asset interface.
+	var _ model.Asset = AutonomousSystem{}       // Verify that AutonomousSystem implements Asset interface
+	var _ model.Asset = (*AutonomousSystem)(nil) // Verify that *AutonomousSystem implements Asset interface.
 }
 
 func TestAutonomousSystem(t *testing.T) {
@@ -18,7 +18,7 @@ func TestAutonomousSystem(t *testing.T) {
 		as := AutonomousSystem{Number: 64496}
 
 		require.Equal(t, 64496, as.Number)
-		require.Equal(t, as.AssetType(), openAssetModel.ASN)
+		require.Equal(t, as.AssetType(), model.ASN)
 	})
 
 	t.Run("Test successful JSON serialization of AutonomousSystem with valid AS number", func(t *testing.T) {

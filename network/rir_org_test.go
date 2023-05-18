@@ -3,15 +3,15 @@ package network_test
 import (
 	"testing"
 
-	openAssetModel "github.com/owasp-amass/open-asset-model"
+	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/network"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestRIROrganizationImplementsAsset(t *testing.T) {
-	var _ openAssetModel.Asset = RIROrganization{}       // Verify that RIROrganization implements Asset interface
-	var _ openAssetModel.Asset = (*RIROrganization)(nil) // Verify that *RIROrganization implements Asset interface.
+	var _ model.Asset = RIROrganization{}       // Verify that RIROrganization implements Asset interface
+	var _ model.Asset = (*RIROrganization)(nil) // Verify that *RIROrganization implements Asset interface.
 }
 
 func TestRIROrganization(t *testing.T) {
@@ -21,7 +21,7 @@ func TestRIROrganization(t *testing.T) {
 		require.Equal(t, "ExampleOrg", rirOrg.Name)
 		require.Equal(t, "e12345", rirOrg.RIRId)
 		require.Equal(t, "ARIN", rirOrg.RIR)
-		require.Equal(t, rirOrg.AssetType(), openAssetModel.RIROrg)
+		require.Equal(t, rirOrg.AssetType(), model.RIROrg)
 	})
 
 	t.Run("Test successful JSON serialization of RIROrganization with valid name, RIRId, and RIR", func(t *testing.T) {
