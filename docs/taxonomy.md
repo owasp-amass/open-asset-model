@@ -53,7 +53,6 @@ The source of the data is useful in a number of different ways:
 | `aaaa_record` | `IPAddress` |
 | `cname_record` | `FQDN` |
 | `ns_record` | `FQDN` |
-| `cname_record` | `FQDN` |
 | `ptr_record` | `FQDN` |
 | `mx_record` | `FQDN` |
 | `srv_record` | `FQDN` |
@@ -132,9 +131,9 @@ The source of the data is useful in a number of different ways:
 
 | Property | Type | Required | Description |
 | -------- | ---- | -------- | ----------- |
-| `name` | integer | true | Organization Name |
-| `rir_id` | string | true | the unique identifier of the RIR organization |
-| `rir` | string | true | Regional Internet Registry |
+| `name` | string | true | Organization Name |
+| `rir_id` | string | false | the unique identifier of the RIR organization |
+| `rir` | string | false | Regional Internet Registry |
 
 ##### Outgoing Relationships
 
