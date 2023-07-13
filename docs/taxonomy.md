@@ -56,7 +56,6 @@ The source of the data is useful in a number of different ways:
 | `ptr_record` | `FQDN` |
 | `mx_record` | `FQDN` |
 | `srv_record` | `FQDN` |
-| `srv_record` | `IPAddress` |
 
 ##### Incoming Relationships
 
