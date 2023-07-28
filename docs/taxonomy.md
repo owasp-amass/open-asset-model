@@ -56,6 +56,7 @@ The source of the data is useful in a number of different ways:
 | `ptr_record` | `FQDN` |
 | `mx_record` | `FQDN` |
 | `srv_record` | `FQDN` |
+| `node` | `FQDN` |
 
 ##### Incoming Relationships
 
@@ -64,6 +65,7 @@ The source of the data is useful in a number of different ways:
 | `ns_record` | `FQDN` |
 | `cname_record` | `FQDN` |
 | `ptr_record` | `FQDN` |
+| `node` | `FQDN` |
 
 ### Networking Assets
 
