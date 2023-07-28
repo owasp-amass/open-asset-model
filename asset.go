@@ -18,24 +18,25 @@ const (
 var ipRels = map[string][]AssetType{}
 
 var netblockRels = map[string][]AssetType{
-	"contains": []AssetType{IPAddress},
+	"contains": {IPAddress},
 }
 
 var asnRels = map[string][]AssetType{
-	"announces":  []AssetType{Netblock},
-	"managed_by": []AssetType{RIROrg},
+	"announces":  {Netblock},
+	"managed_by": {RIROrg},
 }
 
 var rirOrgRels = map[string][]AssetType{}
 
 var fqdnRels = map[string][]AssetType{
-	"a_record":     []AssetType{IPAddress},
-	"aaaa_record":  []AssetType{IPAddress},
-	"cname_record": []AssetType{FQDN},
-	"ns_record":    []AssetType{FQDN},
-	"ptr_record":   []AssetType{FQDN},
-	"mx_record":    []AssetType{FQDN},
-	"srv_record":   []AssetType{FQDN, IPAddress},
+	"a_record":     {IPAddress},
+	"aaaa_record":  {IPAddress},
+	"cname_record": {FQDN},
+	"ns_record":    {FQDN},
+	"ptr_record":   {FQDN},
+	"mx_record":    {FQDN},
+	"srv_record":   {FQDN, IPAddress},
+	"node":         {FQDN},
 }
 
 // ValidRelationship returns true if the relation is valid in the taxonomy
