@@ -39,7 +39,7 @@ Open Asset Model defines not just the assets themselves,
 but also the relationships within and across types of assets.
 This allows the model to express the real-world interconnectedness
 that exist between assets.
-For details, refer to the [Taxonomy](docs/taxonomy.md) documentation.
+For details, refer to the [Taxonomy](taxonomy.md) documentation.
 
 ## Goals
 
