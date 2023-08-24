@@ -177,4 +177,4 @@ Source Asset [] generated [request type] on [timestamp] that had no sources that
 In the future, source can be extended to capture additional information
 about the nature of the collection that was performed.
 
-[w3c-provenance]:https://www.w3.org/2005/Incubator/prov/wiki/What_Is_Provenance]
+[w3c-provenance]:https://www.w3.org/2005/Incubator/prov/wiki/What_Is_Provenance
