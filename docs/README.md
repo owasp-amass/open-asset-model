@@ -82,7 +82,7 @@ a suggestion or improvement to the taxonomy,
 starting a discussion on Discord,
 or even tweaking a line (or character) or two in the project.
 
-Our [CONTRIBUTING.md](docs/CONTRIBUTING.md) document contains details on how to get started.
+Our [CONTRIBUTING.md](CONTRIBUTING.md) document contains details on how to get started.
 
 ## Assets
 
@@ -100,7 +100,7 @@ Supported asset types:
 
 The documentation can be found in the Go packages repository: [open-asset-model](https://pkg.go.dev/github.com/owasp-amass/open-asset-model), there you can find the reference and descriptions to the types.
 
-You can also refer to the [Taxonomy](docs/taxonomy.md) documentation for
+You can also refer to the [Taxonomy](taxonomy.md) documentation for
 specific details on each asset types and their relationships.
 
 ## Contributing
@@ -110,4 +110,4 @@ contribute to our codebase, and join our [Discord Server](https://discord.gg/HNe
 
 ## Licensing
 
-This program is free software: you can redistribute it and/or modify it under the terms of the [Apache license](LICENSE).
+This program is free software: you can redistribute it and/or modify it under the terms of the [Apache license](../LICENSE).
