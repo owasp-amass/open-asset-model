@@ -8,12 +8,46 @@ type Asset interface {
 type AssetType string
 
 const (
-	IPAddress AssetType = "IPAddress"
-	Netblock  AssetType = "Netblock"
-	ASN       AssetType = "ASN"
-	RIROrg    AssetType = "RIROrg"
-	FQDN      AssetType = "FQDN"
+	IPAddress    AssetType = "IPAddress"
+	Netblock     AssetType = "Netblock"
+	ASN          AssetType = "ASN"
+	RIROrg       AssetType = "RIROrg"
+	FQDN         AssetType = "FQDN"
+	WHOIS        AssetType = "WHOIS"
+	Address      AssetType = "Address"
+	Phone        AssetType = "Phone"
+	Email        AssetType = "Email"
+	Name         AssetType = "Name"
+	Role         AssetType = "Role"
+	Organization AssetType = "Organization"
 )
+
+var addressRels = map[string][]AssetType{
+	"physical_address": {Organization, Name, Role},
+}
+
+var phoneRels = map[string][]AssetType{
+	"phone_number": {Organization, Name, Role},
+}
+
+var emailRels = map[string][]AssetType{
+	"email_address": {Organization, Name, Role, FQDN},
+}
+
+var whoisRels = map[string][]AssetType{
+	"registrar":    {Organization},
+	"obtained_by":  {Email, Phone, Address},
+	"whois_record": {FQDN, Netblock},
+}
+
+var nameRels = map[string][]AssetType{
+	"associated_with": {Organization},
+	"role":            {Role},
+}
+
+var orgRels = map[string][]AssetType{
+	"rir_name": {RIROrg},
+}
 
 var ipRels = map[string][]AssetType{}
 
@@ -55,6 +89,18 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = rirOrgRels
 	case FQDN:
 		relations = fqdnRels
+	case WHOIS:
+		relations = whoisRels
+	case Address:
+		relations = addressRels
+	case Phone:
+		relations = phoneRels
+	case Email:
+		relations = emailRels
+	case Name:
+		relations = nameRels
+	case Organization:
+		relations = orgRels
 	default:
 		return false
 	}
