@@ -8,7 +8,12 @@ import (
 
 // Organization represents an organization. Does not have to be tied with an RIR.
 type Organization struct {
-	Organization string `json:"organization"`
+	// OrgName is the name of the organization.
+	OrgName string `json:"org_name,omitempty"`
+	// Industry is the industry of the organization.
+	Industry string `json:"industry,omitempty"`
+	// IANAid is the IANA ID of the organization.
+	IANAid string `json:"iana_id,omitempty"`
 }
 
 // AssetType returns the asset type.
@@ -20,6 +25,3 @@ func (o Organization) AssetType() model.AssetType {
 func (o Organization) JSON() ([]byte, error) {
 	return json.Marshal(o)
 }
-
-// The reason why I included this is because rir_org Refers to organizations that are tied with RIR.
-// Not all organizations are tied to an R I R. For example, the organization that owns the domain name.

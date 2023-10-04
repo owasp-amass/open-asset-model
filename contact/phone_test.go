@@ -1,57 +1,41 @@
 package contact_test
 
 import (
-	"reflect"
+	"encoding/json"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
 	. "github.com/owasp-amass/open-asset-model/contact"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPhone_AssetType(t *testing.T) {
-	tests := []struct {
-		name string
-		p    Phone
-		want model.AssetType
-	}{
-		{
-			name: "phone asset type",
-			p:    Phone{Type: "mobile", Phone: "123-456-7890"},
-			want: model.Phone,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.p.AssetType(); got != tt.want {
-				t.Errorf("Phone.AssetType() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+	p := Phone{}
+	assert.Equal(t, model.Phone, p.AssetType())
 }
 
 func TestPhone_JSON(t *testing.T) {
-	tests := []struct {
-		name    string
-		p       Phone
-		want    []byte
-		wantErr bool
-	}{
-		{
-			name: "phone json",
-			p:    Phone{Type: "mobile", Phone: "123-456-7890"},
-			want: []byte(`{"type":"mobile","phone":"123-456-7890"}`),
-		},
+	p := Phone{
+		E164:             "+1234567890",
+		Type:             "mobile",
+		CountryAbbrev:    "US",
+		CountryCode:      1,
+		SubscriberNumber: "2345678901",
+		Ext:              "123",
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.p.JSON()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Phone.JSON() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Phone.JSON() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+
+	expectedJSON := `{"e164":"+1234567890","type":"mobile","country_abbrev":"US","country_code":1,"subscriber_number":"2345678901","ext":"123"}`
+
+	jsonData, err := p.JSON()
+	assert.NoError(t, err)
+
+	var phoneJSON map[string]interface{}
+	err = json.Unmarshal(jsonData, &phoneJSON)
+	assert.NoError(t, err)
+
+	var expected map[string]interface{}
+	err = json.Unmarshal([]byte(expectedJSON), &expected)
+	assert.NoError(t, err)
+
+	assert.Equal(t, expected, phoneJSON)
 }

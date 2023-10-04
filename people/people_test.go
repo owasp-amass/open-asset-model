@@ -1,6 +1,7 @@
 package people_test
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 
@@ -8,24 +9,43 @@ import (
 	. "github.com/owasp-amass/open-asset-model/people"
 )
 
-func TestName_AssetType(t *testing.T) {
-	n := Name{Name: "John Doe"}
-
-	if n.AssetType() != model.Name {
-		t.Errorf("Expected asset type %v but got %v", model.Name, n.AssetType())
+func TestPerson_AssetType(t *testing.T) {
+	p := Person{}
+	if p.AssetType() != model.Person {
+		t.Errorf("Expected asset type to be %v, but got %v", model.Person, p.AssetType())
 	}
 }
 
-func TestName_JSON(t *testing.T) {
-	n := Name{Name: "John Doe"}
+func TestPerson_JSON(t *testing.T) {
+	p := Person{
+		FullName:     "John Doe",
+		FirstName:    "John",
+		MiddleName:   "Jacob",
+		FamilyName:   "Doe",
+		BirthCountry: "USA",
+		DateOfBirth:  "1990-01-01",
+	}
 
-	expectedJSON := `{"name":"John Doe"}`
-	jsonBytes, err := n.JSON()
+	expectedJSON := `{"full_name":"John Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe","birth_country":"USA","date_of_birth":"1990-01-01"}`
+
+	jsonData, err := p.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
 
-	if !reflect.DeepEqual(jsonBytes, []byte(expectedJSON)) {
-		t.Errorf("Expected JSON %v but got %v", expectedJSON, string(jsonBytes))
+	var jsonMap map[string]interface{}
+	err = json.Unmarshal(jsonData, &jsonMap)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+
+	var expectedMap map[string]interface{}
+	err = json.Unmarshal([]byte(expectedJSON), &expectedMap)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+
+	if !reflect.DeepEqual(jsonMap, expectedMap) {
+		t.Errorf("Expected JSON to be %v, but got %v", expectedJSON, string(jsonData))
 	}
 }

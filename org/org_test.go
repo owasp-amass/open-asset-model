@@ -1,7 +1,6 @@
 package org_test
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
 
@@ -11,36 +10,27 @@ import (
 
 func TestOrganization_AssetType(t *testing.T) {
 	org := Organization{}
-	if org.AssetType() != model.Organization {
-		t.Errorf("Expected asset type %v but got %v", model.Organization, org.AssetType())
+	expected := model.Organization
+	actual := org.AssetType()
+
+	if actual != expected {
+		t.Errorf("Expected asset type %v but got %v", expected, actual)
 	}
 }
 
 func TestOrganization_JSON(t *testing.T) {
-	org := Organization{Organization: "TestOrg"}
-	expectedJSON := `{"organization":"TestOrg"}`
+	org := Organization{
+		OrgName:  "Acme Inc.",
+		Industry: "Technology",
+	}
+	expected := `{"org_name":"Acme Inc.","industry":"Technology"}`
+	actual, err := org.JSON()
 
-	jsonBytes, err := org.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
 
-	if string(jsonBytes) != expectedJSON {
-		t.Errorf("Expected JSON %v but got %v", expectedJSON, string(jsonBytes))
-	}
-}
-
-func TestOrganization_JSON_Unmarshal(t *testing.T) {
-	jsonStr := `{"organization":"TestOrg"}`
-	expectedOrg := Organization{Organization: "TestOrg"}
-
-	var org Organization
-	err := json.Unmarshal([]byte(jsonStr), &org)
-	if err != nil {
-		t.Errorf("Unexpected error: %v", err)
-	}
-
-	if !reflect.DeepEqual(org, expectedOrg) {
-		t.Errorf("Expected organization %v but got %v", expectedOrg, org)
+	if !reflect.DeepEqual(string(actual), expected) {
+		t.Errorf("Expected JSON %v but got %v", expected, string(actual))
 	}
 }

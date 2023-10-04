@@ -20,20 +20,28 @@ func TestWHOIS_AssetType(t *testing.T) {
 
 func TestWHOIS_JSON(t *testing.T) {
 	w := WHOIS{
-		Type:             "domain",
-		DomainStatus:     []string{"clientTransferProhibited", "clientUpdateProhibited", "clientDeleteProhibited"},
-		WHOISServer:      "whois.markmonitor.com",
-		RegistryDomainID: "123456789_DOMAIN_COM-VRSN",
-		IANAid:           "292",
-		Description:      "This is a test domain",
-		CreatedDate:      "2021-01-01T00:00:00Z",
-		LastModifiedDate: "2021-01-02T00:00:00Z",
-		ExpirationDate:   "2022-01-01T00:00:00Z",
-		DNSSEC:           "unsigned",
+		Type:                  "domain",
+		Registrar_WHOISServer: "whois.example.com",
+		Registrar_URL:         "http://www.example.com",
+		CreatedDate:           "2022-01-01",
+		LastModifiedDate:      "2022-01-02",
+		ExpirationDate:        "2023-01-01",
+		Reseller:              "Example Reseller",
+		DomainStatus:          []string{"clientTransferProhibited", "serverTransferProhibited"},
+		RegistryRegistrantID:  "REGISTRANT123",
+		RegistryDomainID:      "DOMAIN123",
+		RegistryAdminID:       "ADMIN123",
+		RegistryTechID:        "TECH123",
+		Description:           "Example Domain",
+		DNSSEC:                "unsigned",
 	}
-	want, _ := json.Marshal(w)
+
+	want, err := json.Marshal(w)
+	if err != nil {
+		t.Fatalf("json.Marshal() error = %v", err)
+	}
 
 	if got, err := w.JSON(); !reflect.DeepEqual(got, want) || err != nil {
-		t.Errorf("WHOIS.JSON() = %v, want %v, error: %v", got, want, err)
+		t.Errorf("WHOIS.JSON() = %v, %v; want %v, nil", got, err, want)
 	}
 }

@@ -14,39 +14,63 @@ const (
 	RIROrg       AssetType = "RIROrg"
 	FQDN         AssetType = "FQDN"
 	WHOIS        AssetType = "WHOIS"
-	Address      AssetType = "Address"
+	Location     AssetType = "Location"
 	Phone        AssetType = "Phone"
 	Email        AssetType = "Email"
-	Name         AssetType = "Name"
-	Role         AssetType = "Role"
+	Person       AssetType = "Person"
 	Organization AssetType = "Organization"
 )
 
-var addressRels = map[string][]AssetType{
-	"physical_address": {Organization, Name, Role},
-}
+var locationRels = map[string][]AssetType{}
 
-var phoneRels = map[string][]AssetType{
-	"phone_number": {Organization, Name, Role},
-}
+var phoneRels = map[string][]AssetType{}
 
-var emailRels = map[string][]AssetType{
-	"email_address": {Organization, Name, Role, FQDN},
-}
+var emailRels = map[string][]AssetType{}
 
 var whoisRels = map[string][]AssetType{
-	"registrar":    {Organization},
-	"obtained_by":  {Email, Phone, Address},
-	"whois_record": {FQDN, Netblock},
+	"whois_registrar":  {Organization},
+	"whois_registrant": {Organization},
+
+	"whois_admin":          {Person},
+	"whois_admin_phone":    {Phone},
+	"whois_admin_email":    {Email},
+	"whois_admin_location": {Location},
+
+	"whois_tech":          {Person},
+	"whois_tech_phone":    {Phone},
+	"whois_tech_email":    {Email},
+	"whois_tech_location": {Location},
+
+	"whois_billing":          {Person},
+	"whois_billing_phone":    {Phone},
+	"whois_billing_email":    {Email},
+	"whois_billing_location": {Location},
+
+	// ?? do we add this as relations here or do we point to registrant
+	// ?? then have registrant point to phone , email, location?
+	"whois_registrant_phone":    {Phone},
+	"whois_registrant_email":    {Email},
+	"whois_registrant_location": {Location},
+
+	"whois_nameserver": {FQDN},
+	"whois_server":     {FQDN},
+
+	// ?? does this need to be a relation? please check whois.go for more info on reseller.
+	"whois_reseller": {Organization},
 }
 
-var nameRels = map[string][]AssetType{
+var personRels = map[string][]AssetType{
 	"associated_with": {Organization},
-	"role":            {Role},
+	"phone_number":    {Phone},
+	"email_address":   {Email},
+	"location":        {Location},
 }
 
 var orgRels = map[string][]AssetType{
-	"rir_name": {RIROrg},
+	"rir_org":      {RIROrg},
+	"location":     {Location},
+	"phone_number": {Phone},
+	"email":        {Email},
 }
 
 var ipRels = map[string][]AssetType{}
@@ -91,14 +115,14 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = fqdnRels
 	case WHOIS:
 		relations = whoisRels
-	case Address:
-		relations = addressRels
+	case Location:
+		relations = locationRels
 	case Phone:
 		relations = phoneRels
 	case Email:
 		relations = emailRels
-	case Name:
-		relations = nameRels
+	case Person:
+		relations = personRels
 	case Organization:
 		relations = orgRels
 	default:
