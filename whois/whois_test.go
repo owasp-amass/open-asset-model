@@ -20,20 +20,14 @@ func TestWHOIS_AssetType(t *testing.T) {
 
 func TestWHOIS_JSON(t *testing.T) {
 	w := WHOIS{
-		Type:                  "domain",
-		Registrar_WHOISServer: "whois.example.com",
-		Registrar_URL:         "http://www.example.com",
-		CreatedDate:           "2022-01-01",
-		LastModifiedDate:      "2022-01-02",
-		ExpirationDate:        "2023-01-01",
-		Reseller:              "Example Reseller",
-		DomainStatus:          []string{"clientTransferProhibited", "serverTransferProhibited"},
-		RegistryRegistrantID:  "REGISTRANT123",
-		RegistryDomainID:      "DOMAIN123",
-		RegistryAdminID:       "ADMIN123",
-		RegistryTechID:        "TECH123",
-		Description:           "Example Domain",
-		DNSSEC:                "unsigned",
+		Type:            "domain",
+		CreatedDate:     "2022-01-01",
+		UpdatedDate:     "2022-01-02",
+		ExpirationDate:  "2023-01-01",
+		DomainStatus:    []string{"clientTransferProhibited", "serverTransferProhibited"},
+		RegistryAdminID: "ADMIN123",
+		Description:     "Example Domain",
+		DNSSEC:          "unsigned",
 	}
 
 	want, err := json.Marshal(w)

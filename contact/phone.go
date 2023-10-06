@@ -8,6 +8,8 @@ import (
 
 // This struct represents the phone number, whether it is fax, mobile, or home number linked to the possible asset
 type Phone struct {
+	// Raw is the raw phone number.
+	Raw string `json:"raw"`
 	// E164 is the phone number in E.164 format.
 	E164 string `json:"e164"`
 	// Type is the type of phone number.

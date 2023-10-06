@@ -19,6 +19,8 @@ const (
 	Email        AssetType = "Email"
 	Person       AssetType = "Person"
 	Organization AssetType = "Organization"
+	Registrar    AssetType = "Registrar"
+	Registrant   AssetType = "Registrant"
 )
 
 var locationRels = map[string][]AssetType{}
@@ -28,39 +30,37 @@ var phoneRels = map[string][]AssetType{}
 var emailRels = map[string][]AssetType{}
 
 var whoisRels = map[string][]AssetType{
-	"whois_registrar":  {Organization},
-	"whois_registrant": {Organization},
+	"published_by": {Registrar},
+	"name_server":  {FQDN},
+	"reseller":     {Organization},
 
-	"whois_admin":          {Person},
-	"whois_admin_phone":    {Phone},
-	"whois_admin_email":    {Email},
-	"whois_admin_location": {Location},
+	"admin_org":      {Organization},
+	"admin_person":   {Person},
+	"admin_phone":    {Phone},
+	"admin_email":    {Email},
+	"admin_location": {Location},
 
-	"whois_tech":          {Person},
-	"whois_tech_phone":    {Phone},
-	"whois_tech_email":    {Email},
-	"whois_tech_location": {Location},
+	"tech_org":      {Organization},
+	"tech_person":   {Person},
+	"tech_phone":    {Phone},
+	"tech_email":    {Email},
+	"tech_location": {Location},
 
-	"whois_billing":          {Person},
-	"whois_billing_phone":    {Phone},
-	"whois_billing_email":    {Email},
-	"whois_billing_location": {Location},
+	"billing_org":      {Organization},
+	"billing_person":   {Person},
+	"billing_phone":    {Phone},
+	"billing_email":    {Email},
+	"billing_location": {Location},
 
-	// ?? do we add this as relations here or do we point to registrant
-	// ?? then have registrant point to phone , email, location?
-	"whois_registrant_phone":    {Phone},
-	"whois_registrant_email":    {Email},
-	"whois_registrant_location": {Location},
-
-	"whois_nameserver": {FQDN},
-	"whois_server":     {FQDN},
-
-	// ?? does this need to be a relation? please check whois.go for more info on reseller.
-	"whois_reseller": {Organization},
+	"registrant_org":      {Organization},
+	"registrant_person":   {Person},
+	"registrant_phone":    {Phone},
+	"registrant_email":    {Email},
+	"registrant_location": {Location},
 }
 
 var personRels = map[string][]AssetType{
-	"associated_with": {Organization},
+	"associated_with": {Organization}, // ?? should I keep this, or when we add an asset related to employment, we can add the relationship?
 	"phone_number":    {Phone},
 	"email_address":   {Email},
 	"location":        {Location},
@@ -71,6 +71,13 @@ var orgRels = map[string][]AssetType{
 	"location":     {Location},
 	"phone_number": {Phone},
 	"email":        {Email},
+	"operates":     {Registrar},
+}
+
+var registrarRels = map[string][]AssetType{
+	"abuse_email":  {Email},
+	"abuse_phone":  {Phone},
+	"whois_server": {FQDN},
 }
 
 var ipRels = map[string][]AssetType{}
@@ -95,6 +102,7 @@ var fqdnRels = map[string][]AssetType{
 	"mx_record":    {FQDN},
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
+	"registration": {WHOIS},
 }
 
 // ValidRelationship returns true if the relation is valid in the taxonomy
@@ -125,6 +133,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = personRels
 	case Organization:
 		relations = orgRels
+	case Registrar:
+		relations = registrarRels
 	default:
 		return false
 	}
