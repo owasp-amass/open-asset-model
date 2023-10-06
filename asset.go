@@ -60,10 +60,9 @@ var whoisRels = map[string][]AssetType{
 }
 
 var personRels = map[string][]AssetType{
-	"associated_with": {Organization}, // ?? should I keep this, or when we add an asset related to employment, we can add the relationship?
-	"phone_number":    {Phone},
-	"email_address":   {Email},
-	"location":        {Location},
+	"phone_number":  {Phone},
+	"email_address": {Email},
+	"location":      {Location},
 }
 
 var orgRels = map[string][]AssetType{
