@@ -13,13 +13,13 @@ type Person struct {
 	// FirstName is the first name of the person.
 	FirstName string `json:"first_name"`
 	// MiddleName is the middle name of the person.
-	MiddleName string `json:"middle_name"`
+	MiddleName string `json:"middle_name,omitempty"`
 	// FamilyName is the family name of the person.
 	FamilyName string `json:"family_name"`
 	// BirthCountry is the country where the person was born.
-	BirthCountry string `json:"birth_country"`
+	BirthCountry string `json:"birth_country,omitempty"`
 	// DateOfBirth is the date of birth of the person.
-	DateOfBirth string `json:"date_of_birth"`
+	DateOfBirth string `json:"date_of_birth,omitempty"`
 }
 
 // AssetType returns the asset type.
