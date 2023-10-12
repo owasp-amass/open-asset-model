@@ -26,10 +26,9 @@ func TestLocation_JSON(t *testing.T) {
 		Region:           "Anyregion",
 		CountryCode:      "US",
 		PostalCode:       "12345",
-		LatLong:          [2]float64{37.7749, -122.4194},
 	}
 
-	expectedJSON := `{"formatted_address":"123 Main St","building_number":"123","street_name":"Main St","unit":"Apt 1","building":"Building A","town":"Anytown","locality":"Anytown","region":"Anyregion","country_code":"US","postal_code":"12345","lat_long":[37.7749,-122.4194]}`
+	expectedJSON := `{"formatted_address":"123 Main St","building_number":"123","street_name":"Main St","unit":"Apt 1","building":"Building A","town":"Anytown","locality":"Anytown","region":"Anyregion","country_code":"US","postal_code":"12345"}`
 
 	jsonData, err := loc.JSON()
 	if err != nil {

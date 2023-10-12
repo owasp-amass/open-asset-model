@@ -29,6 +29,9 @@ type WHOIS struct {
 	// RegistryDomainID represents the registry domain ID of the domain.
 	RegistryDomainID string `json:"registry_domain_id,omitempty"`
 
+	// RegistryBillingID represents the registry billing ID of the domain.
+	RegistryBillingID string `json:"registry_billing_id,omitempty"`
+
 	// RegistryAdminID represents the registry admin ID of the domain.
 	RegistryAdminID string `json:"registry_admin_id,omitempty"`
 

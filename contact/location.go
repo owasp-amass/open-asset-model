@@ -37,9 +37,6 @@ type Location struct {
 
 	// PostalCode is the postal code of the location.
 	PostalCode string `json:"postal_code,omitempty"`
-
-	// LatLong is the latitude and longitude of the location.
-	LatLong [2]float64 `json:"lat_long,omitempty"`
 }
 
 // AssetType returns the asset type.

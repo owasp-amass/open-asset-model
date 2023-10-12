@@ -12,8 +12,6 @@ type Organization struct {
 	OrgName string `json:"org_name,omitempty"`
 	// Industry is the industry of the organization.
 	Industry string `json:"industry,omitempty"`
-	// IANAid is the IANA ID of the organization.
-	IANAid string `json:"iana_id,omitempty"`
 }
 
 // AssetType returns the asset type.
