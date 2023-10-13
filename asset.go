@@ -8,19 +8,20 @@ type Asset interface {
 type AssetType string
 
 const (
-	IPAddress    AssetType = "IPAddress"
-	Netblock     AssetType = "Netblock"
-	ASN          AssetType = "ASN"
-	RIROrg       AssetType = "RIROrg"
-	FQDN         AssetType = "FQDN"
-	WHOIS        AssetType = "WHOIS"
-	Location     AssetType = "Location"
-	Phone        AssetType = "Phone"
-	Email        AssetType = "Email"
-	Person       AssetType = "Person"
-	Organization AssetType = "Organization"
-	Registrar    AssetType = "Registrar"
-	Registrant   AssetType = "Registrant"
+	IPAddress      AssetType = "IPAddress"
+	Netblock       AssetType = "Netblock"
+	ASN            AssetType = "ASN"
+	RIROrg         AssetType = "RIROrg"
+	FQDN           AssetType = "FQDN"
+	WHOIS          AssetType = "WHOIS"
+	Location       AssetType = "Location"
+	Phone          AssetType = "Phone"
+	Email          AssetType = "Email"
+	Person         AssetType = "Person"
+	Organization   AssetType = "Organization"
+	Registrar      AssetType = "Registrar"
+	Registrant     AssetType = "Registrant"
+	TLSCertificate AssetType = "TLSCertificate"
 )
 
 var locationRels = map[string][]AssetType{}
@@ -104,6 +105,35 @@ var fqdnRels = map[string][]AssetType{
 	"registration": {WHOIS},
 }
 
+var tlscertRels = map[string][]AssetType{
+	"common_name":               {FQDN},
+	"subject_organization":      {Organization},
+	"subject_organization_unit": {Organization},
+	"subject_state_or_province": {Location},
+	"subject_locality":          {Location},
+	"subject_email_address":     {Email},
+	"issuer":                    {FQDN},
+	"issuer_organization":       {Organization},
+	"issuer_organization_unit":  {Organization},
+	"not_before":                {TLSCertificate},
+	"not_after":                 {TLSCertificate},
+	"subject_alt_names":         {FQDN},
+	"signature_algorithm":       {TLSCertificate},
+	"public_key_algorithm":      {TLSCertificate},
+	"fingerprint_sha1":          {TLSCertificate},
+	"fingerprint_sha256":        {TLSCertificate},
+	"serial_number":             {TLSCertificate},
+	"version":                   {TLSCertificate},
+	"key_usage":                 {TLSCertificate},
+	"extended_key_usage":        {TLSCertificate},
+	"crl_distribution_points":   {TLSCertificate},
+	"issuer_urls":               {FQDN},
+	"ocsp_server":               {FQDN},
+	"policies":                  {TLSCertificate},
+	"subject_key_id":            {TLSCertificate},
+	"authority_key_id":          {TLSCertificate},
+}
+
 // ValidRelationship returns true if the relation is valid in the taxonomy
 // when outgoing from the source asset type to the destination asset type.
 func ValidRelationship(source AssetType, relation string, destination AssetType) bool {
@@ -134,6 +164,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = orgRels
 	case Registrar:
 		relations = registrarRels
+	case TLSCertificate:
+		relations = tlscertRels
 	default:
 		return false
 	}
