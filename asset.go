@@ -23,6 +23,11 @@ const (
 	Registrant   AssetType = "Registrant"
 )
 
+var AssetList = []AssetType{
+	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOIS, Location,
+	Phone, Email, Person, Organization, Registrar, Registrant,
+}
+
 var locationRels = map[string][]AssetType{}
 
 var phoneRels = map[string][]AssetType{}
