@@ -35,6 +35,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		Organization,
 		Registrar,
 		Registrant,
+		TLSCertificate,
 	}
 
 	expectedTypes := []string{
@@ -51,6 +52,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Organization",
 		"Registrar",
 		"Registrant",
+		"TLSCertificate",
 	}
 
 	if len(assetTypes) != len(expectedTypes) {
