@@ -21,12 +21,16 @@ const (
 	Organization   AssetType = "Organization"
 	Registrar      AssetType = "Registrar"
 	Registrant     AssetType = "Registrant"
+	Port           AssetType = "Port"
+	URL            AssetType = "URL"
+	Fingerprint    AssetType = "Fingerprint"
 	TLSCertificate AssetType = "TLSCertificate"
 )
 
 var AssetList = []AssetType{
 	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOIS, Location,
 	Phone, Email, Person, Organization, Registrar, Registrant,
+	Port, URL, Fingerprint, TLSCertificate,
 }
 
 var locationRels = map[string][]AssetType{}
@@ -69,6 +73,7 @@ var personRels = map[string][]AssetType{
 	"phone_number":  {Phone},
 	"email_address": {Email},
 	"location":      {Location},
+	"url":           {URL},
 }
 
 var orgRels = map[string][]AssetType{
@@ -85,7 +90,10 @@ var registrarRels = map[string][]AssetType{
 	"whois_server": {FQDN},
 }
 
-var ipRels = map[string][]AssetType{}
+var ipRels = map[string][]AssetType{
+	"url":  {URL},
+	"port": {Port},
+}
 
 var netblockRels = map[string][]AssetType{
 	"contains": {IPAddress},
@@ -108,6 +116,7 @@ var fqdnRels = map[string][]AssetType{
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
 	"registration": {WHOIS},
+	"url":          {URL},
 }
 
 var tlscertRels = map[string][]AssetType{
@@ -137,7 +146,16 @@ var tlscertRels = map[string][]AssetType{
 	"policies":                  {TLSCertificate},
 	"subject_key_id":            {TLSCertificate},
 	"authority_key_id":          {TLSCertificate},
+	"jarm":                      {Fingerprint},
 }
+
+var portRels = map[string][]AssetType{}
+
+var urlRels = map[string][]AssetType{
+	"port": {Port},
+}
+
+var fingerprintRels = map[string][]AssetType{}
 
 // ValidRelationship returns true if the relation is valid in the taxonomy
 // when outgoing from the source asset type to the destination asset type.
@@ -171,6 +189,12 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = registrarRels
 	case TLSCertificate:
 		relations = tlscertRels
+	case Port:
+		relations = portRels
+	case URL:
+		relations = urlRels
+	case Fingerprint:
+		relations = fingerprintRels
 	default:
 		return false
 	}

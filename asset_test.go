@@ -35,6 +35,9 @@ func TestAssetTypeConstants(t *testing.T) {
 		Organization,
 		Registrar,
 		Registrant,
+		Port,
+		URL,
+		Fingerprint,
 		TLSCertificate,
 	}
 
@@ -52,6 +55,9 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Organization",
 		"Registrar",
 		"Registrant",
+		"Port",
+		"URL",
+		"Fingerprint",
 		"TLSCertificate",
 	}
 
