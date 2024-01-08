@@ -15,21 +15,46 @@ func TestWHOIS_AssetType(t *testing.T) {
 		t.Errorf("WHOIS.AssetType() = %v, want %v", got, want)
 	}
 }
-
 func TestWHOIS(t *testing.T) {
 	whois := WHOIS{
-		Type:                 "domain",
-		CreatedDate:          "2020-01-01",
-		UpdatedDate:          "2021-01-01",
-		ExpirationDate:       "2022-01-01",
-		DomainStatus:         []string{"active", "clientTransferProhibited"},
-		RegistryRegistrantID: "12345",
-		RegistryDomainID:     "67890",
-		RegistryBillingID:    "13579",
-		RegistryAdminID:      "24680",
-		RegistryTechID:       "13579",
-		Description:          "Example domain",
-		DNSSEC:               "unsigned",
+		Type:                       "domain",
+		Registrar:                  "Registrar",
+		Domain:                     "example.com",
+		Reseller:                   "Reseller",
+		NameServers:                []string{"NameServer1", "NameServer2"},
+		CreatedDate:                "2020-01-01",
+		UpdatedDate:                "2021-01-01",
+		ExpirationDate:             "2022-01-01",
+		DomainStatus:               []string{"active", "clientTransferProhibited"},
+		RegistryRegistrantID:       "12345",
+		RegistryRegistrantName:     "RegistryRegistrantName",
+		RegistryRegistrantOrg:      "RegistryRegistrantOrg",
+		RegistryRegistrantLocation: "RegistryRegistrantLocation",
+		RegistryRegistrantPhone:    "RegistryRegistrantPhone",
+		RegistryRegistrantFax:      "RegistryRegistrantFax",
+		RegistryRegistrantEmail:    "RegistryRegistrantEmail",
+		RegistryDomainID:           "67890",
+		RegistryBillingID:          "13579",
+		RegistryBillingName:        "RegistryBillingName",
+		RegistryBillingOrg:         "RegistryBillingOrg",
+		RegistryBillingLocation:    "RegistryBillingLocation",
+		RegistryBillingEmail:       "RegistryBillingEmail",
+		RegistryAdminID:            "24680",
+		RegistryAdminName:          "RegistryAdminName",
+		RegistryAdminOrg:           "RegistryAdminOrg",
+		RegistryAdminLocation:      "RegistryAdminLocation",
+		RegistryAdminPhone:         "RegistryAdminPhone",
+		RegistryAdminFax:           "RegistryAdminFax",
+		RegistryAdminEmail:         "RegistryAdminEmail",
+		RegistryTechID:             "13579",
+		RegistryTechName:           "RegistryTechName",
+		RegistryTechOrg:            "RegistryTechOrg",
+		RegistryTechLocation:       "RegistryTechLocation",
+		RegistryTechPhone:          "RegistryTechPhone",
+		RegistryTechFax:            "RegistryTechFax",
+		RegistryTechEmail:          "RegistryTechEmail",
+		Description:                "Example domain",
+		DNSSEC:                     "unsigned",
 	}
 
 	// Test AssetType method
@@ -38,7 +63,7 @@ func TestWHOIS(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"type":"domain","created_date":"2020-01-01","updated_date":"2021-01-01","expiration_date":"2022-01-01","domain_status":["active","clientTransferProhibited"],"registry_registrant_id":"12345","registry_domain_id":"67890","registry_billing_id":"13579","registry_admin_id":"24680","registry_tech_id":"13579","description":"Example domain","dnssec":"unsigned"}`
+	expectedJSON := `{"type":"domain","registrar":"Registrar","domain":"example.com","reseller":"Reseller","name_servers":["NameServer1","NameServer2"],"created_date":"2020-01-01","updated_date":"2021-01-01","expiration_date":"2022-01-01","domain_status":["active","clientTransferProhibited"],"registry_registrant_id":"12345","registry_registrant_name":"RegistryRegistrantName","registry_registrant_org":"RegistryRegistrantOrg","registry_registrant_location":"RegistryRegistrantLocation","registry_registrant_phone":"RegistryRegistrantPhone","registry_registrant_fax":"RegistryRegistrantFax","registry_registrant_email":"RegistryRegistrantEmail","registry_domain_id":"67890","registry_billing_id":"13579","registry_billing_name":"RegistryBillingName","registry_billing_org":"RegistryBillingOrg","registry_billing_location":"RegistryBillingLocation","registry_billing_email":"RegistryBillingEmail","registry_admin_id":"24680","registry_admin_name":"RegistryAdminName","registry_admin_org":"RegistryAdminOrg","registry_admin_location":"RegistryAdminLocation","registry_admin_phone":"RegistryAdminPhone","registry_admin_fax":"RegistryAdminFax","registry_admin_email":"RegistryAdminEmail","registry_tech_id":"13579","registry_tech_name":"RegistryTechName","registry_tech_org":"RegistryTechOrg","registry_tech_location":"RegistryTechLocation","registry_tech_phone":"RegistryTechPhone","registry_tech_fax":"RegistryTechFax","registry_tech_email":"RegistryTechEmail","description":"Example domain","dnssec":"unsigned"}`
 	json, err := whois.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
