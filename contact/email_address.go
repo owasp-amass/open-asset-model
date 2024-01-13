@@ -8,8 +8,8 @@ import (
 
 // EmailAddress represents an email address with a value, local part, and domain.
 type EmailAddress struct {
-	// Value is the full email address.
-	Value string `json:"value"`
+	// Address is the full email address.
+	Address string `json:"address"`
 	// LocalPart is the part of the email address before the "@" symbol.
 	LocalPart string `json:"local_part"`
 	// Domain is the part of the email address after the "@" symbol.

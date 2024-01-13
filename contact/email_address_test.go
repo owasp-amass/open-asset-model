@@ -10,7 +10,7 @@ import (
 
 func TestEmailAddress_AssetType(t *testing.T) {
 	e := EmailAddress{
-		Value:     "test@example.com",
+		Address:   "test@example.com",
 		LocalPart: "test",
 		Domain:    "example.com",
 	}
@@ -22,12 +22,12 @@ func TestEmailAddress_AssetType(t *testing.T) {
 
 func TestEmailAddress_JSON(t *testing.T) {
 	e := EmailAddress{
-		Value:     "test@example.com",
+		Address:   "test@example.com",
 		LocalPart: "test",
 		Domain:    "example.com",
 	}
 
-	expectedJSON := `{"value":"test@example.com","local_part":"test","domain":"example.com"}`
+	expectedJSON := `{"address":"test@example.com","local_part":"test","domain":"example.com"}`
 
 	jsonBytes, err := e.JSON()
 	if err != nil {
@@ -45,6 +45,6 @@ func TestEmailAddress_JSON(t *testing.T) {
 	}
 
 	if unmarshaled != e {
-		t.Errorf("Expected unmarshaled value %v, got %v", e, unmarshaled)
+		t.Errorf("Expected unmarshaled address %v, got %v", e, unmarshaled)
 	}
 }
