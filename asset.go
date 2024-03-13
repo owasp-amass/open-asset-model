@@ -73,7 +73,6 @@ var personRels = map[string][]AssetType{
 	"phone_number": {Phone},
 	"email":        {Email},
 	"location":     {Location},
-	"url":          {URL},
 }
 
 var orgRels = map[string][]AssetType{
@@ -90,10 +89,7 @@ var registrarRels = map[string][]AssetType{
 	"whois_server": {FQDN},
 }
 
-var ipRels = map[string][]AssetType{
-	"url":  {URL},
-	"port": {Port},
-}
+var ipRels = map[string][]AssetType{}
 
 var netblockRels = map[string][]AssetType{
 	"contains": {IPAddress},
@@ -116,7 +112,6 @@ var fqdnRels = map[string][]AssetType{
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
 	"registration": {WHOIS},
-	"url":          {URL},
 }
 
 var tlscertRels = map[string][]AssetType{
@@ -138,7 +133,9 @@ var tlscertRels = map[string][]AssetType{
 var portRels = map[string][]AssetType{}
 
 var urlRels = map[string][]AssetType{
-	"port": {Port},
+	"port":       {Port},
+	"domain":     {FQDN},
+	"ip_address": {IPAddress},
 }
 
 var fingerprintRels = map[string][]AssetType{}

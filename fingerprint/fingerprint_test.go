@@ -31,7 +31,7 @@ func TestFingerprint_JSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"string":"example","type":"example"}`
+	expectedJSON := `{"value":"example","type":"example"}`
 	jsonData, err := fp.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
