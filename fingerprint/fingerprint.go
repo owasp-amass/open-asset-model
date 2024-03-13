@@ -8,8 +8,8 @@ import (
 
 // Fingerprint represents a fingerprint.
 type Fingerprint struct {
-	String string `json:"string"` // Fingerprint string
-	Type   string `json:"type"`   // Fingerprint type
+	Value string `json:"value"` // Fingerprint string
+	Type  string `json:"type"`  // Fingerprint type
 }
 
 // AssetType returns the asset type.
