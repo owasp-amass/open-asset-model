@@ -9,8 +9,8 @@ import (
 
 func TestFingerprint_AssetType(t *testing.T) {
 	fp := fingerprint.Fingerprint{
-		String: "example",
-		Type:   "example",
+		Value: "example",
+		Type:  "example",
 	}
 	want := model.Fingerprint
 
@@ -21,8 +21,8 @@ func TestFingerprint_AssetType(t *testing.T) {
 
 func TestFingerprint_JSON(t *testing.T) {
 	fp := fingerprint.Fingerprint{
-		String: "example",
-		Type:   "example",
+		Value: "example",
+		Type:  "example",
 	}
 
 	// Test AssetType method
