@@ -9,8 +9,8 @@ import (
 
 func TestFingerprint_AssetType(t *testing.T) {
 	fp := fingerprint.Fingerprint{
-		String: "example",
-		Type:   "example",
+		Value: "example",
+		Type:  "example",
 	}
 	want := model.Fingerprint
 
@@ -21,8 +21,8 @@ func TestFingerprint_AssetType(t *testing.T) {
 
 func TestFingerprint_JSON(t *testing.T) {
 	fp := fingerprint.Fingerprint{
-		String: "example",
-		Type:   "example",
+		Value: "example",
+		Type:  "example",
 	}
 
 	// Test AssetType method
@@ -31,7 +31,7 @@ func TestFingerprint_JSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"string":"example","type":"example"}`
+	expectedJSON := `{"value":"example","type":"example"}`
 	jsonData, err := fp.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

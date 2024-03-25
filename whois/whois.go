@@ -71,6 +71,12 @@ type WHOIS struct {
 	// RegistryBillingLocation represents the registry billing location of the domain.
 	RegistryBillingLocation string `json:"registry_billing_location,omitempty"`
 
+	// RegistryBillingPhone represents the registry billing phone of the domain.
+	RegistryBillingPhone string `json:"registry_billing_phone,omitempty"`
+
+	// RegistryBillingFax represents the registry billing fax of the domain.
+	RegistryBillingFax string `json:"registry_billing_fax,omitempty"`
+
 	// RegistryBillingEmail represents the registry billing email of the domain.
 	RegistryBillingEmail string `json:"registry_billing_email,omitempty"`
 

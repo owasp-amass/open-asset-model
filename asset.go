@@ -70,10 +70,9 @@ var whoisRels = map[string][]AssetType{
 }
 
 var personRels = map[string][]AssetType{
-	"phone_number":  {Phone},
-	"email_address": {Email},
-	"location":      {Location},
-	"url":           {URL},
+	"phone_number": {Phone},
+	"email":        {Email},
+	"location":     {Location},
 }
 
 var orgRels = map[string][]AssetType{
@@ -90,10 +89,7 @@ var registrarRels = map[string][]AssetType{
 	"whois_server": {FQDN},
 }
 
-var ipRels = map[string][]AssetType{
-	"url":  {URL},
-	"port": {Port},
-}
+var ipRels = map[string][]AssetType{}
 
 var netblockRels = map[string][]AssetType{
 	"contains": {IPAddress},
@@ -116,7 +112,6 @@ var fqdnRels = map[string][]AssetType{
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
 	"registration": {WHOIS},
-	"url":          {URL},
 }
 
 var tlscertRels = map[string][]AssetType{
@@ -125,34 +120,22 @@ var tlscertRels = map[string][]AssetType{
 	"subject_organization_unit": {Organization},
 	"subject_state_or_province": {Location},
 	"subject_locality":          {Location},
-	"subject_email_address":     {Email},
+	"subject_email":             {Email},
 	"issuer":                    {FQDN},
 	"issuer_organization":       {Organization},
 	"issuer_organization_unit":  {Organization},
-	"not_before":                {TLSCertificate},
-	"not_after":                 {TLSCertificate},
 	"subject_alt_names":         {FQDN},
-	"signature_algorithm":       {TLSCertificate},
-	"public_key_algorithm":      {TLSCertificate},
-	"fingerprint_sha1":          {TLSCertificate},
-	"fingerprint_sha256":        {TLSCertificate},
-	"serial_number":             {TLSCertificate},
-	"version":                   {TLSCertificate},
-	"key_usage":                 {TLSCertificate},
-	"extended_key_usage":        {TLSCertificate},
-	"crl_distribution_points":   {TLSCertificate},
-	"issuer_urls":               {FQDN},
-	"ocsp_server":               {FQDN},
-	"policies":                  {TLSCertificate},
-	"subject_key_id":            {TLSCertificate},
-	"authority_key_id":          {TLSCertificate},
+	"issuer_urls":               {URL},
+	"ocsp_server":               {URL},
 	"jarm":                      {Fingerprint},
 }
 
 var portRels = map[string][]AssetType{}
 
 var urlRels = map[string][]AssetType{
-	"port": {Port},
+	"port":       {Port},
+	"domain":     {FQDN},
+	"ip_address": {IPAddress},
 }
 
 var fingerprintRels = map[string][]AssetType{}
