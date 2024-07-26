@@ -89,7 +89,9 @@ var registrarRels = map[string][]AssetType{
 	"whois_server": {FQDN},
 }
 
-var ipRels = map[string][]AssetType{}
+var ipRels = map[string][]AssetType{
+	"port": {Port},
+}
 
 var netblockRels = map[string][]AssetType{
 	"contains": {IPAddress},
