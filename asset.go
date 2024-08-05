@@ -16,7 +16,7 @@ const (
 	WHOIS          AssetType = "WHOIS"
 	Location       AssetType = "Location"
 	Phone          AssetType = "Phone"
-	Email          AssetType = "Email"
+	EmailAddress   AssetType = "EmailAddress"
 	Person         AssetType = "Person"
 	Organization   AssetType = "Organization"
 	Registrar      AssetType = "Registrar"
@@ -29,7 +29,7 @@ const (
 
 var AssetList = []AssetType{
 	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOIS, Location,
-	Phone, Email, Person, Organization, Registrar, Registrant,
+	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
 	Port, URL, Fingerprint, TLSCertificate,
 }
 
@@ -47,31 +47,31 @@ var whoisRels = map[string][]AssetType{
 	"admin_org":      {Organization},
 	"admin_person":   {Person},
 	"admin_phone":    {Phone},
-	"admin_email":    {Email},
+	"admin_email":    {EmailAddress},
 	"admin_location": {Location},
 
 	"tech_org":      {Organization},
 	"tech_person":   {Person},
 	"tech_phone":    {Phone},
-	"tech_email":    {Email},
+	"tech_email":    {EmailAddress},
 	"tech_location": {Location},
 
 	"billing_org":      {Organization},
 	"billing_person":   {Person},
 	"billing_phone":    {Phone},
-	"billing_email":    {Email},
+	"billing_email":    {EmailAddress},
 	"billing_location": {Location},
 
 	"registrant_org":      {Organization},
 	"registrant_person":   {Person},
 	"registrant_phone":    {Phone},
-	"registrant_email":    {Email},
+	"registrant_email":    {EmailAddress},
 	"registrant_location": {Location},
 }
 
 var personRels = map[string][]AssetType{
 	"phone_number": {Phone},
-	"email":        {Email},
+	"email":        {EmailAddress},
 	"location":     {Location},
 }
 
@@ -79,12 +79,12 @@ var orgRels = map[string][]AssetType{
 	"rir_org":      {RIROrg},
 	"location":     {Location},
 	"phone_number": {Phone},
-	"email":        {Email},
+	"email":        {EmailAddress},
 	"operates":     {Registrar},
 }
 
 var registrarRels = map[string][]AssetType{
-	"abuse_email":  {Email},
+	"abuse_email":  {EmailAddress},
 	"abuse_phone":  {Phone},
 	"whois_server": {FQDN},
 }
@@ -122,7 +122,7 @@ var tlscertRels = map[string][]AssetType{
 	"subject_organization_unit": {Organization},
 	"subject_state_or_province": {Location},
 	"subject_locality":          {Location},
-	"subject_email":             {Email},
+	"subject_email":             {EmailAddress},
 	"issuer":                    {FQDN},
 	"issuer_organization":       {Organization},
 	"issuer_organization_unit":  {Organization},
@@ -164,7 +164,7 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = locationRels
 	case Phone:
 		relations = phoneRels
-	case Email:
+	case EmailAddress:
 		relations = emailRels
 	case Person:
 		relations = personRels

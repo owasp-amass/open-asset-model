@@ -18,7 +18,7 @@ type EmailAddress struct {
 
 // AssetType returns the asset type.
 func (e EmailAddress) AssetType() model.AssetType {
-	return model.Email
+	return model.EmailAddress
 }
 
 // JSON returns the JSON representation of the asset.

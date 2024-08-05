@@ -15,8 +15,8 @@ func TestEmailAddress_AssetType(t *testing.T) {
 		Domain:    "example.com",
 	}
 
-	if e.AssetType() != model.Email {
-		t.Errorf("Expected asset type %s, got %s", model.Email, e.AssetType())
+	if e.AssetType() != model.EmailAddress {
+		t.Errorf("Expected asset type %s, got %s", model.EmailAddress, e.AssetType())
 	}
 }
 
