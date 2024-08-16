@@ -17,7 +17,7 @@ const (
 	ASN            AssetType = "ASN"
 	RIROrg         AssetType = "RIROrg"
 	FQDN           AssetType = "FQDN"
-	WHOISRecord    AssetType = "WHOISRecord"
+	DomainRecord   AssetType = "DomainRecord"
 	Location       AssetType = "Location"
 	Phone          AssetType = "Phone"
 	EmailAddress   AssetType = "EmailAddress"
@@ -29,12 +29,13 @@ const (
 	URL            AssetType = "URL"
 	Fingerprint    AssetType = "Fingerprint"
 	TLSCertificate AssetType = "TLSCertificate"
+	ContactRecord  AssetType = "ContactRecord"
 )
 
 var AssetList = []AssetType{
-	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOISRecord, Location,
+	IPAddress, Netblock, ASN, RIROrg, FQDN, DomainRecord, Location,
 	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
-	SocketAddress, URL, Fingerprint, TLSCertificate,
+	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord,
 }
 
 var locationRels = map[string][]AssetType{}
@@ -43,54 +44,29 @@ var phoneRels = map[string][]AssetType{}
 
 var emailRels = map[string][]AssetType{}
 
-var whoisRels = map[string][]AssetType{
-	"published_by": {Registrar},
-	"name_server":  {FQDN},
-	"reseller":     {Organization},
-
-	"admin_org":      {Organization},
-	"admin_person":   {Person},
-	"admin_phone":    {Phone},
-	"admin_email":    {EmailAddress},
-	"admin_location": {Location},
-
-	"tech_org":      {Organization},
-	"tech_person":   {Person},
-	"tech_phone":    {Phone},
-	"tech_email":    {EmailAddress},
-	"tech_location": {Location},
-
-	"billing_org":      {Organization},
-	"billing_person":   {Person},
-	"billing_phone":    {Phone},
-	"billing_email":    {EmailAddress},
-	"billing_location": {Location},
-
-	"registrant_org":      {Organization},
-	"registrant_person":   {Person},
-	"registrant_phone":    {Phone},
-	"registrant_email":    {EmailAddress},
-	"registrant_location": {Location},
+var domainRecordRels = map[string][]AssetType{
+	"published_by":       {Registrar},
+	"name_server":        {FQDN},
+	"reseller":           {Organization},
+	"registrar_contact":  {ContactRecord},
+	"registrant_contact": {ContactRecord},
+	"admin_contact":      {ContactRecord},
+	"technical_contact":  {ContactRecord},
+	"billing_contact":    {ContactRecord},
 }
 
-var personRels = map[string][]AssetType{
-	"phone_number": {Phone},
-	"email":        {EmailAddress},
-	"location":     {Location},
-}
+var personRels = map[string][]AssetType{}
 
 var orgRels = map[string][]AssetType{
-	"rir_org":      {RIROrg},
-	"location":     {Location},
-	"phone_number": {Phone},
-	"email":        {EmailAddress},
-	"operates":     {Registrar},
+	"rir_org":        {RIROrg},
+	"contact_record": {ContactRecord},
+	"operates":       {Registrar},
 }
 
 var registrarRels = map[string][]AssetType{
-	"abuse_email":  {EmailAddress},
-	"abuse_phone":  {Phone},
-	"whois_server": {FQDN},
+	"contact_record": {ContactRecord},
+	"abuse_contact":  {ContactRecord},
+	"whois_server":   {FQDN},
 }
 
 var ipRels = map[string][]AssetType{
@@ -117,23 +93,21 @@ var fqdnRels = map[string][]AssetType{
 	"mx_record":    {FQDN},
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
-	"registration": {WHOISRecord},
+	"registration": {DomainRecord},
 }
 
 var tlscertRels = map[string][]AssetType{
-	"common_name":               {FQDN},
-	"subject_organization":      {Organization},
-	"subject_organization_unit": {Organization},
-	"subject_state_or_province": {Location},
-	"subject_locality":          {Location},
-	"subject_email":             {EmailAddress},
-	"issuer":                    {FQDN},
-	"issuer_organization":       {Organization},
-	"issuer_organization_unit":  {Organization},
-	"subject_alt_names":         {FQDN},
-	"issuer_urls":               {URL},
-	"ocsp_server":               {URL},
-	"jarm":                      {Fingerprint},
+	"common_name":             {FQDN},
+	"subject_contact":         {ContactRecord},
+	"issuer_contact":          {ContactRecord},
+	"subject_alt_names":       {FQDN},
+	"san_dns_name":            {FQDN},
+	"san_email_address":       {EmailAddress},
+	"san_ip_address":          {IPAddress},
+	"san_url":                 {URL},
+	"issuing_certificate_url": {URL},
+	"ocsp_server":             {URL},
+	"jarm":                    {Fingerprint},
 }
 
 var socketAddressRels = map[string][]AssetType{}
@@ -145,6 +119,16 @@ var urlRels = map[string][]AssetType{
 }
 
 var fingerprintRels = map[string][]AssetType{}
+
+var contactRecordRels = map[string][]AssetType{
+	"person":       {Person},
+	"organization": {Organization},
+	"location":     {Location},
+	"email":        {EmailAddress},
+	"phone":        {Phone},
+	"fax":          {Phone},
+	"url":          {URL},
+}
 
 // ValidRelationship returns true if the relation is valid in the taxonomy
 // when outgoing from the source asset type to the destination asset type.
@@ -162,8 +146,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = rirOrgRels
 	case FQDN:
 		relations = fqdnRels
-	case WHOISRecord:
-		relations = whoisRels
+	case DomainRecord:
+		relations = domainRecordRels
 	case Location:
 		relations = locationRels
 	case Phone:
@@ -184,6 +168,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = urlRels
 	case Fingerprint:
 		relations = fingerprintRels
+	case ContactRecord:
+		relations = contactRecordRels
 	default:
 		return false
 	}

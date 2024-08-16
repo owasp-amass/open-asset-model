@@ -31,7 +31,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		ASN,
 		RIROrg,
 		FQDN,
-		WHOISRecord,
+		DomainRecord,
 		Location,
 		Phone,
 		EmailAddress,
@@ -43,6 +43,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		URL,
 		Fingerprint,
 		TLSCertificate,
+		ContactRecord,
 	}
 
 	expectedTypes := []string{
@@ -51,7 +52,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"ASN",
 		"RIROrg",
 		"FQDN",
-		"WHOISRecord",
+		"DomainRecord",
 		"Location",
 		"Phone",
 		"EmailAddress",
@@ -63,6 +64,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"URL",
 		"Fingerprint",
 		"TLSCertificate",
+		"ContactRecord",
 	}
 
 	if len(assetTypes) != len(expectedTypes) {

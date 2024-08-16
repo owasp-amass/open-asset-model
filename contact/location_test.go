@@ -10,28 +10,28 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestLocation_AssetType(t *testing.T) {
+func TestLocationAssetType(t *testing.T) {
 	loc := Location{}
 	if loc.AssetType() != model.Location {
 		t.Errorf("Expected asset type %s but got %s", model.Location, loc.AssetType())
 	}
 }
 
-func TestLocation_JSON(t *testing.T) {
+func TestLocationJSON(t *testing.T) {
 	loc := Location{
 		FormattedAddress: "123 Main St",
 		BuildingNumber:   "123",
 		StreetName:       "Main St",
 		Unit:             "Apt 1",
 		Building:         "Building A",
-		Town:             "Anytown",
+		City:             "Anytown",
 		Locality:         "Anytown",
-		Region:           "Anyregion",
+		Province:         "Anyregion",
 		CountryCode:      "US",
 		PostalCode:       "12345",
 	}
 
-	expectedJSON := `{"formatted_address":"123 Main St","building_number":"123","street_name":"Main St","unit":"Apt 1","building":"Building A","town":"Anytown","locality":"Anytown","region":"Anyregion","country_code":"US","postal_code":"12345"}`
+	expectedJSON := `{"formatted_address":"123 Main St","building_number":"123","street_name":"Main St","unit":"Apt 1","building":"Building A","city":"Anytown","locality":"Anytown","province":"Anyregion","country_code":"US","postal_code":"12345"}`
 
 	jsonData, err := loc.JSON()
 	if err != nil {

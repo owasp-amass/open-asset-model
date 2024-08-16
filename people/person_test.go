@@ -12,24 +12,22 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestPerson_AssetType(t *testing.T) {
+func TestPersonAssetType(t *testing.T) {
 	p := Person{}
 	if p.AssetType() != model.Person {
 		t.Errorf("Expected asset type to be %v, but got %v", model.Person, p.AssetType())
 	}
 }
 
-func TestPerson_JSON(t *testing.T) {
+func TestPersonJSON(t *testing.T) {
 	p := Person{
-		FullName:     "John Doe",
-		FirstName:    "John",
-		MiddleName:   "Jacob",
-		FamilyName:   "Doe",
-		BirthCountry: "USA",
-		DateOfBirth:  "1990-01-01",
+		FullName:   "John Doe",
+		FirstName:  "John",
+		MiddleName: "Jacob",
+		FamilyName: "Doe",
 	}
 
-	expectedJSON := `{"full_name":"John Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe","birth_country":"USA","date_of_birth":"1990-01-01"}`
+	expectedJSON := `{"full_name":"John Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe"}`
 
 	jsonData, err := p.JSON()
 	if err != nil {
