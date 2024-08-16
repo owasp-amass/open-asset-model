@@ -12,7 +12,7 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestRegistrar_AssetType(t *testing.T) {
+func TestRegistrarAssetType(t *testing.T) {
 	reg := Registrar{}
 	expected := model.Registrar
 	actual := reg.AssetType()
@@ -22,7 +22,7 @@ func TestRegistrar_AssetType(t *testing.T) {
 	}
 }
 
-func TestRegistrar_JSON(t *testing.T) {
+func TestRegistrarJSON(t *testing.T) {
 	reg := Registrar{
 		Name:   "Registrar Name",
 		URL:    "https://www.registrar.com",
