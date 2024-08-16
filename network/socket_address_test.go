@@ -22,6 +22,7 @@ func TestSocketAddressAssetType(t *testing.T) {
 
 func TestSocketAddressJSON(t *testing.T) {
 	sa := SocketAddress{
+		Address:   netip.MustParseAddrPort("192.168.1.1:80"),
 		IPAddress: netip.MustParseAddr("192.168.1.1"),
 		Port:      80,
 		Protocol:  "tcp",
@@ -33,7 +34,7 @@ func TestSocketAddressJSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"ip_address":"192.168.1.1","port":80,"protocol":"tcp"}`
+	expectedJSON := `{"address":"192.168.1.1:80","ip_address":"192.168.1.1","port":80,"protocol":"tcp"}`
 	json, err := sa.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
