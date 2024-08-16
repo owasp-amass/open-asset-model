@@ -11,15 +11,15 @@ import (
 )
 
 func TestWHOIS_AssetType(t *testing.T) {
-	w := WHOIS{}
-	want := model.WHOIS
+	w := WHOISRecord{}
+	want := model.WHOISRecord
 
 	if got := w.AssetType(); got != want {
-		t.Errorf("WHOIS.AssetType() = %v, want %v", got, want)
+		t.Errorf("WHOISRecord.AssetType() = %v, want %v", got, want)
 	}
 }
-func TestWHOIS(t *testing.T) {
-	whois := WHOIS{
+func TestWHOISRecord(t *testing.T) {
+	record := WHOISRecord{
 		Type:                       "domain",
 		Registrar:                  "Registrar",
 		Domain:                     "example.com",
@@ -61,13 +61,13 @@ func TestWHOIS(t *testing.T) {
 	}
 
 	// Test AssetType method
-	if whois.AssetType() != model.WHOIS {
-		t.Errorf("Expected asset type %s, but got %s", model.WHOIS, whois.AssetType())
+	if record.AssetType() != model.WHOISRecord {
+		t.Errorf("Expected asset type %s, but got %s", model.WHOISRecord, record.AssetType())
 	}
 
 	// Test JSON method
 	expectedJSON := `{"type":"domain","registrar":"Registrar","domain":"example.com","reseller":"Reseller","name_servers":["NameServer1","NameServer2"],"created_date":"2020-01-01","updated_date":"2021-01-01","expiration_date":"2022-01-01","domain_status":["active","clientTransferProhibited"],"registry_registrant_id":"12345","registry_registrant_name":"RegistryRegistrantName","registry_registrant_org":"RegistryRegistrantOrg","registry_registrant_location":"RegistryRegistrantLocation","registry_registrant_phone":"RegistryRegistrantPhone","registry_registrant_fax":"RegistryRegistrantFax","registry_registrant_email":"RegistryRegistrantEmail","registry_domain_id":"67890","registry_billing_id":"13579","registry_billing_name":"RegistryBillingName","registry_billing_org":"RegistryBillingOrg","registry_billing_location":"RegistryBillingLocation","registry_billing_email":"RegistryBillingEmail","registry_admin_id":"24680","registry_admin_name":"RegistryAdminName","registry_admin_org":"RegistryAdminOrg","registry_admin_location":"RegistryAdminLocation","registry_admin_phone":"RegistryAdminPhone","registry_admin_fax":"RegistryAdminFax","registry_admin_email":"RegistryAdminEmail","registry_tech_id":"13579","registry_tech_name":"RegistryTechName","registry_tech_org":"RegistryTechOrg","registry_tech_location":"RegistryTechLocation","registry_tech_phone":"RegistryTechPhone","registry_tech_fax":"RegistryTechFax","registry_tech_email":"RegistryTechEmail","description":"Example domain","dnssec":"unsigned"}`
-	json, err := whois.JSON()
+	json, err := record.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}

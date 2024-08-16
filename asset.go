@@ -17,7 +17,7 @@ const (
 	ASN            AssetType = "ASN"
 	RIROrg         AssetType = "RIROrg"
 	FQDN           AssetType = "FQDN"
-	WHOIS          AssetType = "WHOIS"
+	WHOISRecord    AssetType = "WHOISRecord"
 	Location       AssetType = "Location"
 	Phone          AssetType = "Phone"
 	EmailAddress   AssetType = "EmailAddress"
@@ -32,7 +32,7 @@ const (
 )
 
 var AssetList = []AssetType{
-	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOIS, Location,
+	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOISRecord, Location,
 	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
 	SocketAddress, URL, Fingerprint, TLSCertificate,
 }
@@ -117,7 +117,7 @@ var fqdnRels = map[string][]AssetType{
 	"mx_record":    {FQDN},
 	"srv_record":   {FQDN, IPAddress},
 	"node":         {FQDN},
-	"registration": {WHOIS},
+	"registration": {WHOISRecord},
 }
 
 var tlscertRels = map[string][]AssetType{
@@ -162,7 +162,7 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = rirOrgRels
 	case FQDN:
 		relations = fqdnRels
-	case WHOIS:
+	case WHOISRecord:
 		relations = whoisRels
 	case Location:
 		relations = locationRels

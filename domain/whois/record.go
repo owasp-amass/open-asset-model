@@ -10,8 +10,8 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// WHOIS represents the WHOIS information of a domain.
-type WHOIS struct {
+// WHOISRecord represents the WHOIS record of a domain.
+type WHOISRecord struct {
 	// Type represents the type of the WHOIS information.
 	Type string `json:"type"`
 
@@ -134,11 +134,11 @@ type WHOIS struct {
 }
 
 // AssetType returns the asset type.
-func (w WHOIS) AssetType() model.AssetType {
-	return model.WHOIS
+func (r WHOISRecord) AssetType() model.AssetType {
+	return model.WHOISRecord
 }
 
 // JSON returns the JSON representation of the asset.
-func (w WHOIS) JSON() ([]byte, error) {
-	return json.Marshal(w)
+func (r WHOISRecord) JSON() ([]byte, error) {
+	return json.Marshal(r)
 }
