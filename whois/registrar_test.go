@@ -1,4 +1,8 @@
-package whois_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package whois
 
 import (
 	"encoding/json"
@@ -6,11 +10,10 @@ import (
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	"github.com/owasp-amass/open-asset-model/whois"
 )
 
 func TestRegistrar_AssetType(t *testing.T) {
-	reg := whois.Registrar{}
+	reg := Registrar{}
 	expected := model.Registrar
 	actual := reg.AssetType()
 
@@ -20,7 +23,7 @@ func TestRegistrar_AssetType(t *testing.T) {
 }
 
 func TestRegistrar_JSON(t *testing.T) {
-	reg := whois.Registrar{
+	reg := Registrar{
 		Name:   "Registrar Name",
 		URL:    "https://www.registrar.com",
 		IANAID: "12345",
@@ -36,7 +39,7 @@ func TestRegistrar_JSON(t *testing.T) {
 		t.Errorf("Expected JSON %v but got %v", expected, string(actual))
 	}
 
-	var reg2 whois.Registrar
+	var reg2 Registrar
 	err = json.Unmarshal(actual, &reg2)
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

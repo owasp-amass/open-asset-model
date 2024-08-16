@@ -1,14 +1,17 @@
-package url_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package url
 
 import (
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	"github.com/owasp-amass/open-asset-model/url"
 )
 
 func TestURL_AssetType(t *testing.T) {
-	u := url.URL{}
+	u := URL{}
 	want := model.URL
 
 	if got := u.AssetType(); got != want {
@@ -17,7 +20,7 @@ func TestURL_AssetType(t *testing.T) {
 }
 
 func TestURL_JSON(t *testing.T) {
-	u := url.URL{
+	u := URL{
 		Raw:      "http://user:pass@example.com:8080/path?option1=value1&option2=value2#fragment",
 		Scheme:   "http",
 		Username: "user",

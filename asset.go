@@ -1,3 +1,7 @@
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
 package open_asset_model
 
 type Asset interface {
@@ -21,7 +25,7 @@ const (
 	Organization   AssetType = "Organization"
 	Registrar      AssetType = "Registrar"
 	Registrant     AssetType = "Registrant"
-	Port           AssetType = "Port"
+	SocketAddress  AssetType = "SocketAddress"
 	URL            AssetType = "URL"
 	Fingerprint    AssetType = "Fingerprint"
 	TLSCertificate AssetType = "TLSCertificate"
@@ -30,7 +34,7 @@ const (
 var AssetList = []AssetType{
 	IPAddress, Netblock, ASN, RIROrg, FQDN, WHOIS, Location,
 	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
-	Port, URL, Fingerprint, TLSCertificate,
+	SocketAddress, URL, Fingerprint, TLSCertificate,
 }
 
 var locationRels = map[string][]AssetType{}
@@ -90,7 +94,7 @@ var registrarRels = map[string][]AssetType{
 }
 
 var ipRels = map[string][]AssetType{
-	"port": {Port},
+	"port": {SocketAddress},
 }
 
 var netblockRels = map[string][]AssetType{
@@ -132,10 +136,10 @@ var tlscertRels = map[string][]AssetType{
 	"jarm":                      {Fingerprint},
 }
 
-var portRels = map[string][]AssetType{}
+var socketAddressRels = map[string][]AssetType{}
 
 var urlRels = map[string][]AssetType{
-	"port":       {Port},
+	"port":       {SocketAddress},
 	"domain":     {FQDN},
 	"ip_address": {IPAddress},
 }
@@ -174,8 +178,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = registrarRels
 	case TLSCertificate:
 		relations = tlscertRels
-	case Port:
-		relations = portRels
+	case SocketAddress:
+		relations = socketAddressRels
 	case URL:
 		relations = urlRels
 	case Fingerprint:

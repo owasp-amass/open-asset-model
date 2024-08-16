@@ -1,11 +1,14 @@
-package contact_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package contact
 
 import (
 	"encoding/json"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	. "github.com/owasp-amass/open-asset-model/contact"
 )
 
 func TestEmailAddress_AssetType(t *testing.T) {

@@ -11,23 +11,25 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// IPAddress represents an IP address.
-type IPAddress struct {
+type SocketAddress struct {
 	// Address is the IP address value, stored as a netip.Addr type.
 	// It should be a valid IP address, such as "192.0.2.1" (IPv4)
 	// or "2001:db8::1" (IPv6).
-	Address netip.Addr `json:"address"`
+	IPAddress netip.Addr `json:"ip_address"`
 
-	// Type is the type of IP address, such as "IPv4" or "IPv6".
-	Type string `json:"type"`
+	// Port is the port number.
+	Port int `json:"port"`
+
+	// Protocol is the protocol of the port, such as "tcp" or "udp".
+	Protocol string `json:"protocol"`
 }
 
 // AssetType returns the asset type.
-func (i IPAddress) AssetType() model.AssetType {
-	return model.IPAddress
+func (sa SocketAddress) AssetType() model.AssetType {
+	return model.SocketAddress
 }
 
 // JSON returns the JSON encoding of the struct.
-func (i IPAddress) JSON() ([]byte, error) {
-	return json.Marshal(i)
+func (sa SocketAddress) JSON() ([]byte, error) {
+	return json.Marshal(sa)
 }

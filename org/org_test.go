@@ -1,17 +1,20 @@
-package org_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package org
 
 import (
 	"reflect"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	. "github.com/owasp-amass/open-asset-model/org"
 )
 
 func TestOrganization_AssetType(t *testing.T) {
-	org := Organization{}
+	o := Organization{}
 	expected := model.Organization
-	actual := org.AssetType()
+	actual := o.AssetType()
 
 	if actual != expected {
 		t.Errorf("Expected asset type %v but got %v", expected, actual)
@@ -19,12 +22,12 @@ func TestOrganization_AssetType(t *testing.T) {
 }
 
 func TestOrganization_JSON(t *testing.T) {
-	org := Organization{
+	o := Organization{
 		OrgName:  "Acme Inc.",
 		Industry: "Technology",
 	}
 	expected := `{"org_name":"Acme Inc.","industry":"Technology"}`
-	actual, err := org.JSON()
+	actual, err := o.JSON()
 
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

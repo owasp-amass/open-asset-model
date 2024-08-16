@@ -1,3 +1,7 @@
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
 package open_asset_model
 
 import (
@@ -35,7 +39,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		Organization,
 		Registrar,
 		Registrant,
-		Port,
+		SocketAddress,
 		URL,
 		Fingerprint,
 		TLSCertificate,
@@ -55,7 +59,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Organization",
 		"Registrar",
 		"Registrant",
-		"Port",
+		"SocketAddress",
 		"URL",
 		"Fingerprint",
 		"TLSCertificate",

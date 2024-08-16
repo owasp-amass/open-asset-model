@@ -1,4 +1,8 @@
-package people_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package people
 
 import (
 	"encoding/json"
@@ -6,7 +10,6 @@ import (
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	. "github.com/owasp-amass/open-asset-model/people"
 )
 
 func TestPerson_AssetType(t *testing.T) {

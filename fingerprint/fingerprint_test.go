@@ -1,14 +1,17 @@
-package fingerprint_test
+// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// SPDX-License-Identifier: Apache-2.0
+
+package fingerprint
 
 import (
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
-	"github.com/owasp-amass/open-asset-model/fingerprint"
 )
 
 func TestFingerprint_AssetType(t *testing.T) {
-	fp := fingerprint.Fingerprint{
+	fp := Fingerprint{
 		Value: "example",
 		Type:  "example",
 	}
@@ -20,7 +23,7 @@ func TestFingerprint_AssetType(t *testing.T) {
 }
 
 func TestFingerprint_JSON(t *testing.T) {
-	fp := fingerprint.Fingerprint{
+	fp := Fingerprint{
 		Value: "example",
 		Type:  "example",
 	}
