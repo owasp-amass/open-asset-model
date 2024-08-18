@@ -126,7 +126,6 @@ var contactRecordRels = map[string][]AssetType{
 	"location":     {Location},
 	"email":        {EmailAddress},
 	"phone":        {Phone},
-	"fax":          {Phone},
 	"url":          {URL},
 }
 

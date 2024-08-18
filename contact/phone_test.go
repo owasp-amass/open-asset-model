@@ -12,23 +12,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPhone_AssetType(t *testing.T) {
+func TestPhoneAssetType(t *testing.T) {
 	p := Phone{}
 	assert.Equal(t, model.Phone, p.AssetType())
 }
 
-func TestPhone_JSON(t *testing.T) {
+func TestPhoneJSON(t *testing.T) {
 	p := Phone{
-		Raw:              "123-456-7890",
-		E164:             "+1234567890",
-		Type:             "mobile",
-		CountryAbbrev:    "US",
-		CountryCode:      1,
-		SubscriberNumber: "2345678901",
-		Ext:              "123",
+		Raw:           "123-456-7890 Ext. 123",
+		E164:          "+1234567890",
+		Type:          PhoneTypeMobile,
+		CountryAbbrev: "US",
+		CountryCode:   1,
+		Ext:           "123",
 	}
 
-	expectedJSON := `{"raw":"123-456-7890","e164":"+1234567890","type":"mobile","country_abbrev":"US","country_code":1,"subscriber_number":"2345678901","ext":"123"}`
+	expectedJSON := `{"raw":"123-456-7890 Ext. 123","e164":"+1234567890","type":"mobile","country_abbrev":"US","country_code":1,"ext":"123"}`
 
 	jsonData, err := p.JSON()
 	assert.NoError(t, err)

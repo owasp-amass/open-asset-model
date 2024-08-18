@@ -13,9 +13,9 @@ import (
 
 func TestEmailAddress_AssetType(t *testing.T) {
 	e := EmailAddress{
-		Address:   "test@example.com",
-		LocalPart: "test",
-		Domain:    "example.com",
+		Address:  "test@example.com",
+		Username: "test",
+		Domain:   "example.com",
 	}
 
 	if e.AssetType() != model.EmailAddress {
@@ -25,12 +25,12 @@ func TestEmailAddress_AssetType(t *testing.T) {
 
 func TestEmailAddress_JSON(t *testing.T) {
 	e := EmailAddress{
-		Address:   "test@example.com",
-		LocalPart: "test",
-		Domain:    "example.com",
+		Address:  "test@example.com",
+		Username: "test",
+		Domain:   "example.com",
 	}
 
-	expectedJSON := `{"address":"test@example.com","local_part":"test","domain":"example.com"}`
+	expectedJSON := `{"address":"test@example.com","username":"test","domain":"example.com"}`
 
 	jsonBytes, err := e.JSON()
 	if err != nil {

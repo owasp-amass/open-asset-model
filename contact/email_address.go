@@ -10,14 +10,11 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// EmailAddress represents an email address with a value, local part, and domain.
+// EmailAddress represents an email address with an address, username, and the domain.
 type EmailAddress struct {
-	// Address is the full email address.
-	Address string `json:"address"`
-	// LocalPart is the part of the email address before the "@" symbol.
-	LocalPart string `json:"local_part"`
-	// Domain is the part of the email address after the "@" symbol.
-	Domain string `json:"domain"`
+	Address  string `json:"address"`
+	Username string `json:"username"`
+	Domain   string `json:"domain"`
 }
 
 // AssetType returns the asset type.

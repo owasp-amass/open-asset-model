@@ -12,9 +12,7 @@ import (
 
 // Organization represents an organization. Does not have to be tied with an RIR.
 type Organization struct {
-	// OrgName is the name of the organization.
-	OrgName string `json:"org_name,omitempty"`
-	// Industry is the industry of the organization.
+	Name     string `json:"name,omitempty"`
 	Industry string `json:"industry,omitempty"`
 }
 
