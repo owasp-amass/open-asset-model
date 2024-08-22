@@ -30,24 +30,31 @@ const (
 	Fingerprint    AssetType = "Fingerprint"
 	TLSCertificate AssetType = "TLSCertificate"
 	ContactRecord  AssetType = "ContactRecord"
+	Source         AssetType = "Source"
 )
 
 var AssetList = []AssetType{
 	IPAddress, Netblock, ASN, RIROrg, FQDN, DomainRecord, Location,
 	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
-	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord,
+	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord, Source,
 }
 
-var locationRels = map[string][]AssetType{}
+var locationRels = map[string][]AssetType{
+	"source": {Source},
+}
 
-var phoneRels = map[string][]AssetType{}
+var phoneRels = map[string][]AssetType{
+	"source": {Source},
+}
 
-var emailRels = map[string][]AssetType{}
+var emailRels = map[string][]AssetType{
+	"source": {Source},
+}
 
 var domainRecordRels = map[string][]AssetType{
+	"source":             {Source},
 	"published_by":       {Registrar},
 	"name_server":        {FQDN},
-	"reseller":           {Organization},
 	"registrar_contact":  {ContactRecord},
 	"registrant_contact": {ContactRecord},
 	"admin_contact":      {ContactRecord},
@@ -55,36 +62,46 @@ var domainRecordRels = map[string][]AssetType{
 	"billing_contact":    {ContactRecord},
 }
 
-var personRels = map[string][]AssetType{}
+var personRels = map[string][]AssetType{
+	"source": {Source},
+}
 
 var orgRels = map[string][]AssetType{
-	"rir_org":        {RIROrg},
+	"source":         {Source},
 	"contact_record": {ContactRecord},
-	"operates":       {Registrar},
 }
 
 var registrarRels = map[string][]AssetType{
+	"source":         {Source},
+	"organization":   {Organization},
 	"contact_record": {ContactRecord},
 	"abuse_contact":  {ContactRecord},
 	"whois_server":   {FQDN},
 }
 
 var ipRels = map[string][]AssetType{
-	"port": {SocketAddress},
+	"source": {Source},
+	"port":   {SocketAddress},
 }
 
 var netblockRels = map[string][]AssetType{
+	"source":   {Source},
 	"contains": {IPAddress},
 }
 
 var asnRels = map[string][]AssetType{
+	"source":     {Source},
 	"announces":  {Netblock},
 	"managed_by": {RIROrg},
 }
 
-var rirOrgRels = map[string][]AssetType{}
+var rirOrgRels = map[string][]AssetType{
+	"source":       {Source},
+	"organization": {Organization},
+}
 
 var fqdnRels = map[string][]AssetType{
+	"source":       {Source},
 	"a_record":     {IPAddress},
 	"aaaa_record":  {IPAddress},
 	"cname_record": {FQDN},
@@ -97,6 +114,7 @@ var fqdnRels = map[string][]AssetType{
 }
 
 var tlscertRels = map[string][]AssetType{
+	"source":                  {Source},
 	"common_name":             {FQDN},
 	"subject_contact":         {ContactRecord},
 	"issuer_contact":          {ContactRecord},
@@ -110,17 +128,23 @@ var tlscertRels = map[string][]AssetType{
 	"jarm":                    {Fingerprint},
 }
 
-var socketAddressRels = map[string][]AssetType{}
+var socketAddressRels = map[string][]AssetType{
+	"source": {Source},
+}
 
 var urlRels = map[string][]AssetType{
+	"source":     {Source},
 	"port":       {SocketAddress},
 	"domain":     {FQDN},
 	"ip_address": {IPAddress},
 }
 
-var fingerprintRels = map[string][]AssetType{}
+var fingerprintRels = map[string][]AssetType{
+	"source": {Source},
+}
 
 var contactRecordRels = map[string][]AssetType{
+	"source":       {Source},
 	"person":       {Person},
 	"organization": {Organization},
 	"location":     {Location},
@@ -129,12 +153,17 @@ var contactRecordRels = map[string][]AssetType{
 	"url":          {URL},
 }
 
+var sourceRels = map[string][]AssetType{
+	"organization": {Organization},
+	"url":          {URL},
+}
+
 // ValidRelationship returns true if the relation is valid in the taxonomy
 // when outgoing from the source asset type to the destination asset type.
-func ValidRelationship(source AssetType, relation string, destination AssetType) bool {
+func ValidRelationship(src AssetType, relation string, destination AssetType) bool {
 	var relations map[string][]AssetType
 
-	switch source {
+	switch src {
 	case IPAddress:
 		relations = ipRels
 	case Netblock:
@@ -169,6 +198,8 @@ func ValidRelationship(source AssetType, relation string, destination AssetType)
 		relations = fingerprintRels
 	case ContactRecord:
 		relations = contactRecordRels
+	case Source:
+		relations = sourceRels
 	default:
 		return false
 	}
