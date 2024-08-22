@@ -13,6 +13,7 @@ import (
 
 // TLSCertificate represents a TLS Certificate asset
 type TLSCertificate struct {
+	Raw                   string    `json:"raw,omitempty"`
 	Version               int       `json:"version"`
 	SerialNumber          string    `json:"serial_number"`
 	SubjectCommonName     string    `json:"subject_common_name"`

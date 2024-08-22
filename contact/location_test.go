@@ -19,19 +19,20 @@ func TestLocationAssetType(t *testing.T) {
 
 func TestLocationJSON(t *testing.T) {
 	loc := Location{
-		FormattedAddress: "123 Main St",
-		BuildingNumber:   "123",
-		StreetName:       "Main St",
-		Unit:             "Apt 1",
-		Building:         "Building A",
-		City:             "Anytown",
-		Locality:         "Anytown",
-		Province:         "Anyregion",
-		CountryCode:      "US",
-		PostalCode:       "12345",
+		Address:        "123 Main St",
+		Building:       "Building A",
+		BuildingNumber: "123",
+		StreetName:     "Main St",
+		Unit:           "Apt 1",
+		POBox:          "P.O. Box 145",
+		City:           "Anytown",
+		Locality:       "Anytown",
+		Province:       "Anyregion",
+		Country:        "US",
+		PostalCode:     "12345",
 	}
 
-	expectedJSON := `{"formatted_address":"123 Main St","building_number":"123","street_name":"Main St","unit":"Apt 1","building":"Building A","city":"Anytown","locality":"Anytown","province":"Anyregion","country_code":"US","postal_code":"12345"}`
+	expectedJSON := `{"address":"123 Main St","building":"Building A","building_number":"123","street_name":"Main St","unit":"Apt 1","po_box":"P.O. Box 145","city":"Anytown","locality":"Anytown","province":"Anyregion","country":"US","postal_code":"12345"}`
 
 	jsonData, err := loc.JSON()
 	if err != nil {

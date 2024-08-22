@@ -10,19 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// This struct represents the location linked to the possible asset
+// Location represents the street address location.
 type Location struct {
-	// FormattedAddress is the human-readable address of the location
-	FormattedAddress string `json:"formatted_address,omitempty"`
-	BuildingNumber   string `json:"building_number,omitempty"`
-	StreetName       string `json:"street_name,omitempty"`
-	Unit             string `json:"unit,omitempty"`
-	Building         string `json:"building,omitempty"`
-	City             string `json:"city,omitempty"`
-	Locality         string `json:"locality,omitempty"`
-	Province         string `json:"province,omitempty"`
-	CountryCode      string `json:"country_code,omitempty"` // ISO 3166-1 alpha-2 country code
-	PostalCode       string `json:"postal_code,omitempty"`
+	Address        string `json:"address,omitempty"`
+	Building       string `json:"building,omitempty"`
+	BuildingNumber string `json:"building_number,omitempty"`
+	StreetName     string `json:"street_name,omitempty"`
+	Unit           string `json:"unit,omitempty"`
+	POBox          string `json:"po_box,omitempty"`
+	City           string `json:"city,omitempty"`
+	Locality       string `json:"locality,omitempty"`
+	Province       string `json:"province,omitempty"`
+	Country        string `json:"country,omitempty"`
+	PostalCode     string `json:"postal_code,omitempty"`
 }
 
 // AssetType returns the asset type.

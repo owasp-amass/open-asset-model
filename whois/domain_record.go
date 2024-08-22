@@ -12,6 +12,7 @@ import (
 
 // DomainRecord represents the WHOIS record of a domain.
 type DomainRecord struct {
+	Raw            string   `json:"raw,omitempty"`
 	ID             string   `json:"id,omitempty"`
 	Domain         string   `json:"domain,omitempty"`
 	Punycode       string   `json:"punycode,omitempty"`
