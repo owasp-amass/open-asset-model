@@ -25,10 +25,9 @@ func TestRegistrarAssetType(t *testing.T) {
 func TestRegistrarJSON(t *testing.T) {
 	reg := Registrar{
 		Name:   "Registrar Name",
-		URL:    "https://www.registrar.com",
 		IANAID: "12345",
 	}
-	expected := `{"name":"Registrar Name","url":"https://www.registrar.com","iana_id":"12345"}`
+	expected := `{"name":"Registrar Name","iana_id":"12345"}`
 	actual, err := reg.JSON()
 
 	if err != nil {

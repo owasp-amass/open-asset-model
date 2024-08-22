@@ -10,7 +10,7 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestURL_AssetType(t *testing.T) {
+func TestURLAssetType(t *testing.T) {
 	u := URL{}
 	want := model.URL
 
@@ -19,7 +19,7 @@ func TestURL_AssetType(t *testing.T) {
 	}
 }
 
-func TestURL_JSON(t *testing.T) {
+func TestURLJSON(t *testing.T) {
 	u := URL{
 		Raw:      "http://user:pass@example.com:8080/path?option1=value1&option2=value2#fragment",
 		Scheme:   "http",
@@ -43,7 +43,7 @@ func TestURL_JSON(t *testing.T) {
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
-	t.Log(string(json))
+
 	if string(json) != expectedJSON {
 		t.Errorf("Expected JSON %s, but got %s", expectedJSON, string(json))
 	}
