@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2023-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2024. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -40,19 +40,23 @@ var AssetList = []AssetType{
 }
 
 var locationRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var phoneRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var emailRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var domainRecordRels = map[string][]AssetType{
 	"source":             {Source},
+	"monitored_by":       {Source},
 	"published_by":       {Registrar},
 	"name_server":        {FQDN},
 	"registrar_contact":  {ContactRecord},
@@ -63,16 +67,19 @@ var domainRecordRels = map[string][]AssetType{
 }
 
 var personRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var orgRels = map[string][]AssetType{
 	"source":         {Source},
+	"monitored_by":   {Source},
 	"contact_record": {ContactRecord},
 }
 
 var registrarRels = map[string][]AssetType{
 	"source":         {Source},
+	"monitored_by":   {Source},
 	"organization":   {Organization},
 	"contact_record": {ContactRecord},
 	"abuse_contact":  {ContactRecord},
@@ -80,28 +87,33 @@ var registrarRels = map[string][]AssetType{
 }
 
 var ipRels = map[string][]AssetType{
-	"source": {Source},
-	"port":   {SocketAddress},
+	"source":       {Source},
+	"monitored_by": {Source},
+	"port":         {SocketAddress},
 }
 
 var netblockRels = map[string][]AssetType{
-	"source":   {Source},
-	"contains": {IPAddress},
+	"source":       {Source},
+	"monitored_by": {Source},
+	"contains":     {IPAddress},
 }
 
 var asnRels = map[string][]AssetType{
-	"source":     {Source},
-	"announces":  {Netblock},
-	"managed_by": {RIROrg},
+	"source":       {Source},
+	"monitored_by": {Source},
+	"announces":    {Netblock},
+	"managed_by":   {RIROrg},
 }
 
 var rirOrgRels = map[string][]AssetType{
 	"source":       {Source},
+	"monitored_by": {Source},
 	"organization": {Organization},
 }
 
 var fqdnRels = map[string][]AssetType{
 	"source":       {Source},
+	"monitored_by": {Source},
 	"a_record":     {IPAddress},
 	"aaaa_record":  {IPAddress},
 	"cname_record": {FQDN},
@@ -115,6 +127,7 @@ var fqdnRels = map[string][]AssetType{
 
 var tlscertRels = map[string][]AssetType{
 	"source":                  {Source},
+	"monitored_by":            {Source},
 	"common_name":             {FQDN},
 	"subject_contact":         {ContactRecord},
 	"issuer_contact":          {ContactRecord},
@@ -129,22 +142,26 @@ var tlscertRels = map[string][]AssetType{
 }
 
 var socketAddressRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var urlRels = map[string][]AssetType{
-	"source":     {Source},
-	"port":       {SocketAddress},
-	"domain":     {FQDN},
-	"ip_address": {IPAddress},
+	"source":       {Source},
+	"monitored_by": {Source},
+	"port":         {SocketAddress},
+	"domain":       {FQDN},
+	"ip_address":   {IPAddress},
 }
 
 var fingerprintRels = map[string][]AssetType{
-	"source": {Source},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var contactRecordRels = map[string][]AssetType{
 	"source":       {Source},
+	"monitored_by": {Source},
 	"person":       {Person},
 	"organization": {Organization},
 	"location":     {Location},
