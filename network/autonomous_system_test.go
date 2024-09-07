@@ -21,7 +21,7 @@ func TestAutonomousSystem(t *testing.T) {
 		as := AutonomousSystem{Number: 64496}
 
 		require.Equal(t, 64496, as.Number)
-		require.Equal(t, as.AssetType(), model.ASN)
+		require.Equal(t, as.AssetType(), model.AutonomousSystem)
 	})
 
 	t.Run("Test successful JSON serialization of AutonomousSystem with valid AS number", func(t *testing.T) {

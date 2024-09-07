@@ -12,13 +12,12 @@ import (
 
 // AutonomousSystem represents an autonomous system.
 type AutonomousSystem struct {
-	// Number is the autonomous system number (AS).
 	Number int `json:"number"`
 }
 
 // AssetType returns the asset type.
 func (a AutonomousSystem) AssetType() model.AssetType {
-	return model.ASN
+	return model.AutonomousSystem
 }
 
 // JSON returns the JSON encoding of the struct.

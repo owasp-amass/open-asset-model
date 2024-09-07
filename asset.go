@@ -12,31 +12,29 @@ type Asset interface {
 type AssetType string
 
 const (
-	IPAddress      AssetType = "IPAddress"
-	Netblock       AssetType = "Netblock"
-	ASN            AssetType = "ASN"
-	RIROrg         AssetType = "RIROrg"
-	FQDN           AssetType = "FQDN"
-	DomainRecord   AssetType = "DomainRecord"
-	Location       AssetType = "Location"
-	Phone          AssetType = "Phone"
-	EmailAddress   AssetType = "EmailAddress"
-	Person         AssetType = "Person"
-	Organization   AssetType = "Organization"
-	Registrar      AssetType = "Registrar"
-	Registrant     AssetType = "Registrant"
-	SocketAddress  AssetType = "SocketAddress"
-	URL            AssetType = "URL"
-	Fingerprint    AssetType = "Fingerprint"
-	TLSCertificate AssetType = "TLSCertificate"
-	ContactRecord  AssetType = "ContactRecord"
-	Source         AssetType = "Source"
+	IPAddress        AssetType = "IPAddress"
+	Netblock         AssetType = "Netblock"
+	AutonomousSystem AssetType = "AutonomousSystem"
+	FQDN             AssetType = "FQDN"
+	DomainRecord     AssetType = "DomainRecord"
+	AutnumRecord     AssetType = "AutnumRecord"
+	Location         AssetType = "Location"
+	Phone            AssetType = "Phone"
+	EmailAddress     AssetType = "EmailAddress"
+	Person           AssetType = "Person"
+	Organization     AssetType = "Organization"
+	SocketAddress    AssetType = "SocketAddress"
+	URL              AssetType = "URL"
+	Fingerprint      AssetType = "Fingerprint"
+	TLSCertificate   AssetType = "TLSCertificate"
+	ContactRecord    AssetType = "ContactRecord"
+	Source           AssetType = "Source"
 )
 
 var AssetList = []AssetType{
-	IPAddress, Netblock, ASN, RIROrg, FQDN, DomainRecord, Location,
-	Phone, EmailAddress, Person, Organization, Registrar, Registrant,
-	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord, Source,
+	IPAddress, Netblock, AutonomousSystem, FQDN, DomainRecord, AutnumRecord,
+	Location, Phone, EmailAddress, Person, Organization, SocketAddress, URL,
+	Fingerprint, TLSCertificate, ContactRecord, Source,
 }
 
 var locationRels = map[string][]AssetType{
@@ -57,13 +55,24 @@ var emailRels = map[string][]AssetType{
 var domainRecordRels = map[string][]AssetType{
 	"source":             {Source},
 	"monitored_by":       {Source},
-	"published_by":       {Registrar},
 	"name_server":        {FQDN},
+	"whois_server":       {FQDN},
 	"registrar_contact":  {ContactRecord},
 	"registrant_contact": {ContactRecord},
 	"admin_contact":      {ContactRecord},
 	"technical_contact":  {ContactRecord},
 	"billing_contact":    {ContactRecord},
+}
+
+var autnumRecordRels = map[string][]AssetType{
+	"source":            {Source},
+	"monitored_by":      {Source},
+	"whois_server":      {FQDN},
+	"registrant":        {ContactRecord},
+	"admin_contact":     {ContactRecord},
+	"abuse_contact":     {ContactRecord},
+	"technical_contact": {ContactRecord},
+	"rdap_url":          {URL},
 }
 
 var personRels = map[string][]AssetType{
@@ -72,18 +81,8 @@ var personRels = map[string][]AssetType{
 }
 
 var orgRels = map[string][]AssetType{
-	"source":         {Source},
-	"monitored_by":   {Source},
-	"contact_record": {ContactRecord},
-}
-
-var registrarRels = map[string][]AssetType{
-	"source":         {Source},
-	"monitored_by":   {Source},
-	"organization":   {Organization},
-	"contact_record": {ContactRecord},
-	"abuse_contact":  {ContactRecord},
-	"whois_server":   {FQDN},
+	"source":       {Source},
+	"monitored_by": {Source},
 }
 
 var ipRels = map[string][]AssetType{
@@ -98,17 +97,10 @@ var netblockRels = map[string][]AssetType{
 	"contains":     {IPAddress},
 }
 
-var asnRels = map[string][]AssetType{
+var autonomousSystemRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
 	"announces":    {Netblock},
-	"managed_by":   {RIROrg},
-}
-
-var rirOrgRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"organization": {Organization},
 }
 
 var fqdnRels = map[string][]AssetType{
@@ -138,7 +130,6 @@ var tlscertRels = map[string][]AssetType{
 	"san_url":                 {URL},
 	"issuing_certificate_url": {URL},
 	"ocsp_server":             {URL},
-	"jarm":                    {Fingerprint},
 }
 
 var socketAddressRels = map[string][]AssetType{
@@ -171,8 +162,7 @@ var contactRecordRels = map[string][]AssetType{
 }
 
 var sourceRels = map[string][]AssetType{
-	"organization": {Organization},
-	"url":          {URL},
+	"contact_record": {ContactRecord},
 }
 
 // ValidRelationship returns true if the relation is valid in the taxonomy
@@ -185,14 +175,14 @@ func ValidRelationship(src AssetType, relation string, destination AssetType) bo
 		relations = ipRels
 	case Netblock:
 		relations = netblockRels
-	case ASN:
-		relations = asnRels
-	case RIROrg:
-		relations = rirOrgRels
+	case AutonomousSystem:
+		relations = autonomousSystemRels
 	case FQDN:
 		relations = fqdnRels
 	case DomainRecord:
 		relations = domainRecordRels
+	case AutnumRecord:
+		relations = autnumRecordRels
 	case Location:
 		relations = locationRels
 	case Phone:
@@ -203,8 +193,6 @@ func ValidRelationship(src AssetType, relation string, destination AssetType) bo
 		relations = personRels
 	case Organization:
 		relations = orgRels
-	case Registrar:
-		relations = registrarRels
 	case TLSCertificate:
 		relations = tlscertRels
 	case SocketAddress:

@@ -41,23 +41,6 @@ func ExampleNetblock() {
 	// true
 }
 
-func ExampleRIROrganization() {
-	riro := RIROrganization{
-		Name:  "Google LLC",
-		RIRId: "GOGL",
-		RIR:   "ARIN",
-	}
-
-	fmt.Println(riro.Name == "Google LLC")
-	fmt.Println(riro.RIRId == "GOGL")
-	fmt.Println(riro.RIR == "ARIN")
-
-	// Output:
-	// true
-	// true
-	// true
-}
-
 func ExampleAutonomousSystem() {
 	as := AutonomousSystem{
 		Number: 64496,
