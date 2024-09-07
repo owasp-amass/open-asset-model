@@ -101,6 +101,7 @@ var autonomousSystemRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
 	"announces":    {Netblock},
+	"registration": {AutnumRecord},
 }
 
 var fqdnRels = map[string][]AssetType{
