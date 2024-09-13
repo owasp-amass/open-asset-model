@@ -16,6 +16,7 @@ const (
 	Netblock         AssetType = "Netblock"
 	AutonomousSystem AssetType = "AutonomousSystem"
 	FQDN             AssetType = "FQDN"
+	NetworkEndpoint  AssetType = "NetworkEndpoint"
 	DomainRecord     AssetType = "DomainRecord"
 	AutnumRecord     AssetType = "AutnumRecord"
 	Location         AssetType = "Location"
@@ -32,9 +33,9 @@ const (
 )
 
 var AssetList = []AssetType{
-	IPAddress, Netblock, AutonomousSystem, FQDN, DomainRecord, AutnumRecord,
-	Location, Phone, EmailAddress, Person, Organization, SocketAddress, URL,
-	Fingerprint, TLSCertificate, ContactRecord, Source,
+	IPAddress, Netblock, AutonomousSystem, FQDN, NetworkEndpoint, DomainRecord,
+	AutnumRecord, Location, Phone, EmailAddress, Person, Organization, SocketAddress,
+	URL, Fingerprint, TLSCertificate, ContactRecord, Source,
 }
 
 var locationRels = map[string][]AssetType{
