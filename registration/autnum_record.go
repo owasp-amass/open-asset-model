@@ -6,6 +6,7 @@ package registration
 
 import (
 	"encoding/json"
+	"strconv"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
@@ -22,12 +23,17 @@ type AutnumRecord struct {
 	Status      []string `json:"status,omitempty"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (as AutnumRecord) Key() string {
+	return strconv.Itoa(as.Number)
+}
+
+// AssetType implements the Asset interface.
 func (as AutnumRecord) AssetType() model.AssetType {
 	return model.AutnumRecord
 }
 
-// JSON returns the JSON representation of the asset.
+// JSON implements the Asset interface.
 func (as AutnumRecord) JSON() ([]byte, error) {
 	return json.Marshal(as)
 }

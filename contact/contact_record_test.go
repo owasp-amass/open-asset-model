@@ -10,7 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestContactRecordKey(t *testing.T) {
+	want := "https://owasp.org/contacts"
+	cr := ContactRecord{DiscoveredAt: want}
+
+	if got := cr.Key(); got != want {
+		t.Errorf("ContactRecord.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestContactRecordAssetType(t *testing.T) {
+	var _ model.Asset = ContactRecord{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*ContactRecord)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	cr := ContactRecord{}
 	if cr.AssetType() != model.ContactRecord {
 		t.Errorf("Expected asset type %s but got %s", model.ContactRecord, cr.AssetType())

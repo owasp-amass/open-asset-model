@@ -10,7 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestLocationKey(t *testing.T) {
+	want := "123 Some Road New York NY"
+	loc := Location{Address: want}
+
+	if got := loc.Key(); got != want {
+		t.Errorf("Location.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestLocationAssetType(t *testing.T) {
+	var _ model.Asset = Location{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Location)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	loc := Location{}
 	if loc.AssetType() != model.Location {
 		t.Errorf("Expected asset type %s but got %s", model.Location, loc.AssetType())

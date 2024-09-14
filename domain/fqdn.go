@@ -16,12 +16,17 @@ type FQDN struct {
 	Name string `json:"name"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (f FQDN) Key() string {
+	return f.Name
+}
+
+// AssetType implements the Asset interface.
 func (f FQDN) AssetType() model.AssetType {
 	return model.FQDN
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (f FQDN) JSON() ([]byte, error) {
 	return json.Marshal(f)
 }

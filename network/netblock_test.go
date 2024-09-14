@@ -13,6 +13,15 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestNetblockKey(t *testing.T) {
+	want := "192.168.1.0/24"
+	nb := Netblock{Cidr: netip.MustParsePrefix(want)}
+
+	if got := nb.Key(); got != want {
+		t.Errorf("Netblock.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestNetblockImplementsAsset(t *testing.T) {
 	var _ model.Asset = Netblock{}       // Verify that Netblock implements Asset interface
 	var _ model.Asset = (*Netblock)(nil) // Verify that *Netblock implements Asset interface.

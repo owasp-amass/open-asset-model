@@ -6,40 +6,51 @@ package certificate
 
 import (
 	"testing"
-	"time"
+
+	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestTLSCertificate(t *testing.T) {
+func TestTLSCertificateKey(t *testing.T) {
+	want := "12345"
+	cert := TLSCertificate{SerialNumber: want}
+
+	if got := cert.Key(); got != want {
+		t.Errorf("TLSCertificate.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestTLSCertificateAssetType(t *testing.T) {
+	var _ model.Asset = TLSCertificate{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*TLSCertificate)(nil) // Verify the pointer properly implements the  Asset interface.
+
+	cert := TLSCertificate{}
+	want := model.TLSCertificate
+
+	if got := cert.AssetType(); got != want {
+		t.Errorf("TLSCertificate.AssetType() = %v, want %v", got, want)
+	}
+}
+
+func TestTLSCertificateJSON(t *testing.T) {
 	cert := TLSCertificate{
 		SubjectCommonName: "www.example.org",
 		IssuerCommonName:  "DigiCert TLS RSA SHA256 2020 CA1",
-		NotBefore:         time.Date(2023, 1, 13, 12, 0, 0, 0, time.UTC),
-		NotAfter:          time.Date(2024, 2, 13, 11, 59, 59, 0, time.UTC),
-		FingerprintSHA1:   "F2AAD73D32683B716D2A7D61B51C6D5764AB3899",
-		FingerprintSHA256: "5EF2F214260AB8F58E55EEA42E4AC04B0F171807D8D1185FDDD67470E9AB6096",
+		NotBefore:         "2006-01-02T15:04:05Z07:00",
+		NotAfter:          "2006-01-02T15:04:05Z07:00",
 	}
 
-	if cert.SubjectCommonName != "www.example.org" {
-		t.Errorf("Failed to set the Subject Common Name field: %s", cert.SubjectCommonName)
+	// test AssetType method
+	if cert.AssetType() != model.TLSCertificate {
+		t.Errorf("Expected asset type %s, but got %s", model.TLSCertificate, cert.AssetType())
 	}
 
-	if cert.IssuerCommonName != "DigiCert TLS RSA SHA256 2020 CA1" {
-		t.Errorf("Failed to set the Issuer Common Name field: %s", cert.IssuerCommonName)
+	// test JSON method
+	expectedJSON := `{"version":"","serial_number":"","subject_common_name":"www.example.org","issuer_common_name":"DigiCert TLS RSA SHA256 2020 CA1","not_before":"2006-01-02T15:04:05Z07:00","not_after":"2006-01-02T15:04:05Z07:00","key_usage":null,"signature_algorithm":"","public_key_algorithm":"","is_ca":false,"crl_distribution_points":null,"subject_key_id":"","authority_key_id":""}`
+	json, err := cert.JSON()
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
 	}
-
-	if cert.NotBefore != time.Date(2023, 1, 13, 12, 0, 0, 0, time.UTC) {
-		t.Errorf("Failed to set the Not Before field: %s", cert.NotBefore)
-	}
-
-	if cert.NotAfter != time.Date(2024, 2, 13, 11, 59, 59, 0, time.UTC) {
-		t.Errorf("Failed to set the Not After field: %s", cert.NotAfter)
-	}
-
-	if cert.FingerprintSHA1 != "F2AAD73D32683B716D2A7D61B51C6D5764AB3899" {
-		t.Errorf("Failed to set the FingerprintSHA1 field: %s", cert.FingerprintSHA1)
-	}
-
-	if cert.FingerprintSHA256 != "5EF2F214260AB8F58E55EEA42E4AC04B0F171807D8D1185FDDD67470E9AB6096" {
-		t.Errorf("Failed to set the FingerprintSHA256 field: %s", cert.FingerprintSHA256)
+	if string(json) != expectedJSON {
+		t.Errorf("Expected JSON %s, but got %s", expectedJSON, string(json))
 	}
 }

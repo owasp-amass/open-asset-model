@@ -11,12 +11,24 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestSocketAddressKey(t *testing.T) {
+	want := "192.168.1.1:80"
+	sa := SocketAddress{Address: netip.MustParseAddrPort(want)}
+
+	if got := sa.Key(); got != want {
+		t.Errorf("SocketAddress.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestSocketAddressAssetType(t *testing.T) {
+	var _ model.Asset = SocketAddress{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*SocketAddress)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	sa := SocketAddress{}
 	want := model.SocketAddress
 
 	if got := sa.AssetType(); got != want {
-		t.Errorf("Port.AssetType() = %v, want %v", got, want)
+		t.Errorf("SocketAddress.AssetType() = %v, want %v", got, want)
 	}
 }
 

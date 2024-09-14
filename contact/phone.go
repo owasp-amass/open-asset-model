@@ -26,12 +26,17 @@ type Phone struct {
 	Ext           string `json:"ext,omitempty"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (p Phone) Key() string {
+	return p.Raw
+}
+
+// AssetType implements the Asset interface.
 func (p Phone) AssetType() model.AssetType {
 	return model.Phone
 }
 
-// JSON returns the JSON representation of the asset.
+// JSON implements the Asset interface.
 func (p Phone) JSON() ([]byte, error) {
 	return json.Marshal(p)
 }

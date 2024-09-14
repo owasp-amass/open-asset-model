@@ -18,12 +18,17 @@ type Source struct {
 	Confidence int `json:"confidence"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (s Source) Key() string {
+	return s.Name
+}
+
+// AssetType implements the Asset interface.
 func (s Source) AssetType() model.AssetType {
 	return model.Source
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (s Source) JSON() ([]byte, error) {
 	return json.Marshal(s)
 }

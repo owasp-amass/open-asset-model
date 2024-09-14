@@ -11,7 +11,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestOrganization_AssetType(t *testing.T) {
+func TestOrganizationKey(t *testing.T) {
+	want := "OWASP Foundation"
+	o := Organization{Name: want}
+
+	if got := o.Key(); got != want {
+		t.Errorf("Organization.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestOrganizationAssetType(t *testing.T) {
+	var _ model.Asset = Organization{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Organization)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	o := Organization{}
 	expected := model.Organization
 	actual := o.AssetType()
@@ -21,7 +33,7 @@ func TestOrganization_AssetType(t *testing.T) {
 	}
 }
 
-func TestOrganization_JSON(t *testing.T) {
+func TestOrganizationJSON(t *testing.T) {
 	o := Organization{
 		Name:     "Acme Inc.",
 		Industry: "Technology",

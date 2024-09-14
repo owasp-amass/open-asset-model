@@ -23,12 +23,17 @@ type NetworkEndpoint struct {
 	Protocol string `json:"protocol"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (ne NetworkEndpoint) Key() string {
+	return ne.Address
+}
+
+// AssetType implements the Asset interface.
 func (ne NetworkEndpoint) AssetType() model.AssetType {
 	return model.NetworkEndpoint
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (ne NetworkEndpoint) JSON() ([]byte, error) {
 	return json.Marshal(ne)
 }

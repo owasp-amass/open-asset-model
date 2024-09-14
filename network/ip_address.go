@@ -22,12 +22,17 @@ type IPAddress struct {
 	Type string `json:"type"`
 }
 
-// AssetType returns the asset type.
-func (i IPAddress) AssetType() model.AssetType {
+// Key implements the Asset interface.
+func (ip IPAddress) Key() string {
+	return ip.Address.String()
+}
+
+// AssetType implements the Asset interface.
+func (ip IPAddress) AssetType() model.AssetType {
 	return model.IPAddress
 }
 
-// JSON returns the JSON encoding of the struct.
-func (i IPAddress) JSON() ([]byte, error) {
-	return json.Marshal(i)
+// JSON implements the Asset interface.
+func (ip IPAddress) JSON() ([]byte, error) {
+	return json.Marshal(ip)
 }

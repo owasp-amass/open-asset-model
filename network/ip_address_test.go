@@ -13,7 +13,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestIPAddressImplementsAsset(t *testing.T) {
+func TestIPAddressKey(t *testing.T) {
+	want := "1.1.1.1"
+	ip := IPAddress{Address: netip.MustParseAddr(want)}
+
+	if got := ip.Key(); got != want {
+		t.Errorf("IPAddress.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestIPAddressAsset(t *testing.T) {
 	var _ model.Asset = IPAddress{}       // Verify that IPAddress implements Asset interface
 	var _ model.Asset = (*IPAddress)(nil) // Verify that *IPAddress implements Asset interface.
 }

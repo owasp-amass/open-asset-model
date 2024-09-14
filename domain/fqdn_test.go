@@ -11,9 +11,18 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestFQDNKey(t *testing.T) {
+	want := "example.com"
+	fqdn := FQDN{Name: want}
+
+	if got := fqdn.Key(); got != want {
+		t.Errorf("FQDN.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestFQDNImplementsAsset(t *testing.T) {
-	var _ model.Asset = FQDN{}       // Verify that FQDN implements Asset interface
-	var _ model.Asset = (*FQDN)(nil) // Verify that *FQDN implements Asset interface.
+	var _ model.Asset = FQDN{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*FQDN)(nil) // Verify *FQDN properly implements the  Asset interface.
 }
 
 func TestFQDN(t *testing.T) {

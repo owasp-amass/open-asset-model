@@ -10,7 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestURLKey(t *testing.T) {
+	want := "https://owasp.org"
+	u := URL{Raw: want}
+
+	if got := u.Key(); got != want {
+		t.Errorf("URL.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestURLAssetType(t *testing.T) {
+	var _ model.Asset = URL{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*URL)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	u := URL{}
 	want := model.URL
 

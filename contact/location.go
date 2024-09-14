@@ -25,12 +25,17 @@ type Location struct {
 	PostalCode     string `json:"postal_code,omitempty"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (a Location) Key() string {
+	return a.Address
+}
+
+// AssetType implements the Asset interface.
 func (a Location) AssetType() model.AssetType {
 	return model.Location
 }
 
-// JSON returns the JSON representation of the asset.
+// JSON implements the Asset interface.
 func (a Location) JSON() ([]byte, error) {
 	return json.Marshal(a)
 }

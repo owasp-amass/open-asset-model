@@ -26,12 +26,17 @@ type SocketAddress struct {
 	Protocol string `json:"protocol"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (sa SocketAddress) Key() string {
+	return sa.Address.String()
+}
+
+// AssetType implements the Asset interface.
 func (sa SocketAddress) AssetType() model.AssetType {
 	return model.SocketAddress
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (sa SocketAddress) JSON() ([]byte, error) {
 	return json.Marshal(sa)
 }

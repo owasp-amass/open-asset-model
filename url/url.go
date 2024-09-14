@@ -24,12 +24,17 @@ type URL struct {
 	Fragment string `json:"fragment,omitempty"` // Fragment used in URI
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (u URL) Key() string {
+	return u.Raw
+}
+
+// AssetType implements the Asset interface.
 func (u URL) AssetType() model.AssetType {
 	return model.URL
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (u URL) JSON() ([]byte, error) {
 	buffer := new(bytes.Buffer)
 	encoder := json.NewEncoder(buffer)

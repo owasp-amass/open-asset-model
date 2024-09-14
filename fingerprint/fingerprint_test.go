@@ -10,7 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestFingerprint_AssetType(t *testing.T) {
+func TestFingerprintKey(t *testing.T) {
+	want := "12345"
+	fp := Fingerprint{Value: want}
+
+	if got := fp.Key(); got != want {
+		t.Errorf("Fingerprint.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestFingerprintAssetType(t *testing.T) {
+	var _ model.Asset = Fingerprint{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Fingerprint)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	fp := Fingerprint{
 		Value: "example",
 		Type:  "example",
@@ -22,7 +34,7 @@ func TestFingerprint_AssetType(t *testing.T) {
 	}
 }
 
-func TestFingerprint_JSON(t *testing.T) {
+func TestFingerprintJSON(t *testing.T) {
 	fp := Fingerprint{
 		Value: "example",
 		Type:  "example",

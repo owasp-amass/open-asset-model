@@ -5,13 +5,23 @@
 package network
 
 import (
+	"strconv"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
 	"github.com/stretchr/testify/require"
 )
 
-func TestAutonomousSystemImplementsAsset(t *testing.T) {
+func TestAutonomousSystemKey(t *testing.T) {
+	want := 26808
+	a := AutonomousSystem{Number: want}
+
+	if got := a.Key(); got != strconv.Itoa(want) {
+		t.Errorf("AutonomousSystem.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestAutonomousSystemAsset(t *testing.T) {
 	var _ model.Asset = AutonomousSystem{}       // Verify that AutonomousSystem implements Asset interface
 	var _ model.Asset = (*AutonomousSystem)(nil) // Verify that *AutonomousSystem implements Asset interface.
 }

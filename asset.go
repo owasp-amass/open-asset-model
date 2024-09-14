@@ -4,7 +4,12 @@
 
 package open_asset_model
 
+import (
+	"strings"
+)
+
 type Asset interface {
+	Key() string
 	AssetType() AssetType
 	JSON() ([]byte, error)
 }
@@ -30,12 +35,13 @@ const (
 	TLSCertificate   AssetType = "TLSCertificate"
 	ContactRecord    AssetType = "ContactRecord"
 	Source           AssetType = "Source"
+	Service          AssetType = "Service"
 )
 
 var AssetList = []AssetType{
 	IPAddress, Netblock, AutonomousSystem, FQDN, NetworkEndpoint, DomainRecord,
 	AutnumRecord, Location, Phone, EmailAddress, Person, Organization, SocketAddress,
-	URL, Fingerprint, TLSCertificate, ContactRecord, Source,
+	URL, Fingerprint, TLSCertificate, ContactRecord, Source, Service,
 }
 
 var locationRels = map[string][]AssetType{
@@ -108,6 +114,7 @@ var autonomousSystemRels = map[string][]AssetType{
 var fqdnRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
+	"port":         {NetworkEndpoint},
 	"a_record":     {IPAddress},
 	"aaaa_record":  {IPAddress},
 	"cname_record": {FQDN},
@@ -125,11 +132,11 @@ var tlscertRels = map[string][]AssetType{
 	"common_name":             {FQDN},
 	"subject_contact":         {ContactRecord},
 	"issuer_contact":          {ContactRecord},
-	"subject_alt_names":       {FQDN},
 	"san_dns_name":            {FQDN},
 	"san_email_address":       {EmailAddress},
 	"san_ip_address":          {IPAddress},
 	"san_url":                 {URL},
+	"issuing_certificate":     {TLSCertificate},
 	"issuing_certificate_url": {URL},
 	"ocsp_server":             {URL},
 }
@@ -137,14 +144,22 @@ var tlscertRels = map[string][]AssetType{
 var socketAddressRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
+	"service":      {Service},
+}
+
+var networkEndpointRels = map[string][]AssetType{
+	"source":       {Source},
+	"monitored_by": {Source},
+	"service":      {Service},
 }
 
 var urlRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
-	"port":         {SocketAddress},
 	"domain":       {FQDN},
 	"ip_address":   {IPAddress},
+	"port":         {SocketAddress, NetworkEndpoint},
+	"service":      {Service},
 }
 
 var fingerprintRels = map[string][]AssetType{
@@ -167,12 +182,49 @@ var sourceRels = map[string][]AssetType{
 	"contact_record": {ContactRecord},
 }
 
-// ValidRelationship returns true if the relation is valid in the taxonomy
-// when outgoing from the source asset type to the destination asset type.
-func ValidRelationship(src AssetType, relation string, destination AssetType) bool {
+var serviceRels = map[string][]AssetType{
+	"source":       {Source},
+	"monitored_by": {Source},
+	"fingerprint":  {Fingerprint},
+	"certificate":  {TLSCertificate},
+}
+
+// GetAssetOutgoingRelations returns the relation types allowed to be used
+// when the subject is the asset type provided in the parameter.
+// Providing an invalid subject causes a return value of nil.
+func GetAssetOutgoingRelations(subject AssetType) []string {
+	relations := assetTypeRelations(subject)
+	if relations == nil {
+		return nil
+	}
+
+	var rtypes []string
+	for k := range relations {
+		rtypes = append(rtypes, k)
+	}
+	return rtypes
+}
+
+// GetAssetOutgoingRelations returns the relation types allowed to be used
+// when the subject is the asset type provided in the parameter.
+// Providing an invalid subject causes a return value of nil.
+func GetTransformAssetTypes(subject AssetType, relation string) []AssetType {
+	relations := assetTypeRelations(subject)
+	if relations == nil {
+		return nil
+	}
+
+	rtype := strings.ToLower(relation)
+	if atypes, ok := relations[rtype]; ok {
+		return atypes
+	}
+	return nil
+}
+
+func assetTypeRelations(atype AssetType) map[string][]AssetType {
 	var relations map[string][]AssetType
 
-	switch src {
+	switch atype {
 	case IPAddress:
 		relations = ipRels
 	case Netblock:
@@ -181,6 +233,8 @@ func ValidRelationship(src AssetType, relation string, destination AssetType) bo
 		relations = autonomousSystemRels
 	case FQDN:
 		relations = fqdnRels
+	case NetworkEndpoint:
+		relations = networkEndpointRels
 	case DomainRecord:
 		relations = domainRecordRels
 	case AutnumRecord:
@@ -207,15 +261,26 @@ func ValidRelationship(src AssetType, relation string, destination AssetType) bo
 		relations = contactRecordRels
 	case Source:
 		relations = sourceRels
+	case Service:
+		relations = serviceRels
 	default:
+		return nil
+	}
+
+	return relations
+}
+
+// ValidRelationship returns true if the relation is valid in the taxonomy
+// when outgoing from the source asset type to the destination asset type.
+func ValidRelationship(src AssetType, relation string, destination AssetType) bool {
+	atypes := GetTransformAssetTypes(src, relation)
+	if atypes == nil {
 		return false
 	}
 
-	if atypes, ok := relations[relation]; ok {
-		for _, atype := range atypes {
-			if atype == destination {
-				return true
-			}
+	for _, atype := range atypes {
+		if atype == destination {
+			return true
 		}
 	}
 	return false

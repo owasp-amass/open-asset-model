@@ -12,7 +12,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestPersonKey(t *testing.T) {
+	want := "Jeff Foley"
+	p := Person{FullName: want}
+
+	if got := p.Key(); got != want {
+		t.Errorf("Person.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestPersonAssetType(t *testing.T) {
+	var _ model.Asset = Person{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Person)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	p := Person{}
 	if p.AssetType() != model.Person {
 		t.Errorf("Expected asset type to be %v, but got %v", model.Person, p.AssetType())

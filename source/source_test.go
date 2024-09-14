@@ -11,9 +11,18 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestSourceKey(t *testing.T) {
+	want := "DNS"
+	src := Source{Name: want}
+
+	if got := src.Key(); got != want {
+		t.Errorf("Source.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestSourceImplementsAsset(t *testing.T) {
-	var _ model.Asset = Source{}       // Verify that FQDN implements Asset interface
-	var _ model.Asset = (*Source)(nil) // Verify that *FQDN implements Asset interface.
+	var _ model.Asset = Source{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Source)(nil) // Verify the pointer properly implements the  Asset interface.
 }
 
 func TestSource(t *testing.T) {

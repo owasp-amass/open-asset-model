@@ -18,12 +18,17 @@ type Person struct {
 	FamilyName string `json:"family_name"`
 }
 
-// AssetType returns the asset type.
-func (n Person) AssetType() model.AssetType {
+// Key implements the Asset interface.
+func (p Person) Key() string {
+	return p.FullName
+}
+
+// AssetType implements the Asset interface.
+func (p Person) AssetType() model.AssetType {
 	return model.Person
 }
 
-// JSON returns the JSON representation of the asset.
-func (n Person) JSON() ([]byte, error) {
-	return json.Marshal(n)
+// JSON implements the Asset interface.
+func (p Person) JSON() ([]byte, error) {
+	return json.Marshal(p)
 }

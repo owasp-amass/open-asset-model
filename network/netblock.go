@@ -24,12 +24,17 @@ type Netblock struct {
 	Type string `json:"type"`
 }
 
-// AssetType returns the asset type.
-func (n Netblock) AssetType() model.AssetType {
+// Key implements the Asset interface.
+func (nb Netblock) Key() string {
+	return nb.Cidr.String()
+}
+
+// AssetType implements the Asset interface.
+func (nb Netblock) AssetType() model.AssetType {
 	return model.Netblock
 }
 
-// JSON returns the JSON encoding of the struct.
-func (n Netblock) JSON() ([]byte, error) {
-	return json.Marshal(n)
+// JSON implements the Asset interface.
+func (nb Netblock) JSON() ([]byte, error) {
+	return json.Marshal(nb)
 }

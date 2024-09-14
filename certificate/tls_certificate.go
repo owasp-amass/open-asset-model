@@ -13,7 +13,7 @@ import (
 // TLSCertificate represents a TLS Certificate asset
 type TLSCertificate struct {
 	Raw                   string   `json:"raw,omitempty"`
-	Version               int      `json:"version"`
+	Version               string   `json:"version"`
 	SerialNumber          string   `json:"serial_number"`
 	SubjectCommonName     string   `json:"subject_common_name"`
 	IssuerCommonName      string   `json:"issuer_common_name"`
@@ -28,12 +28,17 @@ type TLSCertificate struct {
 	AuthorityKeyID        string   `json:"authority_key_id"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (t TLSCertificate) Key() string {
+	return t.SerialNumber
+}
+
+// AssetType implements the Asset interface.
 func (t TLSCertificate) AssetType() model.AssetType {
 	return model.TLSCertificate
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (t TLSCertificate) JSON() ([]byte, error) {
 	return json.Marshal(t)
 }

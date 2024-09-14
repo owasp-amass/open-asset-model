@@ -10,12 +10,24 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestNetworkEndpointKey(t *testing.T) {
+	want := "example.com:80"
+	ne := NetworkEndpoint{Address: want}
+
+	if got := ne.Key(); got != want {
+		t.Errorf("NetworkEndpoint.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestNetworkEndpointAssetType(t *testing.T) {
+	var _ model.Asset = NetworkEndpoint{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*NetworkEndpoint)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	sa := NetworkEndpoint{}
 	want := model.NetworkEndpoint
 
 	if got := sa.AssetType(); got != want {
-		t.Errorf("Port.AssetType() = %v, want %v", got, want)
+		t.Errorf("NetworkEndpoint.AssetType() = %v, want %v", got, want)
 	}
 }
 

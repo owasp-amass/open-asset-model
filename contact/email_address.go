@@ -17,12 +17,17 @@ type EmailAddress struct {
 	Domain   string `json:"domain"`
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (e EmailAddress) Key() string {
+	return e.Address
+}
+
+// AssetType implements the Asset interface.
 func (e EmailAddress) AssetType() model.AssetType {
 	return model.EmailAddress
 }
 
-// JSON returns the JSON representation of the asset.
+// JSON implements the Asset interface.
 func (e EmailAddress) JSON() ([]byte, error) {
 	return json.Marshal(e)
 }

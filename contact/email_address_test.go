@@ -11,7 +11,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-func TestEmailAddress_AssetType(t *testing.T) {
+func TestEmailAddressKey(t *testing.T) {
+	want := "admin@owasp.org"
+	e := EmailAddress{Address: want}
+
+	if got := e.Key(); got != want {
+		t.Errorf("EmailAddress.Key() = %v, want %v", got, want)
+	}
+}
+
+func TestEmailAddressAssetType(t *testing.T) {
+	var _ model.Asset = EmailAddress{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*EmailAddress)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	e := EmailAddress{
 		Address:  "test@example.com",
 		Username: "test",
@@ -23,7 +35,7 @@ func TestEmailAddress_AssetType(t *testing.T) {
 	}
 }
 
-func TestEmailAddress_JSON(t *testing.T) {
+func TestEmailAddressJSON(t *testing.T) {
 	e := EmailAddress{
 		Address:  "test@example.com",
 		Username: "test",

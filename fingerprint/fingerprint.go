@@ -16,12 +16,17 @@ type Fingerprint struct {
 	Type  string `json:"type"`  // Fingerprint type
 }
 
-// AssetType returns the asset type.
+// Key implements the Asset interface.
+func (f Fingerprint) Key() string {
+	return f.Value
+}
+
+// AssetType implements the Asset interface.
 func (f Fingerprint) AssetType() model.AssetType {
 	return model.Fingerprint
 }
 
-// JSON returns the JSON encoding of the struct.
+// JSON implements the Asset interface.
 func (f Fingerprint) JSON() ([]byte, error) {
 	return json.Marshal(f)
 }

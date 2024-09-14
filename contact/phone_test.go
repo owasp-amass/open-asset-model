@@ -12,7 +12,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestPhoneKey(t *testing.T) {
+	want := "12345556666"
+	p := Phone{Raw: want}
+
+	if got := p.Key(); got != want {
+		t.Errorf("Phone.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestPhoneAssetType(t *testing.T) {
+	var _ model.Asset = Phone{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*Phone)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	p := Phone{}
 	assert.Equal(t, model.Phone, p.AssetType())
 }

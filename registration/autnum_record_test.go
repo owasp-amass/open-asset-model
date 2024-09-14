@@ -5,12 +5,25 @@
 package registration
 
 import (
+	"strconv"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestAutnumRecordKey(t *testing.T) {
+	want := 26808
+	as := AutnumRecord{Number: want}
+
+	if got := as.Key(); got != strconv.Itoa(as.Number) {
+		t.Errorf("AutnumRecord.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestAutnumRecordAssetType(t *testing.T) {
+	var _ model.Asset = AutnumRecord{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*AutnumRecord)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	w := AutnumRecord{}
 	want := model.AutnumRecord
 

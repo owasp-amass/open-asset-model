@@ -10,7 +10,19 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+func TestDomainRecordKey(t *testing.T) {
+	want := "owasp.org"
+	dr := DomainRecord{Domain: want}
+
+	if got := dr.Key(); got != want {
+		t.Errorf("DomainRecord.Key() = %v, want %v", got, want)
+	}
+}
+
 func TestDomainRecordAssetType(t *testing.T) {
+	var _ model.Asset = DomainRecord{}       // Verify proper implementation of the Asset interface
+	var _ model.Asset = (*DomainRecord)(nil) // Verify the pointer properly implements the  Asset interface.
+
 	w := DomainRecord{}
 	want := model.DomainRecord
 

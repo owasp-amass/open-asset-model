@@ -15,12 +15,17 @@ type ContactRecord struct {
 	DiscoveredAt string `json:"discovered_at,omitempty"`
 }
 
-// AssetType returns the asset type.
-func (r ContactRecord) AssetType() model.AssetType {
+// Key implements the Asset interface.
+func (cr ContactRecord) Key() string {
+	return cr.DiscoveredAt
+}
+
+// AssetType implements the Asset interface.
+func (cr ContactRecord) AssetType() model.AssetType {
 	return model.ContactRecord
 }
 
-// JSON returns the JSON representation of the asset.
-func (r ContactRecord) JSON() ([]byte, error) {
-	return json.Marshal(r)
+// JSON implements the Asset interface.
+func (cr ContactRecord) JSON() ([]byte, error) {
+	return json.Marshal(cr)
 }

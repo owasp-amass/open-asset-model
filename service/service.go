@@ -2,31 +2,30 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package network
+package service
 
 import (
 	"encoding/json"
-	"strconv"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// AutonomousSystem represents an autonomous system.
-type AutonomousSystem struct {
-	Number int `json:"number"`
+type Service struct {
+	Identifier string `json:"identifier"`
+	Version    string `json:"version"`
 }
 
 // Key implements the Asset interface.
-func (a AutonomousSystem) Key() string {
-	return strconv.Itoa(a.Number)
+func (s Service) Key() string {
+	return s.Identifier
 }
 
 // AssetType implements the Asset interface.
-func (a AutonomousSystem) AssetType() model.AssetType {
-	return model.AutonomousSystem
+func (s Service) AssetType() model.AssetType {
+	return model.Service
 }
 
 // JSON implements the Asset interface.
-func (a AutonomousSystem) JSON() ([]byte, error) {
-	return json.Marshal(a)
+func (s Service) JSON() ([]byte, error) {
+	return json.Marshal(s)
 }

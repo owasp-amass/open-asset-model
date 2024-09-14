@@ -26,12 +26,17 @@ type DomainRecord struct {
 	DNSSEC         bool     `json:"dnssec,omitempty"`
 }
 
-// AssetType returns the asset type.
-func (r DomainRecord) AssetType() model.AssetType {
+// Key implements the Asset interface.
+func (dr DomainRecord) Key() string {
+	return dr.Domain
+}
+
+// AssetType implements the Asset interface.
+func (dr DomainRecord) AssetType() model.AssetType {
 	return model.DomainRecord
 }
 
-// JSON returns the JSON representation of the asset.
-func (r DomainRecord) JSON() ([]byte, error) {
-	return json.Marshal(r)
+// JSON implements the Asset interface.
+func (dr DomainRecord) JSON() ([]byte, error) {
+	return json.Marshal(dr)
 }
