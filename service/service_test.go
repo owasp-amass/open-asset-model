@@ -34,7 +34,9 @@ func TestServiceAssetType(t *testing.T) {
 func TestServiceJSON(t *testing.T) {
 	s := Service{
 		Identifier: "12345",
-		Version:    "v1.0.1",
+		Banner:     "Hello",
+		BannerLen:  5,
+		Headers:    map[string][]string{"server": []string{"nginx-1.26.0"}},
 	}
 
 	// test AssetType method
@@ -43,7 +45,7 @@ func TestServiceJSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"identifier":"12345","version":"v1.0.1"}`
+	expectedJSON := `{"identifier":"12345","banner":"Hello","banner_length":5,"headers":{"server":["nginx-1.26.0"]}}`
 	json, err := s.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

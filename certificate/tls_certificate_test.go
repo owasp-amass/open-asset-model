@@ -45,7 +45,7 @@ func TestTLSCertificateJSON(t *testing.T) {
 	}
 
 	// test JSON method
-	expectedJSON := `{"version":"","serial_number":"","subject_common_name":"www.example.org","issuer_common_name":"DigiCert TLS RSA SHA256 2020 CA1","not_before":"2006-01-02T15:04:05Z07:00","not_after":"2006-01-02T15:04:05Z07:00","key_usage":null,"signature_algorithm":"","public_key_algorithm":"","is_ca":false,"crl_distribution_points":null,"subject_key_id":"","authority_key_id":""}`
+	expectedJSON := `{"version":"","serial_number":"","subject_common_name":"www.example.org","issuer_common_name":"DigiCert TLS RSA SHA256 2020 CA1","not_before":"2006-01-02T15:04:05Z07:00","not_after":"2006-01-02T15:04:05Z07:00","key_usage":null,"ext_key_usage":null,"signature_algorithm":"","public_key_algorithm":"","is_ca":false,"crl_distribution_points":null,"subject_key_id":"","authority_key_id":""}`
 	json, err := cert.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

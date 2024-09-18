@@ -11,8 +11,10 @@ import (
 )
 
 type Service struct {
-	Identifier string `json:"identifier"`
-	Version    string `json:"version"`
+	Identifier string              `json:"identifier"`
+	Banner     string              `json:"banner"`
+	BannerLen  int                 `json:"banner_length"`
+	Headers    map[string][]string `json:"headers"`
 }
 
 // Key implements the Asset interface.
