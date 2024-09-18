@@ -10,9 +10,35 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// TLSCertificate represents a TLS Certificate asset
+const (
+	KeyUsageDigitalSignature  string = "Digital Signature"
+	KeyUsageContentCommitment string = "Content Commitment"
+	KeyUsageKeyEncipherment   string = "Key Encipherment"
+	KeyUsageDataEncipherment  string = "Data Encipherment"
+	KeyUsageKeyAgreement      string = "Key Agreement"
+	KeyUsageCertSign          string = "Certificate Sign"
+	KeyUsageCRLSign           string = "CRL Sign"
+	KeyUsageEncipherOnly      string = "Encipher Only"
+	KeyUsageDecipherOnly      string = "Decipher Only"
+
+	ExtKeyUsageAny                            string = "Any Usage"
+	ExtKeyUsageServerAuth                     string = "TLS Server Authentication"
+	ExtKeyUsageClientAuth                     string = "TLS Client Authentication"
+	ExtKeyUsageCodeSigning                    string = "Code Signing"
+	ExtKeyUsageEmailProtection                string = "E-mail Protection"
+	ExtKeyUsageIPSECEndSystem                 string = "IPSec End System"
+	ExtKeyUsageIPSECTunnel                    string = "IPSec Tunnel"
+	ExtKeyUsageIPSECUser                      string = "IPSec User"
+	ExtKeyUsageTimeStamping                   string = "Trusted Timestamping"
+	ExtKeyUsageOCSPSigning                    string = "OCSP Signing"
+	ExtKeyUsageMicrosoftServerGatedCrypto     string = "Microsoft Server Gated Crypto"
+	ExtKeyUsageNetscapeServerGatedCrypto      string = "Netscape Server Gated Crypto"
+	ExtKeyUsageMicrosoftCommercialCodeSigning string = "Microsoft Commercial Code Signing"
+	ExtKeyUsageMicrosoftKernelCodeSigning     string = "Microsoft Kernel Code Signing"
+)
+
+// TLSCertificate represents a TLS Certificate asset.
 type TLSCertificate struct {
-	Raw                   string   `json:"raw,omitempty"`
 	Version               string   `json:"version"`
 	SerialNumber          string   `json:"serial_number"`
 	SubjectCommonName     string   `json:"subject_common_name"`
@@ -20,6 +46,7 @@ type TLSCertificate struct {
 	NotBefore             string   `json:"not_before"`
 	NotAfter              string   `json:"not_after"`
 	KeyUsage              []string `json:"key_usage"`
+	ExtKeyUsage           []string `json:"ext_key_usage"`
 	SignatureAlgorithm    string   `json:"signature_algorithm"`
 	PublicKeyAlgorithm    string   `json:"public_key_algorithm"`
 	IsCA                  bool     `json:"is_ca"`
