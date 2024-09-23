@@ -5,17 +5,16 @@
 package registration
 
 import (
-	"strconv"
 	"testing"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
 
 func TestAutnumRecordKey(t *testing.T) {
-	want := 26808
-	as := AutnumRecord{Number: want}
+	want := "AS26808"
+	as := AutnumRecord{Handle: want}
 
-	if got := as.Key(); got != strconv.Itoa(as.Number) {
+	if got := as.Key(); got != want {
 		t.Errorf("AutnumRecord.Key() = %v, want %v", got, want)
 	}
 }

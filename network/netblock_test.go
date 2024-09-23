@@ -15,7 +15,7 @@ import (
 
 func TestNetblockKey(t *testing.T) {
 	want := "192.168.1.0/24"
-	nb := Netblock{Cidr: netip.MustParsePrefix(want)}
+	nb := Netblock{CIDR: netip.MustParsePrefix(want)}
 
 	if got := nb.Key(); got != want {
 		t.Errorf("Netblock.Key() = %v, want %v", got, want)
@@ -47,9 +47,9 @@ func TestNetblock(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.description, func(t *testing.T) {
 			prefix, _ := netip.ParsePrefix(tt.cidr)
-			netblock := Netblock{Cidr: prefix, Type: tt.netType}
+			netblock := Netblock{CIDR: prefix, Type: tt.netType}
 
-			require.Equal(t, tt.cidr, netblock.Cidr.String())
+			require.Equal(t, tt.cidr, netblock.CIDR.String())
 			require.Equal(t, tt.netType, netblock.Type)
 
 			require.Equal(t, model.Netblock, netblock.AssetType())
@@ -75,7 +75,7 @@ func TestNetblock(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.description, func(t *testing.T) {
 			prefix, _ := netip.ParsePrefix(tt.cidr)
-			netblock := Netblock{Cidr: prefix, Type: tt.netType}
+			netblock := Netblock{CIDR: prefix, Type: tt.netType}
 
 			jsonData, err := netblock.JSON()
 
