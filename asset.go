@@ -24,6 +24,7 @@ const (
 	NetworkEndpoint  AssetType = "NetworkEndpoint"
 	DomainRecord     AssetType = "DomainRecord"
 	AutnumRecord     AssetType = "AutnumRecord"
+	IPNetRecord      AssetType = "IPNetRecord"
 	Location         AssetType = "Location"
 	Phone            AssetType = "Phone"
 	EmailAddress     AssetType = "EmailAddress"
@@ -40,8 +41,8 @@ const (
 
 var AssetList = []AssetType{
 	IPAddress, Netblock, AutonomousSystem, FQDN, NetworkEndpoint, DomainRecord,
-	AutnumRecord, Location, Phone, EmailAddress, Person, Organization, SocketAddress,
-	URL, Fingerprint, TLSCertificate, ContactRecord, Source, Service,
+	AutnumRecord, IPNetRecord, Location, Phone, EmailAddress, Person, Organization,
+	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord, Source, Service,
 }
 
 var locationRels = map[string][]AssetType{
@@ -57,6 +58,7 @@ var phoneRels = map[string][]AssetType{
 var emailRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
+	"domain":       {FQDN},
 }
 
 var domainRecordRels = map[string][]AssetType{
@@ -72,6 +74,17 @@ var domainRecordRels = map[string][]AssetType{
 }
 
 var autnumRecordRels = map[string][]AssetType{
+	"source":            {Source},
+	"monitored_by":      {Source},
+	"whois_server":      {FQDN},
+	"registrant":        {ContactRecord},
+	"admin_contact":     {ContactRecord},
+	"abuse_contact":     {ContactRecord},
+	"technical_contact": {ContactRecord},
+	"rdap_url":          {URL},
+}
+
+var ipnetRecordRels = map[string][]AssetType{
 	"source":            {Source},
 	"monitored_by":      {Source},
 	"whois_server":      {FQDN},
@@ -102,6 +115,7 @@ var netblockRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
 	"contains":     {IPAddress},
+	"registration": {IPNetRecord},
 }
 
 var autonomousSystemRels = map[string][]AssetType{
@@ -239,6 +253,8 @@ func assetTypeRelations(atype AssetType) map[string][]AssetType {
 		relations = domainRecordRels
 	case AutnumRecord:
 		relations = autnumRecordRels
+	case IPNetRecord:
+		relations = ipnetRecordRels
 	case Location:
 		relations = locationRels
 	case Phone:
