@@ -17,32 +17,33 @@ type Asset interface {
 type AssetType string
 
 const (
-	IPAddress        AssetType = "IPAddress"
-	Netblock         AssetType = "Netblock"
-	AutonomousSystem AssetType = "AutonomousSystem"
-	FQDN             AssetType = "FQDN"
-	NetworkEndpoint  AssetType = "NetworkEndpoint"
-	DomainRecord     AssetType = "DomainRecord"
 	AutnumRecord     AssetType = "AutnumRecord"
+	AutonomousSystem AssetType = "AutonomousSystem"
+	ContactRecord    AssetType = "ContactRecord"
+	DomainRecord     AssetType = "DomainRecord"
+	EmailAddress     AssetType = "EmailAddress"
+	File             AssetType = "File"
+	Fingerprint      AssetType = "Fingerprint"
+	FQDN             AssetType = "FQDN"
+	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
 	Location         AssetType = "Location"
-	Phone            AssetType = "Phone"
-	EmailAddress     AssetType = "EmailAddress"
-	Person           AssetType = "Person"
+	Netblock         AssetType = "Netblock"
+	NetworkEndpoint  AssetType = "NetworkEndpoint"
 	Organization     AssetType = "Organization"
-	SocketAddress    AssetType = "SocketAddress"
-	URL              AssetType = "URL"
-	Fingerprint      AssetType = "Fingerprint"
-	TLSCertificate   AssetType = "TLSCertificate"
-	ContactRecord    AssetType = "ContactRecord"
-	Source           AssetType = "Source"
+	Person           AssetType = "Person"
+	Phone            AssetType = "Phone"
 	Service          AssetType = "Service"
+	SocketAddress    AssetType = "SocketAddress"
+	Source           AssetType = "Source"
+	TLSCertificate   AssetType = "TLSCertificate"
+	URL              AssetType = "URL"
 )
 
 var AssetList = []AssetType{
-	IPAddress, Netblock, AutonomousSystem, FQDN, NetworkEndpoint, DomainRecord,
-	AutnumRecord, IPNetRecord, Location, Phone, EmailAddress, Person, Organization,
-	SocketAddress, URL, Fingerprint, TLSCertificate, ContactRecord, Source, Service,
+	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File,
+	Fingerprint, FQDN, IPAddress, IPNetRecord, Location, Netblock, NetworkEndpoint,
+	Organization, Person, Phone, Service, SocketAddress, Source, TLSCertificate, URL,
 }
 
 var locationRels = map[string][]AssetType{
@@ -71,6 +72,7 @@ var domainRecordRels = map[string][]AssetType{
 	"admin_contact":      {ContactRecord},
 	"technical_contact":  {ContactRecord},
 	"billing_contact":    {ContactRecord},
+	"associated_with":    {AutnumRecord, DomainRecord, IPNetRecord},
 }
 
 var autnumRecordRels = map[string][]AssetType{
@@ -82,6 +84,7 @@ var autnumRecordRels = map[string][]AssetType{
 	"abuse_contact":     {ContactRecord},
 	"technical_contact": {ContactRecord},
 	"rdap_url":          {URL},
+	"associated_with":   {AutnumRecord, DomainRecord, IPNetRecord},
 }
 
 var ipnetRecordRels = map[string][]AssetType{
@@ -93,6 +96,7 @@ var ipnetRecordRels = map[string][]AssetType{
 	"abuse_contact":     {ContactRecord},
 	"technical_contact": {ContactRecord},
 	"rdap_url":          {URL},
+	"associated_with":   {AutnumRecord, DomainRecord, IPNetRecord},
 }
 
 var personRels = map[string][]AssetType{
@@ -109,6 +113,7 @@ var ipRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
 	"port":         {SocketAddress},
+	"ptr_record":   {FQDN},
 }
 
 var netblockRels = map[string][]AssetType{
@@ -123,6 +128,12 @@ var autonomousSystemRels = map[string][]AssetType{
 	"monitored_by": {Source},
 	"announces":    {Netblock},
 	"registration": {AutnumRecord},
+}
+
+var fileRels = map[string][]AssetType{
+	"source":       {Source},
+	"monitored_by": {Source},
+	"contains":     {ContactRecord, URL},
 }
 
 var fqdnRels = map[string][]AssetType{
@@ -153,6 +164,7 @@ var tlscertRels = map[string][]AssetType{
 	"issuing_certificate":     {TLSCertificate},
 	"issuing_certificate_url": {URL},
 	"ocsp_server":             {URL},
+	"associated_with":         {AutnumRecord, DomainRecord, IPNetRecord},
 }
 
 var socketAddressRels = map[string][]AssetType{
@@ -245,6 +257,8 @@ func assetTypeRelations(atype AssetType) map[string][]AssetType {
 		relations = netblockRels
 	case AutonomousSystem:
 		relations = autonomousSystemRels
+	case File:
+		relations = fileRels
 	case FQDN:
 		relations = fqdnRels
 	case NetworkEndpoint:
