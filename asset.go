@@ -133,6 +133,7 @@ var autonomousSystemRels = map[string][]AssetType{
 var fileRels = map[string][]AssetType{
 	"source":       {Source},
 	"monitored_by": {Source},
+	"url":          {URL},
 	"contains":     {ContactRecord, URL},
 }
 
@@ -186,6 +187,7 @@ var urlRels = map[string][]AssetType{
 	"ip_address":   {IPAddress},
 	"port":         {SocketAddress, NetworkEndpoint},
 	"service":      {Service},
+	"file":         {File},
 }
 
 var fingerprintRels = map[string][]AssetType{

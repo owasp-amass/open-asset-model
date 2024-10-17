@@ -12,13 +12,14 @@ import (
 
 // File represents a file discovered, such as a document or image.
 type File struct {
+	URL  string `json:"url"`
 	Name string `json:"name,omitempty"`
 	Type string `json:"type,omitempty"`
 }
 
 // Key implements the Asset interface.
 func (f File) Key() string {
-	return f.Name
+	return f.URL
 }
 
 // AssetType implements the Asset interface.

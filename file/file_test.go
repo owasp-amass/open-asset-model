@@ -12,8 +12,8 @@ import (
 )
 
 func TestFileKey(t *testing.T) {
-	want := "index.html"
-	f := File{Name: want, Type: "Document"}
+	want := "file:///var/html/index.html"
+	f := File{URL: want, Name: "index.html", Type: "Document"}
 
 	if got := f.Key(); got != want {
 		t.Errorf("File.Key() = %v, want %v", got, want)
@@ -35,10 +35,11 @@ func TestFileAssetType(t *testing.T) {
 
 func TestFileJSON(t *testing.T) {
 	f := File{
+		URL:  "file:///var/html/index.html",
 		Name: "index.html",
 		Type: "Document",
 	}
-	expected := `{"name":"index.html","type":"Document"}`
+	expected := `{"url":"file:///var/html/index.html","name":"index.html","type":"Document"}`
 	actual, err := f.JSON()
 
 	if err != nil {
