@@ -12,11 +12,13 @@ type Relation interface {
 type RelationType string
 
 const (
-	SimpleRelation RelationType = "SimpleRelation"
-	PortRelation   RelationType = "PortRelation"
+	BasicDNSRelation RelationType = "BasicDNSRelation"
+	PortRelation     RelationType = "PortRelation"
+	PrefDNSRelation  RelationType = "PrefDNSRelation"
+	SimpleRelation   RelationType = "SimpleRelation"
+	SRVDNSRelation   RelationType = "SRVDNSRelation"
 )
 
 var RelationList = []RelationType{
-	PortRelation,
-	SimpleRelation,
+	BasicDNSRelation, PortRelation, PrefDNSRelation, SimpleRelation, SRVDNSRelation,
 }
