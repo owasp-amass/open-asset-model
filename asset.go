@@ -29,118 +29,99 @@ const (
 	IPNetRecord      AssetType = "IPNetRecord"
 	Location         AssetType = "Location"
 	Netblock         AssetType = "Netblock"
-	NetworkEndpoint  AssetType = "NetworkEndpoint"
 	Organization     AssetType = "Organization"
 	Person           AssetType = "Person"
 	Phone            AssetType = "Phone"
 	Service          AssetType = "Service"
-	SocketAddress    AssetType = "SocketAddress"
-	Source           AssetType = "Source"
 	TLSCertificate   AssetType = "TLSCertificate"
 	URL              AssetType = "URL"
 )
 
 var AssetList = []AssetType{
-	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File,
-	Fingerprint, FQDN, IPAddress, IPNetRecord, Location, Netblock, NetworkEndpoint,
-	Organization, Person, Phone, Service, SocketAddress, Source, TLSCertificate, URL,
+	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, Fingerprint, FQDN,
+	IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Service, TLSCertificate, URL,
 }
 
-var locationRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
+var locationRels = map[string]map[RelationType]AssetType{}
+
+var phoneRels = map[string]map[RelationType]AssetType{}
+
+var emailRels = map[string]map[RelationType]AssetType{
+	"domain": {SimpleRelation: FQDN},
 }
 
-var phoneRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
+var domainRecordRels = map[string]map[RelationType]AssetType{
+	"name_server":        {SimpleRelation: FQDN},
+	"whois_server":       {SimpleRelation: FQDN},
+	"registrar_contact":  {SimpleRelation: ContactRecord},
+	"registrant_contact": {SimpleRelation: ContactRecord},
+	"admin_contact":      {SimpleRelation: ContactRecord},
+	"technical_contact":  {SimpleRelation: ContactRecord},
+	"billing_contact":    {SimpleRelation: ContactRecord},
+	"associated_with": {
+		SimpleRelation: AutnumRecord,
+		SimpleRelation: DomainRecord,
+		SimpleRelation: IPNetRecord,
+	},
 }
 
-var emailRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"domain":       {FQDN},
+var autnumRecordRels = map[string]map[RelationType]AssetType{
+	"whois_server":      {SimpleRelation: FQDN},
+	"registrant":        {SimpleRelation: ContactRecord},
+	"admin_contact":     {SimpleRelation: ContactRecord},
+	"abuse_contact":     {SimpleRelation: ContactRecord},
+	"technical_contact": {SimpleRelation: ContactRecord},
+	"rdap_url":          {SimpleRelation: URL},
+	"associated_with": {
+		SimpleRelation: AutnumRecord,
+		SimpleRelation: DomainRecord,
+		SimpleRelation: IPNetRecord,
+	},
 }
 
-var domainRecordRels = map[string][]AssetType{
-	"source":             {Source},
-	"monitored_by":       {Source},
-	"name_server":        {FQDN},
-	"whois_server":       {FQDN},
-	"registrar_contact":  {ContactRecord},
-	"registrant_contact": {ContactRecord},
-	"admin_contact":      {ContactRecord},
-	"technical_contact":  {ContactRecord},
-	"billing_contact":    {ContactRecord},
-	"associated_with":    {AutnumRecord, DomainRecord, IPNetRecord},
+var ipnetRecordRels = map[string]map[RelationType]AssetType{
+	"whois_server":      {SimpleRelation: FQDN},
+	"registrant":        {SimpleRelation: ContactRecord},
+	"admin_contact":     {SimpleRelation: ContactRecord},
+	"abuse_contact":     {SimpleRelation: ContactRecord},
+	"technical_contact": {SimpleRelation: ContactRecord},
+	"rdap_url":          {SimpleRelation: URL},
+	"associated_with": {
+		SimpleRelation: AutnumRecord,
+		SimpleRelation: DomainRecord,
+		SimpleRelation: IPNetRecord,
+	},
 }
 
-var autnumRecordRels = map[string][]AssetType{
-	"source":            {Source},
-	"monitored_by":      {Source},
-	"whois_server":      {FQDN},
-	"registrant":        {ContactRecord},
-	"admin_contact":     {ContactRecord},
-	"abuse_contact":     {ContactRecord},
-	"technical_contact": {ContactRecord},
-	"rdap_url":          {URL},
-	"associated_with":   {AutnumRecord, DomainRecord, IPNetRecord},
+var personRels = map[string]map[RelationType]AssetType{}
+
+var orgRels = map[string]map[RelationType]AssetType{}
+
+var ipRels = map[string]map[RelationType]AssetType{
+	"port":       {PortRelation: Service},
+	"ptr_record": {SimpleRelation: FQDN},
 }
 
-var ipnetRecordRels = map[string][]AssetType{
-	"source":            {Source},
-	"monitored_by":      {Source},
-	"whois_server":      {FQDN},
-	"registrant":        {ContactRecord},
-	"admin_contact":     {ContactRecord},
-	"abuse_contact":     {ContactRecord},
-	"technical_contact": {ContactRecord},
-	"rdap_url":          {URL},
-	"associated_with":   {AutnumRecord, DomainRecord, IPNetRecord},
+var netblockRels = map[string]map[RelationType]AssetType{
+	"contains":     {SimpleRelation: IPAddress},
+	"registration": {SimpleRelation: IPNetRecord},
 }
 
-var personRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
+var autonomousSystemRels = map[string]map[RelationType]AssetType{
+	"announces":    {SimpleRelation: Netblock},
+	"registration": {SimpleRelation: AutnumRecord},
 }
 
-var orgRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
+var fileRels = map[string]map[RelationType]AssetType{
+	"url": {SimpleRelation: URL},
+	"contains": {
+		SimpleRelation: ContactRecord,
+		SimpleRelation: URL,
+	},
 }
 
-var ipRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"port":         {SocketAddress},
-	"ptr_record":   {FQDN},
-}
-
-var netblockRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"contains":     {IPAddress},
-	"registration": {IPNetRecord},
-}
-
-var autonomousSystemRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"announces":    {Netblock},
-	"registration": {AutnumRecord},
-}
-
-var fileRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"url":          {URL},
-	"contains":     {ContactRecord, URL},
-}
-
-var fqdnRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"port":         {NetworkEndpoint},
+var fqdnRels = map[string]map[RelationType]AssetType{
+	"port":         {PortRelation: Service},
 	"a_record":     {IPAddress},
 	"aaaa_record":  {IPAddress},
 	"cname_record": {FQDN},
@@ -148,73 +129,49 @@ var fqdnRels = map[string][]AssetType{
 	"ptr_record":   {FQDN},
 	"mx_record":    {FQDN},
 	"srv_record":   {FQDN, IPAddress},
-	"node":         {FQDN},
-	"registration": {DomainRecord},
+	"node":         {SimpleRelation: FQDN},
+	"registration": {SimpleRelation: DomainRecord},
 }
 
-var tlscertRels = map[string][]AssetType{
-	"source":                  {Source},
-	"monitored_by":            {Source},
-	"common_name":             {FQDN},
-	"subject_contact":         {ContactRecord},
-	"issuer_contact":          {ContactRecord},
-	"san_dns_name":            {FQDN},
-	"san_email_address":       {EmailAddress},
-	"san_ip_address":          {IPAddress},
-	"san_url":                 {URL},
-	"issuing_certificate":     {TLSCertificate},
-	"issuing_certificate_url": {URL},
-	"ocsp_server":             {URL},
-	"associated_with":         {AutnumRecord, DomainRecord, IPNetRecord},
+var tlscertRels = map[string]map[RelationType]AssetType{
+	"common_name":             {SimpleRelation: FQDN},
+	"subject_contact":         {SimpleRelation: ContactRecord},
+	"issuer_contact":          {SimpleRelation: ContactRecord},
+	"san_dns_name":            {SimpleRelation: FQDN},
+	"san_email_address":       {SimpleRelation: EmailAddress},
+	"san_ip_address":          {SimpleRelation: IPAddress},
+	"san_url":                 {SimpleRelation: URL},
+	"issuing_certificate":     {SimpleRelation: TLSCertificate},
+	"issuing_certificate_url": {SimpleRelation: URL},
+	"ocsp_server":             {SimpleRelation: URL},
+	"associated_with": {
+		SimpleRelation: AutnumRecord,
+		SimpleRelation: DomainRecord,
+		SimpleRelation: IPNetRecord,
+	},
 }
 
-var socketAddressRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"service":      {Service},
+var urlRels = map[string]map[RelationType]AssetType{
+	"domain":     {SimpleRelation: FQDN},
+	"ip_address": {SimpleRelation: IPAddress},
+	"port":       {PortRelation: Service},
+	"file":       {SimpleRelation: File},
 }
 
-var networkEndpointRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"service":      {Service},
+var fingerprintRels = map[string]map[RelationType]AssetType{}
+
+var contactRecordRels = map[string]map[RelationType]AssetType{
+	"person":       {SimpleRelation: Person},
+	"organization": {SimpleRelation: Organization},
+	"location":     {SimpleRelation: Location},
+	"email":        {SimpleRelation: EmailAddress},
+	"phone":        {SimpleRelation: Phone},
+	"url":          {SimpleRelation: URL},
 }
 
-var urlRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"domain":       {FQDN},
-	"ip_address":   {IPAddress},
-	"port":         {SocketAddress, NetworkEndpoint},
-	"service":      {Service},
-	"file":         {File},
-}
-
-var fingerprintRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-}
-
-var contactRecordRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"person":       {Person},
-	"organization": {Organization},
-	"location":     {Location},
-	"email":        {EmailAddress},
-	"phone":        {Phone},
-	"url":          {URL},
-}
-
-var sourceRels = map[string][]AssetType{
-	"contact_record": {ContactRecord},
-}
-
-var serviceRels = map[string][]AssetType{
-	"source":       {Source},
-	"monitored_by": {Source},
-	"fingerprint":  {Fingerprint},
-	"certificate":  {TLSCertificate},
+var serviceRels = map[string]map[RelationType]AssetType{
+	"fingerprint": {SimpleRelation: Fingerprint},
+	"certificate": {SimpleRelation: TLSCertificate},
 }
 
 // GetAssetOutgoingRelations returns the relation types allowed to be used
@@ -263,8 +220,6 @@ func assetTypeRelations(atype AssetType) map[string][]AssetType {
 		relations = fileRels
 	case FQDN:
 		relations = fqdnRels
-	case NetworkEndpoint:
-		relations = networkEndpointRels
 	case DomainRecord:
 		relations = domainRecordRels
 	case AutnumRecord:
@@ -283,16 +238,12 @@ func assetTypeRelations(atype AssetType) map[string][]AssetType {
 		relations = orgRels
 	case TLSCertificate:
 		relations = tlscertRels
-	case SocketAddress:
-		relations = socketAddressRels
 	case URL:
 		relations = urlRels
 	case Fingerprint:
 		relations = fingerprintRels
 	case ContactRecord:
 		relations = contactRecordRels
-	case Source:
-		relations = sourceRels
 	case Service:
 		relations = serviceRels
 	default:
