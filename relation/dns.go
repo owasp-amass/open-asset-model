@@ -18,7 +18,13 @@ type RRHeader struct {
 
 // BasicDNSRelation is a relation in the graph representing a basic DNS resource record.
 type BasicDNSRelation struct {
+	Name   string   `json:"label"`
 	Header RRHeader `json:"header"`
+}
+
+// RelationType implements the Relation interface.
+func (r BasicDNSRelation) Label() string {
+	return r.Name
 }
 
 // RelationType implements the Relation interface.
@@ -33,8 +39,14 @@ func (r BasicDNSRelation) JSON() ([]byte, error) {
 
 // PrefDNSRelation is a relation in the graph representing a DNS resource record with preference information.
 type PrefDNSRelation struct {
+	Name       string   `json:"label"`
 	Header     RRHeader `json:"header"`
 	Preference int      `json:"preference"`
+}
+
+// RelationType implements the Relation interface.
+func (r PrefDNSRelation) Label() string {
+	return r.Name
 }
 
 // RelationType implements the Relation interface.
@@ -49,10 +61,16 @@ func (r PrefDNSRelation) JSON() ([]byte, error) {
 
 // SRVDNSRelation is a relation in the graph representing a DNS SRV resource record.
 type SRVDNSRelation struct {
+	Name     string   `json:"label"`
 	Header   RRHeader `json:"header"`
 	Priority int      `json:"priority"`
 	Weight   int      `json:"weight"`
 	Port     int      `json:"port"`
+}
+
+// RelationType implements the Relation interface.
+func (r SRVDNSRelation) Label() string {
+	return r.Name
 }
 
 // RelationType implements the Relation interface.

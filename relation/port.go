@@ -12,8 +12,14 @@ import (
 
 // PortRelation is a relation in the graph representing an open port.
 type PortRelation struct {
+	Name       string `json:"label"`
 	PortNumber int    `json:"port_number"`
 	Protocol   string `json:"protocol"`
+}
+
+// RelationType implements the Relation interface.
+func (r PortRelation) Label() string {
+	return r.Name
 }
 
 // RelationType implements the Relation interface.

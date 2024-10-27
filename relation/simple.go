@@ -11,7 +11,14 @@ import (
 )
 
 // SimpleRelation represents a simple relation in the graph with no additional data required.
-type SimpleRelation struct{}
+type SimpleRelation struct {
+	Name string `json:"label"`
+}
+
+// RelationType implements the Relation interface.
+func (r SimpleRelation) Label() string {
+	return r.Name
+}
 
 // RelationType implements the Relation interface.
 func (r SimpleRelation) RelationType() model.RelationType {
