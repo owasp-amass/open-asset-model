@@ -38,7 +38,6 @@ func TestAssetTypeConstants(t *testing.T) {
 		Person,
 		Organization,
 		URL,
-		Fingerprint,
 		TLSCertificate,
 		ContactRecord,
 	}
@@ -56,7 +55,6 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Person",
 		"Organization",
 		"URL",
-		"Fingerprint",
 		"TLSCertificate",
 		"ContactRecord",
 	}

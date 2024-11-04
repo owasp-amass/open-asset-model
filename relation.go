@@ -123,8 +123,6 @@ var urlRels = map[string]map[RelationType][]AssetType{
 	"file":       {SimpleRelation: {File}},
 }
 
-var fingerprintRels = map[string]map[RelationType][]AssetType{}
-
 var contactRecordRels = map[string]map[RelationType][]AssetType{
 	"person":       {SimpleRelation: {Person}},
 	"organization": {SimpleRelation: {Organization}},
@@ -135,7 +133,6 @@ var contactRecordRels = map[string]map[RelationType][]AssetType{
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
-	"fingerprint": {SimpleRelation: {Fingerprint}},
 	"certificate": {SimpleRelation: {TLSCertificate}},
 }
 
@@ -216,8 +213,6 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = tlscertRels
 	case URL:
 		relations = urlRels
-	case Fingerprint:
-		relations = fingerprintRels
 	case ContactRecord:
 		relations = contactRecordRels
 	case Service:

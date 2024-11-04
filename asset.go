@@ -19,7 +19,6 @@ const (
 	DomainRecord     AssetType = "DomainRecord"
 	EmailAddress     AssetType = "EmailAddress"
 	File             AssetType = "File"
-	Fingerprint      AssetType = "Fingerprint"
 	FQDN             AssetType = "FQDN"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
@@ -34,6 +33,6 @@ const (
 )
 
 var AssetList = []AssetType{
-	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, Fingerprint, FQDN,
+	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN,
 	IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Service, TLSCertificate, URL,
 }
