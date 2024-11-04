@@ -17,7 +17,7 @@ type PortRelation struct {
 	Protocol   string `json:"protocol"`
 }
 
-// RelationType implements the Relation interface.
+// Label implements the Relation interface.
 func (r PortRelation) Label() string {
 	return r.Name
 }

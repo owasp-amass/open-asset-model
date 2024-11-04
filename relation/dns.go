@@ -22,7 +22,7 @@ type BasicDNSRelation struct {
 	Header RRHeader `json:"header"`
 }
 
-// RelationType implements the Relation interface.
+// Label implements the Relation interface.
 func (r BasicDNSRelation) Label() string {
 	return r.Name
 }
@@ -44,7 +44,7 @@ type PrefDNSRelation struct {
 	Preference int      `json:"preference"`
 }
 
-// RelationType implements the Relation interface.
+// Label implements the Relation interface.
 func (r PrefDNSRelation) Label() string {
 	return r.Name
 }
@@ -68,7 +68,7 @@ type SRVDNSRelation struct {
 	Port     int      `json:"port"`
 }
 
-// RelationType implements the Relation interface.
+// Label implements the Relation interface.
 func (r SRVDNSRelation) Label() string {
 	return r.Name
 }

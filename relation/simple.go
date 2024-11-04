@@ -15,7 +15,7 @@ type SimpleRelation struct {
 	Name string `json:"label"`
 }
 
-// RelationType implements the Relation interface.
+// Label implements the Relation interface.
 func (r SimpleRelation) Label() string {
 	return r.Name
 }
