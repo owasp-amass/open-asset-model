@@ -15,9 +15,10 @@ type PropertyType string
 
 const (
 	SimpleProperty PropertyType = "SimpleProperty"
+	SourceProperty PropertyType = "SourceProperty"
 	VulnProperty   PropertyType = "VulnProperty"
 )
 
 var PropertyList = []PropertyType{
-	SimpleProperty, VulnProperty,
+	SimpleProperty, SourceProperty, VulnProperty,
 }
