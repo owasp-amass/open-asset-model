@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -23,7 +23,7 @@ func TestPersonKey(t *testing.T) {
 
 func TestPersonAssetType(t *testing.T) {
 	var _ model.Asset = Person{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*Person)(nil) // Verify the pointer properly implements the  Asset interface.
+	var _ model.Asset = (*Person)(nil) // Verify the pointer properly implements the Asset interface.
 
 	p := Person{}
 	if p.AssetType() != model.Person {
@@ -33,13 +33,15 @@ func TestPersonAssetType(t *testing.T) {
 
 func TestPersonJSON(t *testing.T) {
 	p := Person{
-		FullName:   "John Doe",
+		FullName:   "John Jacob Doe",
 		FirstName:  "John",
 		MiddleName: "Jacob",
 		FamilyName: "Doe",
+		BirthDate:  "01/01/1970",
+		Gender:     "Male",
 	}
 
-	expectedJSON := `{"full_name":"John Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe"}`
+	expectedJSON := `{"full_name":"John Jacob Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe","birth_date":"01/01/1970","gender":"Male"}`
 
 	jsonData, err := p.JSON()
 	if err != nil {

@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -35,10 +35,15 @@ func TestOrganizationAssetType(t *testing.T) {
 
 func TestOrganizationJSON(t *testing.T) {
 	o := Organization{
-		Name:     "Acme Inc.",
-		Industry: "Technology",
+		Name:           "Acme Inc.",
+		LegalName:      "Acme Inc.",
+		FoundingDate:   "2013-07-24T14:15:00Z",
+		Industry:       "Technology",
+		Active:         true,
+		NonProfit:      false,
+		NumOfEmployees: 10000,
 	}
-	expected := `{"name":"Acme Inc.","industry":"Technology"}`
+	expected := `{"name":"Acme Inc.","legal_name":"Acme Inc.","founding_date":"2013-07-24T14:15:00Z","industry":"Technology","active":true,"num_of_employees":10000}`
 	actual, err := o.JSON()
 
 	if err != nil {

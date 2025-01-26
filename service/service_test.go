@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -36,7 +36,7 @@ func TestServiceJSON(t *testing.T) {
 		Identifier: "12345",
 		Banner:     "Hello",
 		BannerLen:  5,
-		Headers:    map[string][]string{"server": []string{"nginx-1.26.0"}},
+		Headers:    map[string][]string{"server": {"nginx-1.26.0"}},
 	}
 
 	// test AssetType method

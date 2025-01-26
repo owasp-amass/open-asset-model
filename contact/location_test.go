@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -42,9 +42,10 @@ func TestLocationJSON(t *testing.T) {
 		Province:       "Anyregion",
 		Country:        "US",
 		PostalCode:     "12345",
+		GLN:            1234567890123,
 	}
 
-	expectedJSON := `{"address":"123 Main St","building":"Building A","building_number":"123","street_name":"Main St","unit":"Apt 1","po_box":"P.O. Box 145","city":"Anytown","locality":"Anytown","province":"Anyregion","country":"US","postal_code":"12345"}`
+	expectedJSON := `{"address":"123 Main St","building":"Building A","building_number":"123","street_name":"Main St","unit":"Apt 1","po_box":"P.O. Box 145","city":"Anytown","locality":"Anytown","province":"Anyregion","country":"US","postal_code":"12345","gln":1234567890123}`
 
 	jsonData, err := loc.JSON()
 	if err != nil {

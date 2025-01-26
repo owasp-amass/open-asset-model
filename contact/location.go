@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -23,6 +23,7 @@ type Location struct {
 	Province       string `json:"province,omitempty"`
 	Country        string `json:"country,omitempty"`
 	PostalCode     string `json:"postal_code,omitempty"`
+	GLN            int    `json:"gln,omitempty"`
 }
 
 // Key implements the Asset interface.
