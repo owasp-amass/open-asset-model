@@ -2,7 +2,7 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package service
+package platform
 
 import (
 	"encoding/json"
@@ -10,16 +10,22 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+// Service represents a service provided by an asset and/or organization.
+// It should support relationships such as the following:
+// - Providers
+// - Products used
+// - Terms of service
 type Service struct {
-	Identifier string              `json:"identifier"`
-	Banner     string              `json:"banner"`
-	BannerLen  int                 `json:"banner_length"`
-	Headers    map[string][]string `json:"headers"`
+	UniqueID   string              `json:"unique_id"`
+	Type       string              `json:"service_type"`
+	Output     string              `json:"output"`
+	OutputLen  int                 `json:"output_length"`
+	Attributes map[string][]string `json:"attributes,omitempty"`
 }
 
 // Key implements the Asset interface.
 func (s Service) Key() string {
-	return s.Identifier
+	return s.UniqueID
 }
 
 // AssetType implements the Asset interface.

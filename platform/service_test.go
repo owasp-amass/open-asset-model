@@ -2,7 +2,7 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package service
+package platform
 
 import (
 	"testing"
@@ -12,7 +12,7 @@ import (
 
 func TestServiceKey(t *testing.T) {
 	want := "12345"
-	serv := Service{Identifier: want}
+	serv := Service{UniqueID: want}
 
 	if got := serv.Key(); got != want {
 		t.Errorf("Service.Key() = %v, want %v", got, want)
@@ -21,7 +21,7 @@ func TestServiceKey(t *testing.T) {
 
 func TestServiceAssetType(t *testing.T) {
 	var _ model.Asset = Service{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*Service)(nil) // Verify the pointer properly implements the  Asset interface.
+	var _ model.Asset = (*Service)(nil) // Verify the pointer properly implements the  Asset interface
 
 	s := Service{}
 	want := model.Service
@@ -33,10 +33,11 @@ func TestServiceAssetType(t *testing.T) {
 
 func TestServiceJSON(t *testing.T) {
 	s := Service{
-		Identifier: "12345",
-		Banner:     "Hello",
-		BannerLen:  5,
-		Headers:    map[string][]string{"server": {"nginx-1.26.0"}},
+		UniqueID:   "12345",
+		Type:       "HTTP",
+		Output:     "Hello",
+		OutputLen:  5,
+		Attributes: map[string][]string{"server": {"nginx-1.26.0"}},
 	}
 
 	// test AssetType method
@@ -45,7 +46,7 @@ func TestServiceJSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"identifier":"12345","banner":"Hello","banner_length":5,"headers":{"server":["nginx-1.26.0"]}}`
+	expectedJSON := `{"unique_id":"12345","service_type":"HTTP","output":"Hello","output_length":5,"attributes":{"server":["nginx-1.26.0"]}}`
 	json, err := s.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

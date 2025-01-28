@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -28,6 +28,8 @@ const (
 	Organization     AssetType = "Organization"
 	Person           AssetType = "Person"
 	Phone            AssetType = "Phone"
+	Product          AssetType = "Product"
+	ProductRelease   AssetType = "ProductRelease"
 	Service          AssetType = "Service"
 	TLSCertificate   AssetType = "TLSCertificate"
 	URL              AssetType = "URL"
@@ -35,5 +37,6 @@ const (
 
 var AssetList = []AssetType{
 	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN, Identifier,
-	IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Service, TLSCertificate, URL,
+	IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product, ProductRelease,
+	Service, TLSCertificate, URL,
 }

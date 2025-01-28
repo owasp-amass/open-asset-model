@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -26,37 +26,49 @@ func TestAssetInterface(t *testing.T) {
 
 func TestAssetTypeConstants(t *testing.T) {
 	assetTypes := []AssetType{
-		IPAddress,
-		Netblock,
-		AutonomousSystem,
-		FQDN,
-		DomainRecord,
 		AutnumRecord,
-		Location,
-		Phone,
-		EmailAddress,
-		Person,
-		Organization,
-		URL,
-		TLSCertificate,
+		AutonomousSystem,
 		ContactRecord,
+		DomainRecord,
+		EmailAddress,
+		File,
+		FQDN,
+		Identifier,
+		IPAddress,
+		IPNetRecord,
+		Location,
+		Netblock,
+		Organization,
+		Person,
+		Phone,
+		Product,
+		ProductRelease,
+		Service,
+		TLSCertificate,
+		URL,
 	}
 
 	expectedTypes := []string{
-		"IPAddress",
-		"Netblock",
-		"AutonomousSystem",
-		"FQDN",
-		"DomainRecord",
 		"AutnumRecord",
-		"Location",
-		"Phone",
-		"EmailAddress",
-		"Person",
-		"Organization",
-		"URL",
-		"TLSCertificate",
+		"AutonomousSystem",
 		"ContactRecord",
+		"DomainRecord",
+		"EmailAddress",
+		"File",
+		"FQDN",
+		"Identifier",
+		"IPAddress",
+		"IPNetRecord",
+		"Location",
+		"Netblock",
+		"Organization",
+		"Person",
+		"Phone",
+		"Product",
+		"ProductRelease",
+		"Service",
+		"TLSCertificate",
+		"URL",
 	}
 
 	if len(assetTypes) != len(expectedTypes) {
