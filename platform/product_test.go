@@ -26,7 +26,7 @@ func TestProductKey(t *testing.T) {
 
 func TestProductAssetType(t *testing.T) {
 	var _ model.Asset = Product{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*Product)(nil) // Verify the pointer properly implements the  Asset interface.
+	var _ model.Asset = (*Product)(nil) // Verify the pointer properly implements the Asset interface.
 
 	p := Product{}
 	expected := model.Product
@@ -72,7 +72,7 @@ func TestProductReleaseKey(t *testing.T) {
 
 func TestProductReleaseAssetType(t *testing.T) {
 	var _ model.Asset = ProductRelease{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*ProductRelease)(nil) // Verify the pointer properly implements the  Asset interface.
+	var _ model.Asset = (*ProductRelease)(nil) // Verify the pointer properly implements the Asset interface.
 
 	p := ProductRelease{}
 	expected := model.ProductRelease

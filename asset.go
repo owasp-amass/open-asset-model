@@ -13,6 +13,7 @@ type Asset interface {
 type AssetType string
 
 const (
+	Account          AssetType = "Account"
 	AutnumRecord     AssetType = "AutnumRecord"
 	AutonomousSystem AssetType = "AutonomousSystem"
 	ContactRecord    AssetType = "ContactRecord"
@@ -23,6 +24,7 @@ const (
 	Identifier       AssetType = "Identifier"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
+	Institution      AssetType = "Institution"
 	Location         AssetType = "Location"
 	Netblock         AssetType = "Netblock"
 	Organization     AssetType = "Organization"
@@ -36,7 +38,7 @@ const (
 )
 
 var AssetList = []AssetType{
-	AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN, Identifier,
-	IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product, ProductRelease,
-	Service, TLSCertificate, URL,
+	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN,
+	Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product,
+	ProductRelease, Service, TLSCertificate, URL,
 }

@@ -22,7 +22,7 @@ func TestOrganizationKey(t *testing.T) {
 
 func TestOrganizationAssetType(t *testing.T) {
 	var _ model.Asset = Organization{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*Organization)(nil) // Verify the pointer properly implements the  Asset interface.
+	var _ model.Asset = (*Organization)(nil) // Verify the pointer properly implements the Asset interface.
 
 	o := Organization{}
 	expected := model.Organization

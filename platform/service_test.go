@@ -21,7 +21,7 @@ func TestServiceKey(t *testing.T) {
 
 func TestServiceAssetType(t *testing.T) {
 	var _ model.Asset = Service{}       // Verify proper implementation of the Asset interface
-	var _ model.Asset = (*Service)(nil) // Verify the pointer properly implements the  Asset interface
+	var _ model.Asset = (*Service)(nil) // Verify the pointer properly implements the Asset interface
 
 	s := Service{}
 	want := model.Service

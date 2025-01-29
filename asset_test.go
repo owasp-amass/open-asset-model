@@ -26,6 +26,7 @@ func TestAssetInterface(t *testing.T) {
 
 func TestAssetTypeConstants(t *testing.T) {
 	assetTypes := []AssetType{
+		Account,
 		AutnumRecord,
 		AutonomousSystem,
 		ContactRecord,
@@ -49,6 +50,7 @@ func TestAssetTypeConstants(t *testing.T) {
 	}
 
 	expectedTypes := []string{
+		"Account",
 		"AutnumRecord",
 		"AutonomousSystem",
 		"ContactRecord",
