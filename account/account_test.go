@@ -2,7 +2,7 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package financial
+package account
 
 import (
 	"reflect"
@@ -12,10 +12,11 @@ import (
 )
 
 func TestAccountKey(t *testing.T) {
-	want := "ACH:12345"
+	want := "ACH:test:12345"
 	a := Account{
-		Number: "12345",
-		Type:   "ACH",
+		Username: "test",
+		Number:   "12345",
+		Type:     "ACH",
 	}
 
 	if got := a.Key(); got != want {
@@ -38,18 +39,13 @@ func TestAccountAssetType(t *testing.T) {
 
 func TestAccountJSON(t *testing.T) {
 	a := Account{
-		Number:             "12345",
-		Type:               "ACH",
-		DomesticBankNumber: "222333444",
-		Balance:            10000,
-		Currency:           "US",
-		InterestRate:       0.05,
-		PercentageRate:     0.05,
-		FeesAndCommissions: 100,
-		Active:             true,
-		CountryCode:        "US",
+		Username: "test",
+		Number:   "12345",
+		Type:     "ACH",
+		Balance:  10000,
+		Active:   true,
 	}
-	expected := `{"account_number":"12345","account_type":"ACH","domestic_bank_number":"222333444","balance":10000,"currency":"US","interest_rate":0.05,"percentage_rate":0.05,"fees_and_commissions":100,"active":true,"country_code":"US"}`
+	expected := `{"username":"test","account_number":"12345","account_type":"ACH","balance":10000,"active":true}`
 	actual, err := a.JSON()
 
 	if err != nil {

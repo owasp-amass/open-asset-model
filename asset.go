@@ -21,6 +21,7 @@ const (
 	EmailAddress     AssetType = "EmailAddress"
 	File             AssetType = "File"
 	FQDN             AssetType = "FQDN"
+	FundsTransfer    AssetType = "FundsTransfer"
 	Identifier       AssetType = "Identifier"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
@@ -39,6 +40,6 @@ const (
 
 var AssetList = []AssetType{
 	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN,
-	Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product,
-	ProductRelease, Service, TLSCertificate, URL,
+	FundsTransfer, Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone,
+	Product, ProductRelease, Service, TLSCertificate, URL,
 }
