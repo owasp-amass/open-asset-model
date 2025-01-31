@@ -13,8 +13,7 @@ import (
 
 // Account represents an account managed by an organization.
 // Should support relationships for the following:
-// - Managing organization (e.g. Organization)
-// - Owners (e.g. Person or Organization)
+// - Owner (e.g. Person or Organization)
 // - Funds transfers
 // - IBAN and SWIFT codes
 type Account struct {

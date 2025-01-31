@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2024. All rights reserved.
+// Copyright © by Jeff Foley 2017-2025. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -28,12 +28,34 @@ var RelationList = []RelationType{
 	BasicDNSRelation, PortRelation, PrefDNSRelation, SimpleRelation, SRVDNSRelation,
 }
 
-var locationRels = map[string]map[RelationType][]AssetType{}
+var accountRels = map[string]map[RelationType][]AssetType{
+	"account_id":     {SimpleRelation: {Identifier}},
+	"Owner":          {SimpleRelation: {Person, Organization}},
+	"funds_transfer": {SimpleRelation: {FundsTransfer}},
+}
 
-var phoneRels = map[string]map[RelationType][]AssetType{}
+var autnumRecordRels = map[string]map[RelationType][]AssetType{
+	"whois_server":      {SimpleRelation: {FQDN}},
+	"registrant":        {SimpleRelation: {ContactRecord}},
+	"admin_contact":     {SimpleRelation: {ContactRecord}},
+	"abuse_contact":     {SimpleRelation: {ContactRecord}},
+	"technical_contact": {SimpleRelation: {ContactRecord}},
+	"rdap_url":          {SimpleRelation: {URL}},
+	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
+}
 
-var emailRels = map[string]map[RelationType][]AssetType{
-	"domain": {SimpleRelation: {FQDN}},
+var autonomousSystemRels = map[string]map[RelationType][]AssetType{
+	"announces":    {SimpleRelation: {Netblock}},
+	"registration": {SimpleRelation: {AutnumRecord}},
+}
+
+var contactRecordRels = map[string]map[RelationType][]AssetType{
+	"person":       {SimpleRelation: {Person}},
+	"organization": {SimpleRelation: {Organization}},
+	"location":     {SimpleRelation: {Location}},
+	"email":        {SimpleRelation: {EmailAddress}},
+	"phone":        {SimpleRelation: {Phone}},
+	"url":          {SimpleRelation: {URL}},
 }
 
 var domainRecordRels = map[string]map[RelationType][]AssetType{
@@ -47,43 +69,8 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 	"associated_with":    {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
 }
 
-var autnumRecordRels = map[string]map[RelationType][]AssetType{
-	"whois_server":      {SimpleRelation: {FQDN}},
-	"registrant":        {SimpleRelation: {ContactRecord}},
-	"admin_contact":     {SimpleRelation: {ContactRecord}},
-	"abuse_contact":     {SimpleRelation: {ContactRecord}},
-	"technical_contact": {SimpleRelation: {ContactRecord}},
-	"rdap_url":          {SimpleRelation: {URL}},
-	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
-}
-
-var ipnetRecordRels = map[string]map[RelationType][]AssetType{
-	"whois_server":      {SimpleRelation: {FQDN}},
-	"registrant":        {SimpleRelation: {ContactRecord}},
-	"admin_contact":     {SimpleRelation: {ContactRecord}},
-	"abuse_contact":     {SimpleRelation: {ContactRecord}},
-	"technical_contact": {SimpleRelation: {ContactRecord}},
-	"rdap_url":          {SimpleRelation: {URL}},
-	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
-}
-
-var personRels = map[string]map[RelationType][]AssetType{}
-
-var orgRels = map[string]map[RelationType][]AssetType{}
-
-var ipRels = map[string]map[RelationType][]AssetType{
-	"port":       {PortRelation: {Service}},
-	"ptr_record": {SimpleRelation: {FQDN}},
-}
-
-var netblockRels = map[string]map[RelationType][]AssetType{
-	"contains":     {SimpleRelation: {IPAddress}},
-	"registration": {SimpleRelation: {IPNetRecord}},
-}
-
-var autonomousSystemRels = map[string]map[RelationType][]AssetType{
-	"announces":    {SimpleRelation: {Netblock}},
-	"registration": {SimpleRelation: {AutnumRecord}},
+var emailRels = map[string]map[RelationType][]AssetType{
+	"domain": {SimpleRelation: {FQDN}},
 }
 
 var fileRels = map[string]map[RelationType][]AssetType{
@@ -100,6 +87,63 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	},
 	"node":         {SimpleRelation: {FQDN}},
 	"registration": {SimpleRelation: {DomainRecord}},
+}
+
+var fundsTransferRels = map[string]map[RelationType][]AssetType{}
+
+var identifierRels = map[string]map[RelationType][]AssetType{}
+
+var ipRels = map[string]map[RelationType][]AssetType{
+	"port":       {PortRelation: {Service}},
+	"ptr_record": {SimpleRelation: {FQDN}},
+}
+
+var ipnetRecordRels = map[string]map[RelationType][]AssetType{
+	"whois_server":      {SimpleRelation: {FQDN}},
+	"registrant":        {SimpleRelation: {ContactRecord}},
+	"admin_contact":     {SimpleRelation: {ContactRecord}},
+	"abuse_contact":     {SimpleRelation: {ContactRecord}},
+	"technical_contact": {SimpleRelation: {ContactRecord}},
+	"rdap_url":          {SimpleRelation: {URL}},
+	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
+}
+
+var locationRels = map[string]map[RelationType][]AssetType{}
+
+var netblockRels = map[string]map[RelationType][]AssetType{
+	"contains":     {SimpleRelation: {IPAddress}},
+	"registration": {SimpleRelation: {IPNetRecord}},
+}
+
+var orgRels = map[string]map[RelationType][]AssetType{
+	"org_id":               {SimpleRelation: {Identifier}},
+	"location":             {SimpleRelation: {Location}},
+	"parent":               {SimpleRelation: {Organization}},
+	"subsidiary":           {SimpleRelation: {Organization}},
+	"sister":               {SimpleRelation: {Organization}},
+	"account":              {SimpleRelation: {Account}},
+	"website":              {SimpleRelation: {URL}},
+	"social_media_profile": {SimpleRelation: {URL}},
+	"funding_source":       {SimpleRelation: {Person, Organization}},
+}
+
+var personRels = map[string]map[RelationType][]AssetType{}
+
+var phoneRels = map[string]map[RelationType][]AssetType{}
+
+var productRels = map[string]map[RelationType][]AssetType{
+	"manufacturer": {SimpleRelation: {Organization}},
+	"website":      {SimpleRelation: {URL}},
+	"release":      {SimpleRelation: {ProductRelease}},
+}
+
+var productReleaseRels = map[string]map[RelationType][]AssetType{
+	"product_id": {SimpleRelation: {Identifier}},
+	"website":    {SimpleRelation: {URL}},
+}
+
+var serviceRels = map[string]map[RelationType][]AssetType{
+	"certificate": {SimpleRelation: {TLSCertificate}},
 }
 
 var tlscertRels = map[string]map[RelationType][]AssetType{
@@ -121,19 +165,6 @@ var urlRels = map[string]map[RelationType][]AssetType{
 	"ip_address": {SimpleRelation: {IPAddress}},
 	"port":       {PortRelation: {Service}},
 	"file":       {SimpleRelation: {File}},
-}
-
-var contactRecordRels = map[string]map[RelationType][]AssetType{
-	"person":       {SimpleRelation: {Person}},
-	"organization": {SimpleRelation: {Organization}},
-	"location":     {SimpleRelation: {Location}},
-	"email":        {SimpleRelation: {EmailAddress}},
-	"phone":        {SimpleRelation: {Phone}},
-	"url":          {SimpleRelation: {URL}},
-}
-
-var serviceRels = map[string]map[RelationType][]AssetType{
-	"certificate": {SimpleRelation: {TLSCertificate}},
 }
 
 // GetAssetOutgoingRelations returns the relation types allowed to be used
@@ -183,40 +214,50 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 	var relations map[string]map[RelationType][]AssetType
 
 	switch atype {
-	case IPAddress:
-		relations = ipRels
-	case Netblock:
-		relations = netblockRels
+	case Account:
+		relations = accountRels
+	case AutnumRecord:
+		relations = autnumRecordRels
 	case AutonomousSystem:
 		relations = autonomousSystemRels
+	case ContactRecord:
+		relations = contactRecordRels
+	case DomainRecord:
+		relations = domainRecordRels
+	case EmailAddress:
+		relations = emailRels
 	case File:
 		relations = fileRels
 	case FQDN:
 		relations = fqdnRels
-	case DomainRecord:
-		relations = domainRecordRels
-	case AutnumRecord:
-		relations = autnumRecordRels
+	case FundsTransfer:
+		relations = fundsTransferRels
+	case Identifier:
+		relations = identifierRels
+	case IPAddress:
+		relations = ipRels
 	case IPNetRecord:
 		relations = ipnetRecordRels
 	case Location:
 		relations = locationRels
-	case Phone:
-		relations = phoneRels
-	case EmailAddress:
-		relations = emailRels
-	case Person:
-		relations = personRels
+	case Netblock:
+		relations = netblockRels
 	case Organization:
 		relations = orgRels
+	case Person:
+		relations = personRels
+	case Phone:
+		relations = phoneRels
+	case Product:
+		relations = productRels
+	case ProductRelease:
+		relations = productReleaseRels
+	case Service:
+		relations = serviceRels
 	case TLSCertificate:
 		relations = tlscertRels
 	case URL:
 		relations = urlRels
-	case ContactRecord:
-		relations = contactRecordRels
-	case Service:
-		relations = serviceRels
 	default:
 		return nil
 	}
