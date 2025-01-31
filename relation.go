@@ -29,7 +29,7 @@ var RelationList = []RelationType{
 }
 
 var accountRels = map[string]map[RelationType][]AssetType{
-	"account_id":     {SimpleRelation: {Identifier}},
+	"id":             {SimpleRelation: {Identifier}},
 	"Owner":          {SimpleRelation: {Person, Organization}},
 	"funds_transfer": {SimpleRelation: {FundsTransfer}},
 }
@@ -41,7 +41,6 @@ var autnumRecordRels = map[string]map[RelationType][]AssetType{
 	"abuse_contact":     {SimpleRelation: {ContactRecord}},
 	"technical_contact": {SimpleRelation: {ContactRecord}},
 	"rdap_url":          {SimpleRelation: {URL}},
-	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
 }
 
 var autonomousSystemRels = map[string]map[RelationType][]AssetType{
@@ -66,7 +65,6 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 	"admin_contact":      {SimpleRelation: {ContactRecord}},
 	"technical_contact":  {SimpleRelation: {ContactRecord}},
 	"billing_contact":    {SimpleRelation: {ContactRecord}},
-	"associated_with":    {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
 }
 
 var emailRels = map[string]map[RelationType][]AssetType{
@@ -89,7 +87,9 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	"registration": {SimpleRelation: {DomainRecord}},
 }
 
-var fundsTransferRels = map[string]map[RelationType][]AssetType{}
+var fundsTransferRels = map[string]map[RelationType][]AssetType{
+	"id": {SimpleRelation: {Identifier}},
+}
 
 var identifierRels = map[string]map[RelationType][]AssetType{}
 
@@ -105,10 +105,11 @@ var ipnetRecordRels = map[string]map[RelationType][]AssetType{
 	"abuse_contact":     {SimpleRelation: {ContactRecord}},
 	"technical_contact": {SimpleRelation: {ContactRecord}},
 	"rdap_url":          {SimpleRelation: {URL}},
-	"associated_with":   {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
 }
 
-var locationRels = map[string]map[RelationType][]AssetType{}
+var locationRels = map[string]map[RelationType][]AssetType{
+	"id": {SimpleRelation: {Identifier}},
+}
 
 var netblockRels = map[string]map[RelationType][]AssetType{
 	"contains":     {SimpleRelation: {IPAddress}},
@@ -116,7 +117,7 @@ var netblockRels = map[string]map[RelationType][]AssetType{
 }
 
 var orgRels = map[string]map[RelationType][]AssetType{
-	"org_id":               {SimpleRelation: {Identifier}},
+	"id":                   {SimpleRelation: {Identifier}},
 	"location":             {SimpleRelation: {Location}},
 	"parent":               {SimpleRelation: {Organization}},
 	"subsidiary":           {SimpleRelation: {Organization}},
@@ -127,19 +128,22 @@ var orgRels = map[string]map[RelationType][]AssetType{
 	"funding_source":       {SimpleRelation: {Person, Organization}},
 }
 
-var personRels = map[string]map[RelationType][]AssetType{}
+var personRels = map[string]map[RelationType][]AssetType{
+	"id": {SimpleRelation: {Identifier}},
+}
 
 var phoneRels = map[string]map[RelationType][]AssetType{}
 
 var productRels = map[string]map[RelationType][]AssetType{
+	"id":           {SimpleRelation: {Identifier}},
 	"manufacturer": {SimpleRelation: {Organization}},
 	"website":      {SimpleRelation: {URL}},
 	"release":      {SimpleRelation: {ProductRelease}},
 }
 
 var productReleaseRels = map[string]map[RelationType][]AssetType{
-	"product_id": {SimpleRelation: {Identifier}},
-	"website":    {SimpleRelation: {URL}},
+	"id":      {SimpleRelation: {Identifier}},
+	"website": {SimpleRelation: {URL}},
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
@@ -157,7 +161,6 @@ var tlscertRels = map[string]map[RelationType][]AssetType{
 	"issuing_certificate":     {SimpleRelation: {TLSCertificate}},
 	"issuing_certificate_url": {SimpleRelation: {URL}},
 	"ocsp_server":             {SimpleRelation: {URL}},
-	"associated_with":         {SimpleRelation: {AutnumRecord, DomainRecord, IPNetRecord}},
 }
 
 var urlRels = map[string]map[RelationType][]AssetType{
