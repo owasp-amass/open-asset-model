@@ -151,7 +151,6 @@ var productRels = map[string]map[RelationType][]AssetType{
 
 var productReleaseRels = map[string]map[RelationType][]AssetType{
 	"id":      {SimpleRelation: {Identifier}},
-	"product": {SimpleRelation: {Product}},
 	"website": {SimpleRelation: {URL}},
 }
 
