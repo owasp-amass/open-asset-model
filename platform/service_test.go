@@ -11,8 +11,11 @@ import (
 )
 
 func TestServiceKey(t *testing.T) {
-	want := "12345"
-	serv := Service{UniqueID: want}
+	want := "HTTP:222333444"
+	serv := Service{
+		ID:   "222333444",
+		Type: "HTTP",
+	}
 
 	if got := serv.Key(); got != want {
 		t.Errorf("Service.Key() = %v, want %v", got, want)
@@ -33,7 +36,7 @@ func TestServiceAssetType(t *testing.T) {
 
 func TestServiceJSON(t *testing.T) {
 	s := Service{
-		UniqueID:   "12345",
+		ID:         "222333444",
 		Type:       "HTTP",
 		Output:     "Hello",
 		OutputLen:  5,
@@ -46,7 +49,7 @@ func TestServiceJSON(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"unique_id":"12345","service_type":"HTTP","output":"Hello","output_length":5,"attributes":{"server":["nginx-1.26.0"]}}`
+	expectedJSON := `{"unique_id":"222333444","service_type":"HTTP","output":"Hello","output_length":5,"attributes":{"server":["nginx-1.26.0"]}}`
 	json, err := s.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)

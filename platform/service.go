@@ -6,26 +6,28 @@ package platform
 
 import (
 	"encoding/json"
+	"fmt"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
 
 // Service represents a service provided by an asset and/or organization.
 // It should support relationships such as the following:
-// - Providers
-// - Products used
-// - Terms of service
+// - Provider (e.g. Organization)
+// - Terms of service (e.g. File or URL)
+// - TLS Certificate (e.g. TLSCertificate)
+// - Product used to provide the service (e.g. Product or ProductRelease)
 type Service struct {
-	UniqueID   string              `json:"unique_id"`
+	ID         string              `json:"unique_id"`
 	Type       string              `json:"service_type"`
-	Output     string              `json:"output"`
-	OutputLen  int                 `json:"output_length"`
+	Output     string              `json:"output,omitempty"`
+	OutputLen  int                 `json:"output_length,omitempty"`
 	Attributes map[string][]string `json:"attributes,omitempty"`
 }
 
 // Key implements the Asset interface.
 func (s Service) Key() string {
-	return s.UniqueID
+	return fmt.Sprintf("%s:%s", s.Type, s.ID)
 }
 
 // AssetType implements the Asset interface.

@@ -39,7 +39,7 @@ const (
 )
 
 var AssetList = []AssetType{
-	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, EmailAddress, File, FQDN,
-	FundsTransfer, Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone,
-	Product, ProductRelease, Service, TLSCertificate, URL,
+	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, File, FQDN, FundsTransfer,
+	Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product,
+	ProductRelease, Service, TLSCertificate, URL,
 }

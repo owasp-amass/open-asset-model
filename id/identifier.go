@@ -13,12 +13,9 @@ import (
 
 // Identifier identifies something that's a member of a system or organization that issues ID numbers or codes.
 // Should support relationships for the following:
-// - Member (e.g., person, organization, or device)
-// - Registration location
-// - Registration authority
-// - Issuing authority
-// - Issuing authority Website
-// - Agent of authority (e.g., person or organization)
+// - Registration agency (e.g., ContactRecord)
+// - Issuing authority (e.g., ContactRecord)
+// - Issuing agent (e.g., ContactRecord)
 type Identifier struct {
 	ID             string `json:"id"`
 	Type           string `json:"id_type"`

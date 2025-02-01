@@ -14,9 +14,9 @@ import (
 func TestProductKey(t *testing.T) {
 	want := "12345"
 	p := Product{
-		UniqueID: want,
-		Name:     "OWASP Amass",
-		Type:     "Information Security",
+		ID:   want,
+		Name: "OWASP Amass",
+		Type: "Information Security",
 	}
 
 	if got := p.Key(); got != want {
@@ -39,14 +39,14 @@ func TestProductAssetType(t *testing.T) {
 
 func TestProductJSON(t *testing.T) {
 	p := Product{
-		UniqueID:        "12345",
+		ID:              "12345",
 		Name:            "OWASP Amass",
 		Type:            "Attack Surface Management",
 		Category:        "Information Security",
 		Description:     "In-depth attack surface mapping and asset discovery",
 		CountryOfOrigin: "US",
 	}
-	expected := `{"unique_id":"12345","name":"OWASP Amass","product_type":"Attack Surface Management","category":"Information Security","description":"In-depth attack surface mapping and asset discovery","country_of_origin":"US"}`
+	expected := `{"unique_id":"12345","product_name":"OWASP Amass","product_type":"Attack Surface Management","category":"Information Security","description":"In-depth attack surface mapping and asset discovery","country_of_origin":"US"}`
 	actual, err := p.JSON()
 
 	if err != nil {
@@ -61,7 +61,7 @@ func TestProductJSON(t *testing.T) {
 func TestProductReleaseKey(t *testing.T) {
 	want := "12345"
 	p := ProductRelease{
-		UniqueID:      want,
+		ID:            want,
 		VersionNumber: "v4.2.0",
 	}
 
@@ -85,7 +85,7 @@ func TestProductReleaseAssetType(t *testing.T) {
 
 func TestProductReleaseJSON(t *testing.T) {
 	p := ProductRelease{
-		UniqueID:      "12345",
+		ID:            "12345",
 		VersionNumber: "v4.2.0",
 		ModelNumber:   "N/A",
 		SerialNumber:  "N/A",

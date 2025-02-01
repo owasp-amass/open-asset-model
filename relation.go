@@ -30,7 +30,7 @@ var RelationList = []RelationType{
 
 var accountRels = map[string]map[RelationType][]AssetType{
 	"id":             {SimpleRelation: {Identifier}},
-	"Owner":          {SimpleRelation: {Person, Organization}},
+	"user":           {SimpleRelation: {Person, Organization}},
 	"funds_transfer": {SimpleRelation: {FundsTransfer}},
 }
 
@@ -49,10 +49,10 @@ var autonomousSystemRels = map[string]map[RelationType][]AssetType{
 }
 
 var contactRecordRels = map[string]map[RelationType][]AssetType{
+	"id":           {SimpleRelation: {Identifier}},
 	"person":       {SimpleRelation: {Person}},
 	"organization": {SimpleRelation: {Organization}},
-	"location":     {SimpleRelation: {Location}},
-	"email":        {SimpleRelation: {EmailAddress}},
+	"location":     {SimpleRelation: {FQDN, Location}},
 	"phone":        {SimpleRelation: {Phone}},
 	"url":          {SimpleRelation: {URL}},
 }
@@ -65,10 +65,6 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 	"admin_contact":      {SimpleRelation: {ContactRecord}},
 	"technical_contact":  {SimpleRelation: {ContactRecord}},
 	"billing_contact":    {SimpleRelation: {ContactRecord}},
-}
-
-var emailRels = map[string]map[RelationType][]AssetType{
-	"domain": {SimpleRelation: {FQDN}},
 }
 
 var fileRels = map[string]map[RelationType][]AssetType{
@@ -88,10 +84,17 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
-	"id": {SimpleRelation: {Identifier}},
+	"id":          {SimpleRelation: {Identifier}},
+	"sender":      {SimpleRelation: {Account}},
+	"recipient":   {SimpleRelation: {Account}},
+	"third_party": {SimpleRelation: {Organization}},
 }
 
-var identifierRels = map[string]map[RelationType][]AssetType{}
+var identifierRels = map[string]map[RelationType][]AssetType{
+	"registration_agency": {SimpleRelation: {ContactRecord}},
+	"issuing_authority":   {SimpleRelation: {ContactRecord}},
+	"issuing_agent":       {SimpleRelation: {ContactRecord}},
+}
 
 var ipRels = map[string]map[RelationType][]AssetType{
 	"port":       {PortRelation: {Service}},
@@ -129,10 +132,15 @@ var orgRels = map[string]map[RelationType][]AssetType{
 }
 
 var personRels = map[string]map[RelationType][]AssetType{
-	"id": {SimpleRelation: {Identifier}},
+	"id":      {SimpleRelation: {Identifier}},
+	"address": {SimpleRelation: {Location}},
+	"phone":   {SimpleRelation: {Phone}},
 }
 
-var phoneRels = map[string]map[RelationType][]AssetType{}
+var phoneRels = map[string]map[RelationType][]AssetType{
+	"account": {SimpleRelation: {Account}},
+	"contact": {SimpleRelation: {ContactRecord}},
+}
 
 var productRels = map[string]map[RelationType][]AssetType{
 	"id":           {SimpleRelation: {Identifier}},
@@ -143,11 +151,15 @@ var productRels = map[string]map[RelationType][]AssetType{
 
 var productReleaseRels = map[string]map[RelationType][]AssetType{
 	"id":      {SimpleRelation: {Identifier}},
+	"product": {SimpleRelation: {Product}},
 	"website": {SimpleRelation: {URL}},
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
-	"certificate": {SimpleRelation: {TLSCertificate}},
+	"provider":         {SimpleRelation: {Organization}},
+	"certificate":      {SimpleRelation: {TLSCertificate}},
+	"terms_of_service": {SimpleRelation: {File, URL}},
+	"product_used":     {SimpleRelation: {Product, ProductRelease}},
 }
 
 var tlscertRels = map[string]map[RelationType][]AssetType{
@@ -155,7 +167,7 @@ var tlscertRels = map[string]map[RelationType][]AssetType{
 	"subject_contact":         {SimpleRelation: {ContactRecord}},
 	"issuer_contact":          {SimpleRelation: {ContactRecord}},
 	"san_dns_name":            {SimpleRelation: {FQDN}},
-	"san_email_address":       {SimpleRelation: {EmailAddress}},
+	"san_email_address":       {SimpleRelation: {Identifier}},
 	"san_ip_address":          {SimpleRelation: {IPAddress}},
 	"san_url":                 {SimpleRelation: {URL}},
 	"issuing_certificate":     {SimpleRelation: {TLSCertificate}},
@@ -227,8 +239,6 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = contactRecordRels
 	case DomainRecord:
 		relations = domainRecordRels
-	case EmailAddress:
-		relations = emailRels
 	case File:
 		relations = fileRels
 	case FQDN:

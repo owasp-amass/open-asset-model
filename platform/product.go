@@ -16,8 +16,8 @@ import (
 // - Website
 // - Product releases
 type Product struct {
-	UniqueID        string `json:"unique_id"`
-	Name            string `json:"name"`
+	ID              string `json:"unique_id"`
+	Name            string `json:"product_name"`
 	Type            string `json:"product_type"`
 	Category        string `json:"category,omitempty"`
 	Description     string `json:"description,omitempty"`
@@ -26,7 +26,7 @@ type Product struct {
 
 // Key implements the Asset interface.
 func (p Product) Key() string {
-	return p.UniqueID
+	return p.ID
 }
 
 // AssetType implements the Asset interface.
@@ -47,7 +47,7 @@ func (p Product) JSON() ([]byte, error) {
 // - Vulnerabilities
 // - Website with release details
 type ProductRelease struct {
-	UniqueID      string `json:"unique_id"`
+	ID            string `json:"unique_id"`
 	VersionNumber string `json:"version_number,omitempty"`
 	ModelNumber   string `json:"model_number,omitempty"`
 	SerialNumber  string `json:"serial_number,omitempty"`
@@ -56,7 +56,7 @@ type ProductRelease struct {
 
 // Key implements the Asset interface.
 func (p ProductRelease) Key() string {
-	return p.UniqueID
+	return p.ID
 }
 
 // AssetType implements the Asset interface.
