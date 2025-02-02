@@ -82,3 +82,30 @@ func (r SRVDNSRelation) RelationType() model.RelationType {
 func (r SRVDNSRelation) JSON() ([]byte, error) {
 	return json.Marshal(r)
 }
+
+// DNSRecordProperty represents a DNS resource record that does not refer to another asset in the graph.
+type DNSRecordProperty struct {
+	PropertyName string   `json:"property_name"`
+	Header       RRHeader `json:"header"`
+	Data         string   `json:"data"`
+}
+
+// Name implements the Property interface.
+func (r DNSRecordProperty) Name() string {
+	return r.PropertyName
+}
+
+// Value implements the Property interface.
+func (r DNSRecordProperty) Value() string {
+	return r.Data
+}
+
+// PropertyType implements the Property interface.
+func (r DNSRecordProperty) PropertyType() model.PropertyType {
+	return model.DNSRecordProperty
+}
+
+// JSON implements the Property interface.
+func (r DNSRecordProperty) JSON() ([]byte, error) {
+	return json.Marshal(r)
+}

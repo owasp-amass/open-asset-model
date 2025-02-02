@@ -169,3 +169,62 @@ func TestSRVDNSRelation(t *testing.T) {
 		require.JSONEq(t, `{"label":"dns_record", "header":{"rr_type":1, "class":1, "ttl":86400}, "priority":10, "weight":5, "port":80}`, string(jsonData))
 	})
 }
+
+func TestDNSRecordPropertyName(t *testing.T) {
+	want := "anything"
+	p := DNSRecordProperty{
+		PropertyName: "anything",
+		Data:         "foobar",
+	}
+
+	if got := p.Name(); got != want {
+		t.Errorf("DNSRecordProperty.Name() = %v, want %v", got, want)
+	}
+}
+
+func TestDNSRecordPropertyValue(t *testing.T) {
+	want := "foobar"
+	p := DNSRecordProperty{
+		PropertyName: "anything",
+		Data:         "foobar",
+	}
+
+	if got := p.Value(); got != want {
+		t.Errorf("DNSRecordProperty.Value() = %v, want %v", got, want)
+	}
+}
+
+func TestDNSRecordPropertyImplementsProperty(t *testing.T) {
+	var _ model.Property = DNSRecordProperty{}       // Verify proper implementation of the Property interface
+	var _ model.Property = (*DNSRecordProperty)(nil) // Verify *DNSRecordProperty properly implements the Property interface.
+}
+
+func TestDNSRecordProperty(t *testing.T) {
+	t.Run("Test successful creation of DNSRecordProperty", func(t *testing.T) {
+		p := DNSRecordProperty{
+			PropertyName: "anything",
+			Data:         "foobar",
+		}
+
+		require.Equal(t, "anything", p.PropertyName)
+		require.Equal(t, "foobar", p.Data)
+		require.Equal(t, p.PropertyType(), model.DNSRecordProperty)
+	})
+
+	t.Run("Test successful JSON serialization of DNSRecordProperty", func(t *testing.T) {
+		p := DNSRecordProperty{
+			PropertyName: "anything",
+			Header: RRHeader{
+				RRType: 16,
+				Class:  1,
+				TTL:    86400,
+			},
+			Data: "foobar",
+		}
+
+		jsonData, err := p.JSON()
+
+		require.NoError(t, err)
+		require.JSONEq(t, `{"property_name":"anything","header":{"rr_type":16,"class":1,"ttl":86400},"data":"foobar"}`, string(jsonData))
+	})
+}

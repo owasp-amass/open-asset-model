@@ -14,11 +14,12 @@ type Property interface {
 type PropertyType string
 
 const (
-	SimpleProperty PropertyType = "SimpleProperty"
-	SourceProperty PropertyType = "SourceProperty"
-	VulnProperty   PropertyType = "VulnProperty"
+	DNSRecordProperty PropertyType = "DNSRecordProperty"
+	SimpleProperty    PropertyType = "SimpleProperty"
+	SourceProperty    PropertyType = "SourceProperty"
+	VulnProperty      PropertyType = "VulnProperty"
 )
 
 var PropertyList = []PropertyType{
-	SimpleProperty, SourceProperty, VulnProperty,
+	DNSRecordProperty, SimpleProperty, SourceProperty, VulnProperty,
 }
