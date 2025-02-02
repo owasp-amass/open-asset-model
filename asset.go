@@ -18,7 +18,6 @@ const (
 	AutonomousSystem AssetType = "AutonomousSystem"
 	ContactRecord    AssetType = "ContactRecord"
 	DomainRecord     AssetType = "DomainRecord"
-	EmailAddress     AssetType = "EmailAddress"
 	File             AssetType = "File"
 	FQDN             AssetType = "FQDN"
 	FundsTransfer    AssetType = "FundsTransfer"
