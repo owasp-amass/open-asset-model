@@ -43,20 +43,24 @@ func (p Product) JSON() ([]byte, error) {
 // Should support relationships for the following:
 // - Amazon Standard Identification Number (ASIN)
 // - Global Trade Item Number (GTIN)
+// - International Article Number (EAN)
+// - International Standard Book Number (ISBN)
+// - Manufacturer Part Number (MPN)
+// - Model Number
 // - NATO Stock Number (NSN)
+// - Serial Number
+// - Universal Product Code (UPC)
+// - Version Number
 // - Vulnerabilities
 // - Website with release details
 type ProductRelease struct {
-	ID            string `json:"unique_id"`
-	VersionNumber string `json:"version_number,omitempty"`
-	ModelNumber   string `json:"model_number,omitempty"`
-	SerialNumber  string `json:"serial_number,omitempty"`
-	ReleaseDate   string `json:"release_date,omitempty"`
+	Name        string `json:"name"`
+	ReleaseDate string `json:"release_date,omitempty"`
 }
 
 // Key implements the Asset interface.
 func (p ProductRelease) Key() string {
-	return p.ID
+	return p.Name
 }
 
 // AssetType implements the Asset interface.

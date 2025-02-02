@@ -59,11 +59,8 @@ func TestProductJSON(t *testing.T) {
 }
 
 func TestProductReleaseKey(t *testing.T) {
-	want := "12345"
-	p := ProductRelease{
-		ID:            want,
-		VersionNumber: "v4.2.0",
-	}
+	want := "Amass v4.2.0"
+	p := ProductRelease{Name: want}
 
 	if got := p.Key(); got != want {
 		t.Errorf("ProductRelease.Key() = %v, want %v", got, want)
@@ -85,13 +82,10 @@ func TestProductReleaseAssetType(t *testing.T) {
 
 func TestProductReleaseJSON(t *testing.T) {
 	p := ProductRelease{
-		ID:            "12345",
-		VersionNumber: "v4.2.0",
-		ModelNumber:   "N/A",
-		SerialNumber:  "N/A",
-		ReleaseDate:   "2023-09-10T14:15:00Z",
+		Name:        "Amass v4.2.0",
+		ReleaseDate: "2023-09-10T14:15:00Z",
 	}
-	expected := `{"unique_id":"12345","version_number":"v4.2.0","model_number":"N/A","serial_number":"N/A","release_date":"2023-09-10T14:15:00Z"}`
+	expected := `{"name":"Amass v4.2.0","release_date":"2023-09-10T14:15:00Z"}`
 	actual, err := p.JSON()
 
 	if err != nil {
