@@ -12,8 +12,11 @@ import (
 )
 
 func TestOrganizationKey(t *testing.T) {
-	want := "OWASP Foundation"
-	o := Organization{Name: want}
+	want := "222333444"
+	o := Organization{
+		ID:   want,
+		Name: "OWASP Foundation",
+	}
 
 	if got := o.Key(); got != want {
 		t.Errorf("Organization.Key() = %v, want %v", got, want)
@@ -35,6 +38,7 @@ func TestOrganizationAssetType(t *testing.T) {
 
 func TestOrganizationJSON(t *testing.T) {
 	o := Organization{
+		ID:             "222333444",
 		Name:           "Acme Inc.",
 		LegalName:      "Acme Inc.",
 		FoundingDate:   "2013-07-24T14:15:00Z",
@@ -43,7 +47,7 @@ func TestOrganizationJSON(t *testing.T) {
 		NonProfit:      false,
 		NumOfEmployees: 10000,
 	}
-	expected := `{"name":"Acme Inc.","legal_name":"Acme Inc.","founding_date":"2013-07-24T14:15:00Z","industry":"Technology","active":true,"num_of_employees":10000}`
+	expected := `{"unique_id":"222333444","name":"Acme Inc.","legal_name":"Acme Inc.","founding_date":"2013-07-24T14:15:00Z","industry":"Technology","active":true,"num_of_employees":10000}`
 	actual, err := o.JSON()
 
 	if err != nil {

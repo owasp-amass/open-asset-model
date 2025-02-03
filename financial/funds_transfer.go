@@ -2,11 +2,10 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package org
+package financial
 
 import (
 	"encoding/json"
-	"fmt"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
@@ -17,8 +16,9 @@ import (
 // - Recipient financial account (e.g. Account)
 // - IBIN and SWIFT codes
 type FundsTransfer struct {
-	ReferenceNumber string  `json:"reference_number"`
+	ID              string  `json:"unique_id"`
 	Amount          float64 `json:"amount"`
+	ReferenceNumber string  `json:"reference_number,omitempty"`
 	Currency        string  `json:"currency,omitempty"`
 	Method          string  `json:"transfer_method,omitempty"`
 	ExchangeDate    string  `json:"exchange_date,omitempty"`
@@ -27,7 +27,7 @@ type FundsTransfer struct {
 
 // Key implements the Asset interface.
 func (ft FundsTransfer) Key() string {
-	return fmt.Sprintf("%s:%.2f", ft.ReferenceNumber, ft.Amount)
+	return ft.ID
 }
 
 // AssetType implements the Asset interface.

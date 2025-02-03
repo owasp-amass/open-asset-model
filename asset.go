@@ -24,7 +24,6 @@ const (
 	Identifier       AssetType = "Identifier"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
-	Institution      AssetType = "Institution"
 	Location         AssetType = "Location"
 	Netblock         AssetType = "Netblock"
 	Organization     AssetType = "Organization"

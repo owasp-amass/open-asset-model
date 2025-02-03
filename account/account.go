@@ -6,7 +6,6 @@ package account
 
 import (
 	"encoding/json"
-	"fmt"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
@@ -17,16 +16,17 @@ import (
 // - Funds transfers
 // - IBAN and SWIFT codes
 type Account struct {
-	Username string `json:"username"`
-	Number   string `json:"account_number"`
+	ID       string `json:"unique_id"`
 	Type     string `json:"account_type"`
+	Username string `json:"username,omitempty"`
+	Number   string `json:"account_number,omitempty"`
 	Balance  int    `json:"balance,omitempty"`
 	Active   bool   `json:"active,omitempty"`
 }
 
 // Key implements the Asset interface.
 func (a Account) Key() string {
-	return fmt.Sprintf("%s:%s:%s", a.Type, a.Username, a.Number)
+	return a.ID
 }
 
 // AssetType implements the Asset interface.

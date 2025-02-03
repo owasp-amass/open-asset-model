@@ -12,8 +12,9 @@ import (
 )
 
 func TestAccountKey(t *testing.T) {
-	want := "ACH:test:12345"
+	want := "222333444"
 	a := Account{
+		ID:       want,
 		Username: "test",
 		Number:   "12345",
 		Type:     "ACH",
@@ -39,13 +40,14 @@ func TestAccountAssetType(t *testing.T) {
 
 func TestAccountJSON(t *testing.T) {
 	a := Account{
+		ID:       "222333444",
+		Type:     "ACH",
 		Username: "test",
 		Number:   "12345",
-		Type:     "ACH",
 		Balance:  10000,
 		Active:   true,
 	}
-	expected := `{"username":"test","account_number":"12345","account_type":"ACH","balance":10000,"active":true}`
+	expected := `{"unique_id":"222333444","account_type":"ACH","username":"test","account_number":"12345","balance":10000,"active":true}`
 	actual, err := a.JSON()
 
 	if err != nil {

@@ -2,7 +2,7 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
-package org
+package financial
 
 import (
 	"reflect"
@@ -12,11 +12,11 @@ import (
 )
 
 func TestFundsTransferKey(t *testing.T) {
-	want := "222333444:42.00"
-	ft := FundsTransfer{ReferenceNumber: "222333444", Amount: 42.0}
+	want := "222333444"
+	ft := FundsTransfer{ID: want, Amount: 42.0}
 
 	if got := ft.Key(); got != want {
-		t.Errorf("Organization.Key() = %v, want %v", got, want)
+		t.Errorf("FundsTransfer.Key() = %v, want %v", got, want)
 	}
 }
 
@@ -35,14 +35,15 @@ func TestFundsTransferAssetType(t *testing.T) {
 
 func TestFundsTransferJSON(t *testing.T) {
 	ft := FundsTransfer{
-		ReferenceNumber: "222333444",
+		ID:              "222333444",
 		Amount:          42.0,
+		ReferenceNumber: "555666777",
 		Currency:        "US",
 		Method:          "ACH",
 		ExchangeDate:    "2013-07-24T14:15:00Z",
 		ExchangeRate:    0.9,
 	}
-	expected := `{"reference_number":"222333444","amount":42,"currency":"US","transfer_method":"ACH","exchange_date":"2013-07-24T14:15:00Z","exchange_rate":0.9}`
+	expected := `{"unique_id":"222333444","amount":42,"reference_number":"555666777","currency":"US","transfer_method":"ACH","exchange_date":"2013-07-24T14:15:00Z","exchange_rate":0.9}`
 	actual, err := ft.JSON()
 
 	if err != nil {

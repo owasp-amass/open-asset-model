@@ -31,6 +31,7 @@ import (
 // - Contact information
 // - Founder, sponsorships, and funding sources
 type Organization struct {
+	ID             string `json:"unique_id"`
 	Name           string `json:"name"`
 	LegalName      string `json:"legal_name,omitempty"`
 	FoundingDate   string `json:"founding_date,omitempty"`
@@ -42,7 +43,7 @@ type Organization struct {
 
 // Key implements the Asset interface.
 func (o Organization) Key() string {
-	return o.Name
+	return o.ID
 }
 
 // AssetType implements the Asset interface.
