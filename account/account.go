@@ -16,12 +16,12 @@ import (
 // - Funds transfers
 // - IBAN and SWIFT codes
 type Account struct {
-	ID       string `json:"unique_id"`
-	Type     string `json:"account_type"`
-	Username string `json:"username,omitempty"`
-	Number   string `json:"account_number,omitempty"`
-	Balance  int    `json:"balance,omitempty"`
-	Active   bool   `json:"active,omitempty"`
+	ID       string  `json:"unique_id"`
+	Type     string  `json:"account_type"`
+	Username string  `json:"username,omitempty"`
+	Number   string  `json:"account_number,omitempty"`
+	Balance  float64 `json:"balance,omitempty"`
+	Active   bool    `json:"active,omitempty"`
 }
 
 // Key implements the Asset interface.

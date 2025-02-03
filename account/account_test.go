@@ -44,10 +44,10 @@ func TestAccountJSON(t *testing.T) {
 		Type:     "ACH",
 		Username: "test",
 		Number:   "12345",
-		Balance:  10000,
+		Balance:  42.50,
 		Active:   true,
 	}
-	expected := `{"unique_id":"222333444","account_type":"ACH","username":"test","account_number":"12345","balance":10000,"active":true}`
+	expected := `{"unique_id":"222333444","account_type":"ACH","username":"test","account_number":"12345","balance":42.5,"active":true}`
 	actual, err := a.JSON()
 
 	if err != nil {
