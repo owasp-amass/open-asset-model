@@ -6,7 +6,6 @@ package platform
 
 import (
 	"encoding/json"
-	"fmt"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
@@ -27,7 +26,7 @@ type Service struct {
 
 // Key implements the Asset interface.
 func (s Service) Key() string {
-	return fmt.Sprintf("%s:%s", s.Type, s.ID)
+	return s.ID
 }
 
 // AssetType implements the Asset interface.

@@ -11,9 +11,9 @@ import (
 )
 
 func TestServiceKey(t *testing.T) {
-	want := "HTTP:222333444"
+	want := "222333444"
 	serv := Service{
-		ID:   "222333444",
+		ID:   want,
 		Type: "HTTP",
 	}
 
