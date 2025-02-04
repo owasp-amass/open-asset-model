@@ -49,10 +49,11 @@ var autonomousSystemRels = map[string]map[RelationType][]AssetType{
 }
 
 var contactRecordRels = map[string]map[RelationType][]AssetType{
+	"fqdn":         {SimpleRelation: {FQDN}},
 	"id":           {SimpleRelation: {Identifier}},
 	"person":       {SimpleRelation: {Person}},
 	"organization": {SimpleRelation: {Organization}},
-	"location":     {SimpleRelation: {FQDN, Location}},
+	"location":     {SimpleRelation: {Location}},
 	"phone":        {SimpleRelation: {Phone}},
 	"url":          {SimpleRelation: {URL}},
 }
