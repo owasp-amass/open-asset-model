@@ -13,8 +13,11 @@ import (
 )
 
 func TestPersonKey(t *testing.T) {
-	want := "Jeff Foley"
-	p := Person{FullName: want}
+	want := "222333444"
+	p := Person{
+		ID:       want,
+		FullName: "Jeff Foley",
+	}
 
 	if got := p.Key(); got != want {
 		t.Errorf("Person.Key() = %v, want %v", got, want)
@@ -33,6 +36,7 @@ func TestPersonAssetType(t *testing.T) {
 
 func TestPersonJSON(t *testing.T) {
 	p := Person{
+		ID:         "222333444",
 		FullName:   "John Jacob Doe",
 		FirstName:  "John",
 		MiddleName: "Jacob",
@@ -41,7 +45,7 @@ func TestPersonJSON(t *testing.T) {
 		Gender:     "Male",
 	}
 
-	expectedJSON := `{"full_name":"John Jacob Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe","birth_date":"01/01/1970","gender":"Male"}`
+	expectedJSON := `{"unique_id":"222333444","full_name":"John Jacob Doe","first_name":"John","middle_name":"Jacob","family_name":"Doe","birth_date":"01/01/1970","gender":"Male"}`
 
 	jsonData, err := p.JSON()
 	if err != nil {
@@ -59,7 +63,6 @@ func TestPersonJSON(t *testing.T) {
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
-
 	if !reflect.DeepEqual(jsonMap, expectedMap) {
 		t.Errorf("Expected JSON to be %v, but got %v", expectedJSON, string(jsonData))
 	}

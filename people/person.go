@@ -12,6 +12,7 @@ import (
 
 // Person represents a person's information.
 type Person struct {
+	ID         string `json:"unique_id"`
 	FullName   string `json:"full_name"`
 	FirstName  string `json:"first_name"`
 	MiddleName string `json:"middle_name,omitempty"`
@@ -22,7 +23,7 @@ type Person struct {
 
 // Key implements the Asset interface.
 func (p Person) Key() string {
-	return p.FullName
+	return p.ID
 }
 
 // AssetType implements the Asset interface.

@@ -6,7 +6,6 @@ package general
 
 import (
 	"encoding/json"
-	"fmt"
 
 	model "github.com/owasp-amass/open-asset-model"
 )
@@ -51,7 +50,8 @@ const (
 // - Issuing authority (e.g., ContactRecord)
 // - Issuing agent (e.g., ContactRecord)
 type Identifier struct {
-	ID             string `json:"id"`
+	UniqueID       string `json:"unique_id"`
+	EntityID       string `json:"entity_id"`
 	Type           string `json:"id_type"`
 	Category       string `json:"category,omitempty"`
 	CreationDate   string `json:"creation_date,omitempty"`
@@ -62,7 +62,7 @@ type Identifier struct {
 
 // Key implements the Asset interface.
 func (r Identifier) Key() string {
-	return fmt.Sprintf("%s:%s", r.Type, r.ID)
+	return r.UniqueID
 }
 
 // AssetType implements the Asset interface.
