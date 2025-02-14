@@ -29,9 +29,8 @@ var RelationList = []RelationType{
 }
 
 var accountRels = map[string]map[RelationType][]AssetType{
-	"id":             {SimpleRelation: {Identifier}},
-	"user":           {SimpleRelation: {Person, Organization}},
-	"funds_transfer": {SimpleRelation: {FundsTransfer}},
+	"id":   {SimpleRelation: {Identifier}},
+	"user": {SimpleRelation: {Person, Organization}},
 }
 
 var autnumRecordRels = map[string]map[RelationType][]AssetType{
@@ -122,11 +121,15 @@ var netblockRels = map[string]map[RelationType][]AssetType{
 
 var orgRels = map[string]map[RelationType][]AssetType{
 	"id":                   {SimpleRelation: {Identifier}},
+	"legal_address":        {SimpleRelation: {Location}},
+	"hq_address":           {SimpleRelation: {Location}},
 	"location":             {SimpleRelation: {Location}},
 	"parent":               {SimpleRelation: {Organization}},
 	"subsidiary":           {SimpleRelation: {Organization}},
 	"sister":               {SimpleRelation: {Organization}},
+	"org_unit":             {SimpleRelation: {Organization}},
 	"account":              {SimpleRelation: {Account}},
+	"member":               {SimpleRelation: {Person}},
 	"website":              {SimpleRelation: {URL}},
 	"social_media_profile": {SimpleRelation: {URL}},
 	"funding_source":       {SimpleRelation: {Person, Organization}},

@@ -35,6 +35,8 @@ type Organization struct {
 	Name           string `json:"name"`
 	LegalName      string `json:"legal_name,omitempty"`
 	FoundingDate   string `json:"founding_date,omitempty"`
+	Jurisdiction   string `json:"jurisdiction,omitempty"`
+	RegistrationID string `json:"registration_id,omitempty"`
 	Industry       string `json:"industry,omitempty"`
 	Active         bool   `json:"active,omitempty"`
 	NonProfit      bool   `json:"non_profit,omitempty"`
