@@ -21,6 +21,7 @@ const (
 	EmailAddress          = "email"      // Email address
 	EmployerIDNumber      = "ein"        // Employer Identification Number
 	GlobalLocNumber       = "gln"        // Global Location Number
+	GlobalOCID            = "ocid"       // Global Organization Identifier, Open Contracting Data Standard v1.1
 	GlobalTradeItemNumber = "gtin"       // Global Trade Item Number
 	GovIssuedIDNumber     = "gov_id"     // Government issued identification number for individuals
 	IBANCode              = "iban"       // International Bank Account Number
@@ -28,14 +29,18 @@ const (
 	ICANNEPPCode          = "icann_epp"  // Extensible Provisioning Protocol (EPP) status code, ICANN
 	ISBN                  = "isbn"       // International Standard Book Number
 	ISICCode              = "isic"       // International Standard Industrial Classification
+	LegalName             = "legal_name" // Legal name
 	LEICode               = "lei"        // Legal Entity Identifier, Global Legal Entity Identifier Foundation assigns this number
+	MarketIDCode          = "mic"        // Market Identifier Code, International Organization for Standardization (ISO) 10383 standard
 	ModelNumber           = "model"      // Model number
 	MPN                   = "mpn"        // Manufacturer Part Number
 	NAICSCode             = "naics"      // North American Industry Classification System
 	NSNCode               = "nsn"        // NATO Stock Number
 	OECDCode              = "oecd"       // Organization for Economic Co-operation and Development
+	OrganizationName      = "org_name"   // Organization name
 	SerialNumber          = "serial"     // Serial number
 	SICCode               = "sic"        // Standard Industrial Classification
+	SPGlobalCompanyID     = "spglobal"   // S&P Global Company ID, S&P Global Market Intelligence
 	SWIFTCode             = "swift"      // Society for Worldwide Interbank Financial Telecommunication
 	TaxIDNumber           = "tin"        // Taxpayer Identification Number
 	TickerSymbol          = "ticker"     // Stock ticker symbol
