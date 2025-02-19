@@ -37,7 +37,6 @@ func TestFQDN(t *testing.T) {
 		fqdn := FQDN{Name: "foo.example.com"}
 
 		jsonData, err := fqdn.JSON()
-
 		require.NoError(t, err)
 		require.JSONEq(t, `{"name":"foo.example.com"}`, string(jsonData))
 	})

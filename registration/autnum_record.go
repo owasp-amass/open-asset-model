@@ -17,8 +17,8 @@ type AutnumRecord struct {
 	Handle      string   `json:"handle"`
 	Name        string   `json:"name"`
 	WhoisServer string   `json:"whois_server,omitempty"`
-	CreatedDate string   `json:"created_date,omitempty"`
-	UpdatedDate string   `json:"updated_date,omitempty"`
+	CreatedDate string   `json:"created_date"`
+	UpdatedDate string   `json:"updated_date"`
 	Status      []string `json:"status,omitempty"`
 }
 

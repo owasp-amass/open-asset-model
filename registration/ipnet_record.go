@@ -14,7 +14,7 @@ import (
 // IPNetRecord represents the RDAP record for an IP network.
 type IPNetRecord struct {
 	Raw          string       `json:"raw,omitempty"`
-	CIDR         netip.Prefix `json:"cidr,omitempty"`
+	CIDR         netip.Prefix `json:"cidr"`
 	Handle       string       `json:"handle"`
 	StartAddress netip.Addr   `json:"start_address"`
 	EndAddress   netip.Addr   `json:"end_address"`
@@ -24,8 +24,8 @@ type IPNetRecord struct {
 	Country      string       `json:"country,omitempty"`
 	ParentHandle string       `json:"parent_handle,omitempty"`
 	WhoisServer  string       `json:"whois_server,omitempty"`
-	CreatedDate  string       `json:"created_date,omitempty"`
-	UpdatedDate  string       `json:"updated_date,omitempty"`
+	CreatedDate  string       `json:"created_date"`
+	UpdatedDate  string       `json:"updated_date"`
 	Status       []string     `json:"status,omitempty"`
 }
 

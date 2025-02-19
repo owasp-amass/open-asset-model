@@ -38,7 +38,6 @@ func TestAutonomousSystem(t *testing.T) {
 		as := AutonomousSystem{Number: 64496}
 
 		jsonData, err := as.JSON()
-
 		require.NoError(t, err)
 		require.JSONEq(t, `{"number":64496}`, string(jsonData))
 	})

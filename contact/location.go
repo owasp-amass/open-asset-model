@@ -12,13 +12,13 @@ import (
 
 // Location represents the street address location.
 type Location struct {
-	Address        string `json:"address,omitempty"`
+	Address        string `json:"address"`
 	Building       string `json:"building,omitempty"`
 	BuildingNumber string `json:"building_number,omitempty"`
 	StreetName     string `json:"street_name,omitempty"`
 	Unit           string `json:"unit,omitempty"`
 	POBox          string `json:"po_box,omitempty"`
-	City           string `json:"city,omitempty"`
+	City           string `json:"city"`
 	Locality       string `json:"locality,omitempty"`
 	Province       string `json:"province,omitempty"`
 	Country        string `json:"country,omitempty"`

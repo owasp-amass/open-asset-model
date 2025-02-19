@@ -14,7 +14,7 @@ import (
 type DomainRecord struct {
 	Raw            string   `json:"raw,omitempty"`
 	ID             string   `json:"id,omitempty"`
-	Domain         string   `json:"domain,omitempty"`
+	Domain         string   `json:"domain"`
 	Punycode       string   `json:"punycode,omitempty"`
 	Name           string   `json:"name,omitempty"`
 	Extension      string   `json:"extension,omitempty"`

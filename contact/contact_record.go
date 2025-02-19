@@ -12,7 +12,7 @@ import (
 
 // This type links various assets together to form complete contact information
 type ContactRecord struct {
-	DiscoveredAt string `json:"discovered_at,omitempty"`
+	DiscoveredAt string `json:"discovered_at"`
 }
 
 // Key implements the Asset interface.

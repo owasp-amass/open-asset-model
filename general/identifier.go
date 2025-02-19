@@ -13,6 +13,7 @@ import (
 // Known identifier types.
 const (
 	AccountNumber         = "account"    // Account number
+	ARINHandle            = "arin"       // American Registry for Internet Numbers (ARIN) handle
 	ASINNumber            = "asin"       // Amazon Standard Identification Number
 	BankIDCode            = "bic"        // Bank Identifier Code
 	DUNSNumer             = "duns"       // Data Universal Numbering System, Dun & Bradstreet (D&B) assigns this number
@@ -21,7 +22,6 @@ const (
 	EmailAddress          = "email"      // Email address
 	EmployerIDNumber      = "ein"        // Employer Identification Number
 	GlobalLocNumber       = "gln"        // Global Location Number
-	GlobalOCID            = "ocid"       // Global Organization Identifier, Open Contracting Data Standard v1.1
 	GlobalTradeItemNumber = "gtin"       // Global Trade Item Number
 	GovIssuedIDNumber     = "gov_id"     // Government issued identification number for individuals
 	IBANCode              = "iban"       // International Bank Account Number
@@ -36,6 +36,7 @@ const (
 	MPN                   = "mpn"        // Manufacturer Part Number
 	NAICSCode             = "naics"      // North American Industry Classification System
 	NSNCode               = "nsn"        // NATO Stock Number
+	OCID                  = "ocid"       // OpenCorporates ID, identifier for a corporation in the OpenCorporates database
 	OECDCode              = "oecd"       // Organization for Economic Co-operation and Development
 	OrganizationName      = "org_name"   // Organization name
 	SerialNumber          = "serial"     // Serial number
@@ -58,7 +59,6 @@ type Identifier struct {
 	UniqueID       string `json:"unique_id"`
 	EntityID       string `json:"entity_id"`
 	Type           string `json:"id_type"`
-	Category       string `json:"category,omitempty"`
 	CreationDate   string `json:"creation_date,omitempty"`
 	UpdatedDate    string `json:"update_date,omitempty"`
 	ExpirationDate string `json:"expiration_date,omitempty"`
