@@ -36,8 +36,8 @@ const (
 	MPN                   = "mpn"        // Manufacturer Part Number
 	NAICSCode             = "naics"      // North American Industry Classification System
 	NSNCode               = "nsn"        // NATO Stock Number
-	OCID                  = "ocid"       // OpenCorporates ID, identifier for a corporation in the OpenCorporates database
 	OECDCode              = "oecd"       // Organization for Economic Co-operation and Development
+	OpenCorpID            = "ocid"       // OpenCorporates ID, identifier for a corporation in the OpenCorporates database
 	OrganizationName      = "org_name"   // Organization name
 	SerialNumber          = "serial"     // Serial number
 	SICCode               = "sic"        // Standard Industrial Classification
