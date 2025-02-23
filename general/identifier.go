@@ -57,7 +57,7 @@ const (
 // - Issuing agent (e.g., ContactRecord)
 type Identifier struct {
 	UniqueID       string `json:"unique_id"`
-	EntityID       string `json:"entity_id"`
+	ID             string `json:"id"`
 	Type           string `json:"id_type"`
 	CreationDate   string `json:"creation_date,omitempty"`
 	UpdatedDate    string `json:"update_date,omitempty"`

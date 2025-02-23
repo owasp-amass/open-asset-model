@@ -15,7 +15,7 @@ func TestIdentifierKey(t *testing.T) {
 	want := "Legal Entity Identifier:549300XMYB546ZI1F126"
 	i := Identifier{
 		UniqueID: want,
-		EntityID: "549300XMYB546ZI1F126",
+		ID:       "549300XMYB546ZI1F126",
 		Type:     "Legal Entity Identifier"}
 
 	if got := i.Key(); got != want {
@@ -39,14 +39,14 @@ func TestIdentifierAssetType(t *testing.T) {
 func TestIdentifierJSON(t *testing.T) {
 	i := Identifier{
 		UniqueID:       "Legal Entity Identifier:549300XMYB546ZI1F126",
-		EntityID:       "549300XMYB546ZI1F126",
+		ID:             "549300XMYB546ZI1F126",
 		Type:           "Legal Entity Identifier",
 		CreationDate:   "2013-07-24T14:15:00Z",
 		UpdatedDate:    "2023-08-04T17:33:45Z",
 		ExpirationDate: "2020-01-16T00:32:00Z",
 		Status:         "ACTIVE",
 	}
-	expected := `{"unique_id":"Legal Entity Identifier:549300XMYB546ZI1F126","entity_id":"549300XMYB546ZI1F126","id_type":"Legal Entity Identifier","creation_date":"2013-07-24T14:15:00Z","update_date":"2023-08-04T17:33:45Z","expiration_date":"2020-01-16T00:32:00Z","status":"ACTIVE"}`
+	expected := `{"unique_id":"Legal Entity Identifier:549300XMYB546ZI1F126","id":"549300XMYB546ZI1F126","id_type":"Legal Entity Identifier","creation_date":"2013-07-24T14:15:00Z","update_date":"2023-08-04T17:33:45Z","expiration_date":"2020-01-16T00:32:00Z","status":"ACTIVE"}`
 	actual, err := i.JSON()
 
 	if err != nil {
