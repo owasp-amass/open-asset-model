@@ -45,11 +45,12 @@ func TestOrganizationJSON(t *testing.T) {
 		Jurisdiction:   "US-DE",
 		RegistrationID: "123456789",
 		Industry:       "Technology",
+		TargetMarkets:  []string{"Apps", "Software"},
 		Active:         true,
 		NonProfit:      false,
-		NumOfEmployees: 10000,
+		Headcount:      10000,
 	}
-	expected := `{"unique_id":"222333444","name":"Acme Inc.","legal_name":"Acme Inc.","founding_date":"2013-07-24T14:15:00Z","jurisdiction":"US-DE","registration_id":"123456789","industry":"Technology","active":true,"num_of_employees":10000}`
+	expected := `{"unique_id":"222333444","name":"Acme Inc.","legal_name":"Acme Inc.","founding_date":"2013-07-24T14:15:00Z","jurisdiction":"US-DE","registration_id":"123456789","industry":"Technology","target_markets":["Apps","Software"],"active":true,"headcount":10000}`
 	actual, err := o.JSON()
 
 	if err != nil {

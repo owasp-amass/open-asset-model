@@ -31,16 +31,17 @@ import (
 // - Contact information
 // - Founder, sponsorships, and funding sources
 type Organization struct {
-	ID             string `json:"unique_id"`
-	Name           string `json:"name"`
-	LegalName      string `json:"legal_name,omitempty"`
-	FoundingDate   string `json:"founding_date,omitempty"`
-	Jurisdiction   string `json:"jurisdiction,omitempty"`
-	RegistrationID string `json:"registration_id,omitempty"`
-	Industry       string `json:"industry,omitempty"`
-	Active         bool   `json:"active,omitempty"`
-	NonProfit      bool   `json:"non_profit,omitempty"`
-	NumOfEmployees int    `json:"num_of_employees,omitempty"`
+	ID             string   `json:"unique_id"`
+	Name           string   `json:"name"`
+	LegalName      string   `json:"legal_name,omitempty"`
+	FoundingDate   string   `json:"founding_date,omitempty"`
+	Jurisdiction   string   `json:"jurisdiction,omitempty"`
+	RegistrationID string   `json:"registration_id,omitempty"`
+	Industry       string   `json:"industry,omitempty"`
+	TargetMarkets  []string `json:"target_markets,omitempty"`
+	Active         bool     `json:"active,omitempty"`
+	NonProfit      bool     `json:"non_profit,omitempty"`
+	Headcount      int      `json:"headcount,omitempty"`
 }
 
 // Key implements the Asset interface.
