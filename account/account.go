@@ -10,6 +10,11 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
+// Known account types.
+const (
+	Checking = "checking" // Checking bank account
+)
+
 // Account represents an account managed by an organization.
 // Should support relationships for the following:
 // - User (e.g. Person or Organization)
