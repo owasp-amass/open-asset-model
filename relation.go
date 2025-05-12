@@ -137,6 +137,7 @@ var personRels = map[string]map[RelationType][]AssetType{
 	"id":      {SimpleRelation: {Identifier}},
 	"address": {SimpleRelation: {Location}},
 	"phone":   {SimpleRelation: {Phone}},
+	"account": {SimpleRelation: {Account}},
 }
 
 var phoneRels = map[string]map[RelationType][]AssetType{
