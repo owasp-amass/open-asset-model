@@ -81,6 +81,7 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	},
 	"node":         {SimpleRelation: {FQDN}},
 	"registration": {SimpleRelation: {DomainRecord}},
+	"verified_for": {SimpleRelation: {Organization, Service}},
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
