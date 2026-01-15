@@ -176,6 +176,7 @@ var tlscertRels = map[string]map[RelationType][]AssetType{
 	"issuing_certificate":     {SimpleRelation: {TLSCertificate}},
 	"issuing_certificate_url": {SimpleRelation: {URL}},
 	"ocsp_server":             {SimpleRelation: {URL}},
+	"certificate_authority":   {SimpleRelation: {Organization}},
 }
 
 var urlRels = map[string]map[RelationType][]AssetType{
