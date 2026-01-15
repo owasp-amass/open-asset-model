@@ -75,7 +75,7 @@ var fileRels = map[string]map[RelationType][]AssetType{
 var fqdnRels = map[string]map[RelationType][]AssetType{
 	"port": {PortRelation: {Service}},
 	"dns_record": {
-		BasicDNSRelation: {FQDN, IPAddress},
+		BasicDNSRelation: {FQDN, IPAddress, Identifier},
 		PrefDNSRelation:  {FQDN},
 		SRVDNSRelation:   {FQDN},
 	},
