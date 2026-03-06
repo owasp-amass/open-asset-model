@@ -3,12 +3,12 @@
 Thank you for your interest in contributing to the amass ecosystem!
 Open Asset Model is only as good as the community that's backing it.
 Contributions could simply be a bug or suggestion you drop in an issue,
-dropping a question in [Discord](https://discord.gg/HNePVyX3cp),
+dropping a question in [Discord](https://discord.gg/N4z7HjYcM8),
 or tweaking a line (or character) or two in the project as a pull request.
 [Open issues][issue-url] is another good place to look for ways to contribute.
 
 If you need any help or guidance, please reach out
-to the community on [Discord](https://discord.gg/HNePVyX3cp).
+to the community on [Discord](https://discord.gg/N4z7HjYcM8).
 
 ## Getting Started
 
