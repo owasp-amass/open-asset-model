@@ -1,4 +1,4 @@
-// Copyright © by Jeff Foley 2017-2025. All rights reserved.
+// Copyright © by Jeff Foley 2017-2026. All rights reserved.
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -75,12 +75,13 @@ var fileRels = map[string]map[RelationType][]AssetType{
 var fqdnRels = map[string]map[RelationType][]AssetType{
 	"port": {PortRelation: {Service}},
 	"dns_record": {
-		BasicDNSRelation: {FQDN, IPAddress},
+		BasicDNSRelation: {FQDN, IPAddress, Identifier},
 		PrefDNSRelation:  {FQDN},
 		SRVDNSRelation:   {FQDN},
 	},
 	"node":         {SimpleRelation: {FQDN}},
 	"registration": {SimpleRelation: {DomainRecord}},
+	"verified_for": {SimpleRelation: {Organization, Service}},
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
@@ -175,6 +176,7 @@ var tlscertRels = map[string]map[RelationType][]AssetType{
 	"issuing_certificate":     {SimpleRelation: {TLSCertificate}},
 	"issuing_certificate_url": {SimpleRelation: {URL}},
 	"ocsp_server":             {SimpleRelation: {URL}},
+	"certificate_authority":   {SimpleRelation: {Organization}},
 }
 
 var urlRels = map[string]map[RelationType][]AssetType{
