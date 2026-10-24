@@ -1,7 +1,7 @@
 module github.com/owasp-amass/open-asset-model
 
-go 1.26.0
+go 1.27.3
 
-require github.com/stretchr/testify v1.11.1-0.20260304064832-5f80e4aef7be
+require github.com/stretchr/testify v1.12.2-0.20260924145934-87a7b9d57689
 
-require gopkg.in/yaml.v3 v3.0.1 // indirect
+require go.yaml.in/yaml/v3 v3.0.5 // indirect
