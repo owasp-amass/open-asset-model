@@ -117,6 +117,7 @@ var locationRels = map[string]map[RelationType][]AssetType{
 
 var netblockRels = map[string]map[RelationType][]AssetType{
 	"contains":     {SimpleRelation: {IPAddress}},
+	"provider":     {SimpleRelation: {Organization}},
 	"registration": {SimpleRelation: {IPNetRecord}},
 }
 
