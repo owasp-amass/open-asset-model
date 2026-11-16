@@ -159,10 +159,16 @@ var productReleaseRels = map[string]map[RelationType][]AssetType{
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
-	"provider":         {SimpleRelation: {Organization}},
-	"certificate":      {SimpleRelation: {TLSCertificate}},
-	"terms_of_service": {SimpleRelation: {File, URL}},
-	"product_used":     {SimpleRelation: {Product, ProductRelease}},
+	"provider":                 {SimpleRelation: {Organization}},
+	"certificate":              {SimpleRelation: {TLSCertificate}},
+	"terms_of_service":         {SimpleRelation: {File, URL}},
+	"product_used":             {SimpleRelation: {Product, ProductRelease}},
+	"security_contact":         {SimpleRelation: {ContactRecord}},
+	"security_policy":          {SimpleRelation: {URL}},
+	"security_canonical":       {SimpleRelation: {URL}},
+	"security_encryption":      {SimpleRelation: {URL}},
+	"security_acknowledgments": {SimpleRelation: {URL}},
+	"security_hiring":          {SimpleRelation: {URL}},
 }
 
 var tlscertRels = map[string]map[RelationType][]AssetType{

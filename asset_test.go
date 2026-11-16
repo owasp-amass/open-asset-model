@@ -83,3 +83,22 @@ func TestAssetTypeConstants(t *testing.T) {
 		}
 	}
 }
+
+func TestSecurityTxtServiceRelations(t *testing.T) {
+	got := map[string]bool{}
+	for _, r := range GetAssetOutgoingRelations(Service) {
+		got[r] = true
+	}
+	for _, label := range []string{"security_policy", "security_canonical", "security_encryption",
+		"security_acknowledgments", "security_hiring"} {
+		if !got[label] {
+			t.Errorf("Service is missing the %q relation", label)
+		}
+		if !ValidRelationship(Service, label, SimpleRelation, URL) {
+			t.Errorf("%q should allow Service --SimpleRelation--> URL", label)
+		}
+	}
+	if !got["security_contact"] || !ValidRelationship(Service, "security_contact", SimpleRelation, ContactRecord) {
+		t.Error("security_contact should allow Service --SimpleRelation--> ContactRecord")
+	}
+}
