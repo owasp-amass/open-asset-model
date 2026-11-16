@@ -53,6 +53,11 @@ type TLSCertificate struct {
 	CRLDistributionPoints []string `json:"crl_distribution_points"`
 	SubjectKeyID          string   `json:"subject_key_id"`
 	AuthorityKeyID        string   `json:"authority_key_id"`
+	// PublicKeySHA256 is the lower-case hex SHA-256 of the certificate's DER
+	// SubjectPublicKeyInfo. Two certificates with the same value carry the
+	// same public key, and so the same key pair, whatever their serial or key
+	// identifiers: a durable signal that one operator holds both.
+	PublicKeySHA256 string `json:"public_key_sha256,omitempty"`
 }
 
 // Key implements the Asset interface.
