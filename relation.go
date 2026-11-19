@@ -82,6 +82,12 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	"node":         {SimpleRelation: {FQDN}},
 	"registration": {SimpleRelation: {DomainRecord}},
 	"verified_for": {SimpleRelation: {Organization, Service}},
+	// A domain's published mail policy names other domains: its SPF record
+	// authorizes a domain's senders (include:/redirect=), and its DMARC record
+	// sends reports to a domain (rua/ruf mailto). The raw policy stays in the
+	// TXT record; these edges make the references pivotable.
+	"spf_authorizes":   {SimpleRelation: {FQDN}},
+	"dmarc_reports_to": {SimpleRelation: {FQDN}},
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
