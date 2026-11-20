@@ -171,8 +171,13 @@ var productReleaseRels = map[string]map[RelationType][]AssetType{
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
-	"provider":                 {SimpleRelation: {Organization}},
-	"certificate":              {SimpleRelation: {TLSCertificate}},
+	"provider":    {SimpleRelation: {Organization}},
+	"certificate": {SimpleRelation: {TLSCertificate}},
+	// A fingerprint of what the service served (favicon hash, JARM, page title,
+	// content hash, analytics identifier, SSH host key) as a shared Identifier,
+	// so services and hosts carrying the same value are one hop apart and can be
+	// pivoted on in the graph. The Identifier's id_type names the fingerprint.
+	"fingerprint":              {SimpleRelation: {Identifier}},
 	"terms_of_service":         {SimpleRelation: {File, URL}},
 	"product_used":             {SimpleRelation: {Product, ProductRelease}},
 	"security_contact":         {SimpleRelation: {ContactRecord}},
@@ -201,6 +206,9 @@ var urlRels = map[string]map[RelationType][]AssetType{
 	"ip_address": {SimpleRelation: {IPAddress}},
 	"port":       {PortRelation: {Service}},
 	"file":       {SimpleRelation: {File}},
+	// A fingerprint (e.g. an analytics identifier) of the page at this URL, as a
+	// shared Identifier, mirroring the service fingerprint relation.
+	"fingerprint": {SimpleRelation: {Identifier}},
 }
 
 // GetAssetOutgoingRelations returns the relation types allowed to be used
