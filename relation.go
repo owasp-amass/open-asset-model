@@ -88,6 +88,11 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	// TXT record; these edges make the references pivotable.
 	"spf_authorizes":   {SimpleRelation: {FQDN}},
 	"dmarc_reports_to": {SimpleRelation: {FQDN}},
+	// Identity-fabric relations: the domain's identity tenant (an Entra tenant
+	// GUID or Okta org, as an Identifier) and the sibling domains that share the
+	// same tenant federation trust.
+	"identity_tenant": {SimpleRelation: {Identifier}},
+	"federated_with":  {SimpleRelation: {FQDN}},
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
