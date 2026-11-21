@@ -21,6 +21,7 @@ const (
 	File             AssetType = "File"
 	FQDN             AssetType = "FQDN"
 	FundsTransfer    AssetType = "FundsTransfer"
+	GeoLocation      AssetType = "GeoLocation"
 	Identifier       AssetType = "Identifier"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
@@ -39,6 +40,6 @@ const (
 
 var AssetList = []AssetType{
 	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, File, FQDN, FundsTransfer,
-	Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product,
-	ProductRelease, Service, StorageBucket, TLSCertificate, URL,
+	GeoLocation, Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone,
+	Product, ProductRelease, Service, StorageBucket, TLSCertificate, URL,
 }

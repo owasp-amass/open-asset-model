@@ -10,8 +10,8 @@ import "testing"
 // software that produced it (created_with) and its content hash
 // (fingerprint). Where it was retrieved is the URL "file" relation only.
 func TestFileRelations(t *testing.T) {
-	for _, dst := range []AssetType{Account, ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock,
-		Organization, Person, Phone, URL} {
+	for _, dst := range []AssetType{Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress, Location,
+		Netblock, Organization, Person, Phone, URL} {
 		if !ValidRelationship(File, "contains", SimpleRelation, dst) {
 			t.Errorf("File --contains--> %s is not valid", dst)
 		}
@@ -38,5 +38,22 @@ func TestFileRelations(t *testing.T) {
 	}
 	if ValidRelationship(File, "author", SimpleRelation, FQDN) {
 		t.Error("a name cannot author a document")
+	}
+}
+
+// Positions are reached from what is at them: a street address, an IP
+// address's geolocation, a file that records one. A GeoLocation points
+// nowhere.
+func TestGeoLocationRelations(t *testing.T) {
+	for _, src := range []AssetType{Location, IPAddress} {
+		if !ValidRelationship(src, "geolocation", SimpleRelation, GeoLocation) {
+			t.Errorf("%s --geolocation--> GeoLocation is not valid", src)
+		}
+	}
+	if !ValidRelationship(File, "contains", SimpleRelation, GeoLocation) {
+		t.Error("File --contains--> GeoLocation is not valid")
+	}
+	if rels := GetAssetOutgoingRelations(GeoLocation); len(rels) != 0 {
+		t.Errorf("GeoLocation has outgoing relations %v", rels)
 	}
 }

@@ -77,8 +77,8 @@ var fileRels = map[string]map[RelationType][]AssetType{
 	// Where the file was retrieved is the URL "file" relation (and the
 	// File's key), not a relation of the File.
 	"contains": {SimpleRelation: {
-		Account, ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock, Organization, Person, Phone,
-		URL,
+		Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress, Location, Netblock, Organization,
+		Person, Phone, URL,
 	}},
 	// Who made the document, as its metadata names them (author, last
 	// modified by): a stronger claim than being mentioned in it.
@@ -134,6 +134,10 @@ var identifierRels = map[string]map[RelationType][]AssetType{
 var ipRels = map[string]map[RelationType][]AssetType{
 	"port":       {PortRelation: {Service}},
 	"ptr_record": {SimpleRelation: {FQDN}},
+	// Where a geolocation source places the address. Such positions are often
+	// approximate (a city or a provider's registered office), which the
+	// GeoLocation's uncertainty records.
+	"geolocation": {SimpleRelation: {GeoLocation}},
 }
 
 var ipnetRecordRels = map[string]map[RelationType][]AssetType{
@@ -147,7 +151,13 @@ var ipnetRecordRels = map[string]map[RelationType][]AssetType{
 
 var locationRels = map[string]map[RelationType][]AssetType{
 	"id": {SimpleRelation: {Identifier}},
+	// The point the street address is at, from a geocoder or a source that
+	// gives both.
+	"geolocation": {SimpleRelation: {GeoLocation}},
 }
+
+// A GeoLocation is a position others point to; it has no outgoing relations.
+var geoLocationRels = map[string]map[RelationType][]AssetType{}
 
 var netblockRels = map[string]map[RelationType][]AssetType{
 	"contains":     {SimpleRelation: {IPAddress}},
@@ -303,6 +313,8 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = fqdnRels
 	case FundsTransfer:
 		relations = fundsTransferRels
+	case GeoLocation:
+		relations = geoLocationRels
 	case Identifier:
 		relations = identifierRels
 	case IPAddress:
