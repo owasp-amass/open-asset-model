@@ -10,8 +10,8 @@ import "testing"
 // software that produced it (created_with) and its content hash
 // (fingerprint). Where it was retrieved is the URL "file" relation only.
 func TestFileRelations(t *testing.T) {
-	for _, dst := range []AssetType{Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress, Location,
-		Netblock, Organization, Person, Phone, URL} {
+	for _, dst := range []AssetType{Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress,
+		Netblock, Organization, Person, Phone, StreetAddress, URL} {
 		if !ValidRelationship(File, "contains", SimpleRelation, dst) {
 			t.Errorf("File --contains--> %s is not valid", dst)
 		}
@@ -45,7 +45,7 @@ func TestFileRelations(t *testing.T) {
 // address's geolocation, a file that records one. A GeoLocation points
 // nowhere.
 func TestGeoLocationRelations(t *testing.T) {
-	for _, src := range []AssetType{Location, IPAddress} {
+	for _, src := range []AssetType{StreetAddress, IPAddress} {
 		if !ValidRelationship(src, "geolocation", SimpleRelation, GeoLocation) {
 			t.Errorf("%s --geolocation--> GeoLocation is not valid", src)
 		}
@@ -55,5 +55,25 @@ func TestGeoLocationRelations(t *testing.T) {
 	}
 	if rels := GetAssetOutgoingRelations(GeoLocation); len(rels) != 0 {
 		t.Errorf("GeoLocation has outgoing relations %v", rels)
+	}
+}
+
+// The plain "an address of" edge has one label, street_address, wherever an
+// asset points to a StreetAddress; role labels name the address's role.
+func TestStreetAddressRelations(t *testing.T) {
+	for _, src := range []AssetType{ContactRecord, Organization, Person} {
+		if !ValidRelationship(src, "street_address", SimpleRelation, StreetAddress) {
+			t.Errorf("%s --street_address--> StreetAddress is not valid", src)
+		}
+		for _, old := range []string{"location", "address"} {
+			if ValidRelationship(src, old, SimpleRelation, StreetAddress) {
+				t.Errorf("%s --%s--> StreetAddress is still valid", src, old)
+			}
+		}
+	}
+	for _, role := range []string{"hq_address", "legal_address"} {
+		if !ValidRelationship(Organization, role, SimpleRelation, StreetAddress) {
+			t.Errorf("Organization --%s--> StreetAddress is not valid", role)
+		}
 	}
 }

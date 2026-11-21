@@ -48,13 +48,13 @@ var autonomousSystemRels = map[string]map[RelationType][]AssetType{
 }
 
 var contactRecordRels = map[string]map[RelationType][]AssetType{
-	"fqdn":         {SimpleRelation: {FQDN}},
-	"id":           {SimpleRelation: {Identifier}},
-	"person":       {SimpleRelation: {Person}},
-	"organization": {SimpleRelation: {Organization}},
-	"location":     {SimpleRelation: {Location}},
-	"phone":        {SimpleRelation: {Phone}},
-	"url":          {SimpleRelation: {URL}},
+	"fqdn":           {SimpleRelation: {FQDN}},
+	"id":             {SimpleRelation: {Identifier}},
+	"person":         {SimpleRelation: {Person}},
+	"organization":   {SimpleRelation: {Organization}},
+	"street_address": {SimpleRelation: {StreetAddress}},
+	"phone":          {SimpleRelation: {Phone}},
+	"url":            {SimpleRelation: {URL}},
 }
 
 var domainRecordRels = map[string]map[RelationType][]AssetType{
@@ -77,8 +77,8 @@ var fileRels = map[string]map[RelationType][]AssetType{
 	// Where the file was retrieved is the URL "file" relation (and the
 	// File's key), not a relation of the File.
 	"contains": {SimpleRelation: {
-		Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress, Location, Netblock, Organization,
-		Person, Phone, URL,
+		Account, ContactRecord, FQDN, File, GeoLocation, Identifier, IPAddress, Netblock, Organization, Person,
+		Phone, StreetAddress, URL,
 	}},
 	// Who made the document, as its metadata names them (author, last
 	// modified by): a stronger claim than being mentioned in it.
@@ -149,7 +149,7 @@ var ipnetRecordRels = map[string]map[RelationType][]AssetType{
 	"rdap_url":          {SimpleRelation: {URL}},
 }
 
-var locationRels = map[string]map[RelationType][]AssetType{
+var streetAddressRels = map[string]map[RelationType][]AssetType{
 	"id": {SimpleRelation: {Identifier}},
 	// The point the street address is at, from a geocoder or a source that
 	// gives both.
@@ -167,9 +167,9 @@ var netblockRels = map[string]map[RelationType][]AssetType{
 
 var orgRels = map[string]map[RelationType][]AssetType{
 	"id":                   {SimpleRelation: {Identifier}},
-	"legal_address":        {SimpleRelation: {Location}},
-	"hq_address":           {SimpleRelation: {Location}},
-	"location":             {SimpleRelation: {Location}},
+	"legal_address":        {SimpleRelation: {StreetAddress}},
+	"hq_address":           {SimpleRelation: {StreetAddress}},
+	"street_address":       {SimpleRelation: {StreetAddress}},
 	"subsidiary":           {SimpleRelation: {Organization}},
 	"org_unit":             {SimpleRelation: {Organization}},
 	"account":              {SimpleRelation: {Account}},
@@ -180,10 +180,10 @@ var orgRels = map[string]map[RelationType][]AssetType{
 }
 
 var personRels = map[string]map[RelationType][]AssetType{
-	"id":      {SimpleRelation: {Identifier}},
-	"address": {SimpleRelation: {Location}},
-	"phone":   {SimpleRelation: {Phone}},
-	"account": {SimpleRelation: {Account}},
+	"id":             {SimpleRelation: {Identifier}},
+	"street_address": {SimpleRelation: {StreetAddress}},
+	"phone":          {SimpleRelation: {Phone}},
+	"account":        {SimpleRelation: {Account}},
 }
 
 var phoneRels = map[string]map[RelationType][]AssetType{
@@ -321,8 +321,6 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = ipRels
 	case IPNetRecord:
 		relations = ipnetRecordRels
-	case Location:
-		relations = locationRels
 	case Netblock:
 		relations = netblockRels
 	case Organization:
@@ -339,6 +337,8 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = serviceRels
 	case StorageBucket:
 		relations = storageBucketRels
+	case StreetAddress:
+		relations = streetAddressRels
 	case TLSCertificate:
 		relations = tlscertRels
 	case URL:

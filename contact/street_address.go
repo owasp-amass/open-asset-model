@@ -10,8 +10,11 @@ import (
 	model "github.com/owasp-amass/open-asset-model"
 )
 
-// Location represents the street address location.
-type Location struct {
+// StreetAddress represents a street or postal address, as written, with its
+// parsed parts. Its identity is the full address string. A position on the
+// Earth is a GeoLocation, linked from the address when one is known
+// (StreetAddress --geolocation--> GeoLocation).
+type StreetAddress struct {
 	Address        string `json:"address"`
 	Building       string `json:"building,omitempty"`
 	BuildingNumber string `json:"building_number,omitempty"`
@@ -27,16 +30,16 @@ type Location struct {
 }
 
 // Key implements the Asset interface.
-func (a Location) Key() string {
+func (a StreetAddress) Key() string {
 	return a.Address
 }
 
 // AssetType implements the Asset interface.
-func (a Location) AssetType() model.AssetType {
-	return model.Location
+func (a StreetAddress) AssetType() model.AssetType {
+	return model.StreetAddress
 }
 
 // JSON implements the Asset interface.
-func (a Location) JSON() ([]byte, error) {
+func (a StreetAddress) JSON() ([]byte, error) {
 	return json.Marshal(a)
 }

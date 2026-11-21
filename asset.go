@@ -25,7 +25,6 @@ const (
 	Identifier       AssetType = "Identifier"
 	IPAddress        AssetType = "IPAddress"
 	IPNetRecord      AssetType = "IPNetRecord"
-	Location         AssetType = "Location"
 	Netblock         AssetType = "Netblock"
 	Organization     AssetType = "Organization"
 	Person           AssetType = "Person"
@@ -34,12 +33,13 @@ const (
 	ProductRelease   AssetType = "ProductRelease"
 	Service          AssetType = "Service"
 	StorageBucket    AssetType = "StorageBucket"
+	StreetAddress    AssetType = "StreetAddress"
 	TLSCertificate   AssetType = "TLSCertificate"
 	URL              AssetType = "URL"
 )
 
 var AssetList = []AssetType{
 	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, File, FQDN, FundsTransfer,
-	GeoLocation, Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone,
-	Product, ProductRelease, Service, StorageBucket, TLSCertificate, URL,
+	GeoLocation, Identifier, IPAddress, IPNetRecord, Netblock, Organization, Person, Phone,
+	Product, ProductRelease, Service, StorageBucket, StreetAddress, TLSCertificate, URL,
 }

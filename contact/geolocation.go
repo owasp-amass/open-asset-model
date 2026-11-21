@@ -25,7 +25,7 @@ import (
 // photo's GPS is good to meters and an IP geolocation often only to a city.
 //
 // It should support relationships such as the following:
-// - A street address at the position (Location --geolocation--> GeoLocation)
+// - A street address at the position (StreetAddress --geolocation--> GeoLocation)
 // - An IP address geolocated to it (IPAddress --geolocation--> GeoLocation)
 // - A file that records it (File --contains--> GeoLocation)
 type GeoLocation struct {

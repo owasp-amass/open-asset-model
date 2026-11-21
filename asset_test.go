@@ -38,7 +38,6 @@ func TestAssetTypeConstants(t *testing.T) {
 		Identifier,
 		IPAddress,
 		IPNetRecord,
-		Location,
 		Netblock,
 		Organization,
 		Person,
@@ -47,6 +46,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		ProductRelease,
 		Service,
 		StorageBucket,
+		StreetAddress,
 		TLSCertificate,
 		URL,
 	}
@@ -64,7 +64,6 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Identifier",
 		"IPAddress",
 		"IPNetRecord",
-		"Location",
 		"Netblock",
 		"Organization",
 		"Person",
@@ -73,6 +72,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"ProductRelease",
 		"Service",
 		"StorageBucket",
+		"StreetAddress",
 		"TLSCertificate",
 		"URL",
 	}
