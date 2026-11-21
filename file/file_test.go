@@ -13,7 +13,7 @@ import (
 
 func TestFileKey(t *testing.T) {
 	want := "file:///var/html/index.html"
-	f := File{URL: want, Name: "index.html", Type: "Document"}
+	f := File{URL: want, Name: "index.html", Type: "text/html"}
 
 	if got := f.Key(); got != want {
 		t.Errorf("File.Key() = %v, want %v", got, want)
@@ -35,11 +35,12 @@ func TestFileAssetType(t *testing.T) {
 
 func TestFileJSON(t *testing.T) {
 	f := File{
-		URL:  "file:///var/html/index.html",
-		Name: "index.html",
-		Type: "Document",
+		URL:  "https://example.com/reports/annual.pdf",
+		Name: "annual.pdf",
+		Type: "application/pdf",
+		Size: 482133,
 	}
-	expected := `{"url":"file:///var/html/index.html","name":"index.html","type":"Document"}`
+	expected := `{"url":"https://example.com/reports/annual.pdf","name":"annual.pdf","type":"application/pdf","size":482133}`
 	actual, err := f.JSON()
 
 	if err != nil {
@@ -48,5 +49,18 @@ func TestFileJSON(t *testing.T) {
 
 	if !reflect.DeepEqual(string(actual), expected) {
 		t.Errorf("Expected JSON %v but got %v", expected, string(actual))
+	}
+}
+
+func TestFileJSONOmitsUnknownSize(t *testing.T) {
+	f := File{URL: "https://example.com/a.docx", Type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"}
+	got, err := f.JSON()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := `{"url":"https://example.com/a.docx","type":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"}`
+	if string(got) != want {
+		t.Errorf("JSON = %s, want %s", got, want)
 	}
 }

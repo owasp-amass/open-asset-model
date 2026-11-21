@@ -70,6 +70,10 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 var fileRels = map[string]map[RelationType][]AssetType{
 	"url":      {SimpleRelation: {URL}},
 	"contains": {SimpleRelation: {ContactRecord, URL}},
+	// The file's content hash as a shared Identifier (id_type sha256), so the
+	// same document found at several URLs, or published by several parties,
+	// is one hop apart, mirroring the Service and URL fingerprint relations.
+	"fingerprint": {SimpleRelation: {Identifier}},
 }
 
 var fqdnRels = map[string]map[RelationType][]AssetType{
