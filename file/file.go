@@ -13,9 +13,10 @@ import (
 // File represents a file discovered, such as a document or image. Its
 // identity is the URL it was retrieved from; the same content found at several
 // URLs is linked through the File "fingerprint" relation to a shared
-// Identifier holding the content hash. Metadata read from the file (author,
-// software, dates) is recorded as properties, and the people, email addresses
-// and locations it names through the "contains" relation to a ContactRecord.
+// Identifier holding the content hash. Metadata read from the file (title,
+// dates) is recorded as properties; who made it is the "author" relation, the
+// software that made it "created_with", and what its content names (people,
+// accounts, email addresses, host names, places) the "contains" relation.
 type File struct {
 	URL  string `json:"url"`
 	Name string `json:"name,omitempty"`

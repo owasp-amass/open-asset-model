@@ -45,14 +45,14 @@ type TLSCertificate struct {
 	IssuerCommonName      string   `json:"issuer_common_name"`
 	NotBefore             string   `json:"not_before"`
 	NotAfter              string   `json:"not_after"`
-	KeyUsage              []string `json:"key_usage"`
-	ExtKeyUsage           []string `json:"ext_key_usage"`
+	KeyUsage              []string `json:"key_usage,omitempty"`
+	ExtKeyUsage           []string `json:"ext_key_usage,omitempty"`
 	SignatureAlgorithm    string   `json:"signature_algorithm"`
 	PublicKeyAlgorithm    string   `json:"public_key_algorithm"`
 	IsCA                  bool     `json:"is_ca"`
-	CRLDistributionPoints []string `json:"crl_distribution_points"`
-	SubjectKeyID          string   `json:"subject_key_id"`
-	AuthorityKeyID        string   `json:"authority_key_id"`
+	CRLDistributionPoints []string `json:"crl_distribution_points,omitempty"`
+	SubjectKeyID          string   `json:"subject_key_id,omitempty"`
+	AuthorityKeyID        string   `json:"authority_key_id,omitempty"`
 	// PublicKeySHA256 is the lower-case hex SHA-256 of the certificate's DER
 	// SubjectPublicKeyInfo. Two certificates with the same value carry the
 	// same public key, and so the same key pair, whatever their serial or key

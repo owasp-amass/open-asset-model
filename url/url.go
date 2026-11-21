@@ -19,7 +19,7 @@ type URL struct {
 	Password string `json:"password,omitempty"` // Password for authentication
 	Host     string `json:"host"`               // Host
 	Port     int    `json:"port,omitempty"`     // Port
-	Path     string `json:"path"`               // Name
+	Path     string `json:"path,omitempty"`     // Path, empty for a bare host
 	Options  string `json:"options,omitempty"`  // Extra options used while connecting
 	Fragment string `json:"fragment,omitempty"` // Fragment used in URI
 }
