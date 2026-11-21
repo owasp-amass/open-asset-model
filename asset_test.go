@@ -45,6 +45,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		Product,
 		ProductRelease,
 		Service,
+		StorageBucket,
 		TLSCertificate,
 		URL,
 	}
@@ -69,6 +70,7 @@ func TestAssetTypeConstants(t *testing.T) {
 		"Product",
 		"ProductRelease",
 		"Service",
+		"StorageBucket",
 		"TLSCertificate",
 		"URL",
 	}
