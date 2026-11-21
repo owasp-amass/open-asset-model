@@ -10,7 +10,7 @@ import "testing"
 // software that produced it (created_with) and its content hash
 // (fingerprint). Where it was retrieved is the URL "file" relation only.
 func TestFileRelations(t *testing.T) {
-	for _, dst := range []AssetType{ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock,
+	for _, dst := range []AssetType{Account, ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock,
 		Organization, Person, Phone, URL} {
 		if !ValidRelationship(File, "contains", SimpleRelation, dst) {
 			t.Errorf("File --contains--> %s is not valid", dst)

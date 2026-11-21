@@ -70,12 +70,15 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 var fileRels = map[string]map[RelationType][]AssetType{
 	// What the document mentions in its content: names, addresses, ranges,
 	// links, identifiers (email addresses), phone numbers, people,
-	// organizations, places and embedded files. A ContactRecord is used only
-	// for a block of contact details the document holds, such as a signature.
+	// organizations, places and embedded files, and the accounts its metadata
+	// shows (a user directory named in a file path). A ContactRecord is used
+	// only for a block of contact details the document holds, such as a
+	// signature.
 	// Where the file was retrieved is the URL "file" relation (and the
 	// File's key), not a relation of the File.
 	"contains": {SimpleRelation: {
-		ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock, Organization, Person, Phone, URL,
+		Account, ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock, Organization, Person, Phone,
+		URL,
 	}},
 	// Who made the document, as its metadata names them (author, last
 	// modified by): a stronger claim than being mentioned in it.
