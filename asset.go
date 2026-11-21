@@ -32,6 +32,7 @@ const (
 	Product          AssetType = "Product"
 	ProductRelease   AssetType = "ProductRelease"
 	Service          AssetType = "Service"
+	StorageBucket    AssetType = "StorageBucket"
 	TLSCertificate   AssetType = "TLSCertificate"
 	URL              AssetType = "URL"
 )
@@ -39,5 +40,5 @@ const (
 var AssetList = []AssetType{
 	Account, AutnumRecord, AutonomousSystem, ContactRecord, DomainRecord, File, FQDN, FundsTransfer,
 	Identifier, IPAddress, IPNetRecord, Location, Netblock, Organization, Person, Phone, Product,
-	ProductRelease, Service, TLSCertificate, URL,
+	ProductRelease, Service, StorageBucket, TLSCertificate, URL,
 }

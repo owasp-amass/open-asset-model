@@ -93,6 +93,9 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	// same tenant federation trust.
 	"identity_tenant": {SimpleRelation: {Identifier}},
 	"federated_with":  {SimpleRelation: {FQDN}},
+	// An object-storage bucket this name resolves to (an S3/GCS/Azure Blob
+	// host), so a controlled name and the bucket it reaches are one hop apart.
+	"bucket": {SimpleRelation: {StorageBucket}},
 }
 
 var fundsTransferRels = map[string]map[RelationType][]AssetType{
@@ -186,6 +189,12 @@ var serviceRels = map[string]map[RelationType][]AssetType{
 	"security_encryption":      {SimpleRelation: {URL}},
 	"security_acknowledgments": {SimpleRelation: {URL}},
 	"security_hiring":          {SimpleRelation: {URL}},
+}
+
+var storageBucketRels = map[string]map[RelationType][]AssetType{
+	// The cloud provider that operates the bucket's namespace. Uses the same
+	// "provider" convention as netblock.
+	"provider": {SimpleRelation: {Organization}},
 }
 
 var tlscertRels = map[string]map[RelationType][]AssetType{
@@ -296,6 +305,8 @@ func assetTypeRelations(atype AssetType) map[string]map[RelationType][]AssetType
 		relations = productReleaseRels
 	case Service:
 		relations = serviceRels
+	case StorageBucket:
+		relations = storageBucketRels
 	case TLSCertificate:
 		relations = tlscertRels
 	case URL:
