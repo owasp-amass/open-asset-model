@@ -68,11 +68,24 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 }
 
 var fileRels = map[string]map[RelationType][]AssetType{
-	"url":      {SimpleRelation: {URL}},
-	"contains": {SimpleRelation: {ContactRecord, URL}},
-	// The file's content hash as a shared Identifier (id_type sha256), so the
-	// same document found at several URLs, or published by several parties,
-	// is one hop apart, mirroring the Service and URL fingerprint relations.
+	// What the document mentions in its content: names, addresses, ranges,
+	// links, identifiers (email addresses), phone numbers, people,
+	// organizations, places and embedded files. A ContactRecord is used only
+	// for a block of contact details the document holds, such as a signature.
+	// Where the file was retrieved is the URL "file" relation (and the
+	// File's key), not a relation of the File.
+	"contains": {SimpleRelation: {
+		ContactRecord, FQDN, File, Identifier, IPAddress, Location, Netblock, Organization, Person, Phone, URL,
+	}},
+	// Who made the document, as its metadata names them (author, last
+	// modified by): a stronger claim than being mentioned in it.
+	"author": {SimpleRelation: {Organization, Person}},
+	// The software that produced the document, as its metadata names it.
+	"created_with": {SimpleRelation: {Product, ProductRelease}},
+	// The file's content hash as a shared Identifier (id_type file_sha256), so
+	// the same document found at several URLs, or published by several
+	// parties, is one hop apart, mirroring the Service and URL fingerprint
+	// relations.
 	"fingerprint": {SimpleRelation: {Identifier}},
 }
 
