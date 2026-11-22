@@ -136,3 +136,12 @@ func TestBugBountyProgramRelations(t *testing.T) {
 		t.Error("program_page should allow Account --SimpleRelation--> URL")
 	}
 }
+
+func TestRoutingRegistryNetblockRelations(t *testing.T) {
+	if !ValidRelationship(Netblock, "irr_maintainer", SimpleRelation, Identifier) {
+		t.Error("irr_maintainer should allow Netblock --SimpleRelation--> Identifier")
+	}
+	if !ValidRelationship(Netblock, "rpki_origin", SimpleRelation, AutonomousSystem) {
+		t.Error("rpki_origin should allow Netblock --SimpleRelation--> AutonomousSystem")
+	}
+}

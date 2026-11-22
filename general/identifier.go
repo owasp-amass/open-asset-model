@@ -28,6 +28,7 @@ const (
 	IBANCode              = "iban"            // International Bank Account Number
 	ICANNAuthCode         = "icann_auth"      // Auth Code, Internet Corporation for Assigned Names and Numbers
 	ICANNEPPCode          = "icann_epp"       // Extensible Provisioning Protocol (EPP) status code, ICANN
+	IRRMaintainer         = "irr_maintainer"  // Routing registry (IRR) maintainer handle, as <source>:<handle>
 	ISBN                  = "isbn"            // International Standard Book Number
 	ISICCode              = "isic"            // International Standard Industrial Classification
 	LegalName             = "legal_name"      // Legal name

@@ -166,6 +166,10 @@ var netblockRels = map[string]map[RelationType][]AssetType{
 	"contains":     {SimpleRelation: {IPAddress}},
 	"provider":     {SimpleRelation: {Organization}},
 	"registration": {SimpleRelation: {IPNetRecord}},
+	// The maintainer of the netblock's routing registry (IRR) route object,
+	// and each autonomous system a valid RPKI ROA authorizes to announce it.
+	"irr_maintainer": {SimpleRelation: {Identifier}},
+	"rpki_origin":    {SimpleRelation: {AutonomousSystem}},
 }
 
 var orgRels = map[string]map[RelationType][]AssetType{
