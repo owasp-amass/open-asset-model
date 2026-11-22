@@ -35,6 +35,10 @@ const (
 	ExtKeyUsageNetscapeServerGatedCrypto      string = "Netscape Server Gated Crypto"
 	ExtKeyUsageMicrosoftCommercialCodeSigning string = "Microsoft Commercial Code Signing"
 	ExtKeyUsageMicrosoftKernelCodeSigning     string = "Microsoft Kernel Code Signing"
+	// ExtKeyUsageBIMI marks a mark certificate (a Verified or Common Mark
+	// Certificate) for Brand Indicators for Message Identification, OID
+	// 1.3.6.1.5.5.7.3.31.
+	ExtKeyUsageBIMI string = "Brand Indicator for Message Identification"
 )
 
 // TLSCertificate represents a TLS Certificate asset.
