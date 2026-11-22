@@ -31,6 +31,9 @@ var RelationList = []RelationType{
 var accountRels = map[string]map[RelationType][]AssetType{
 	"id":   {SimpleRelation: {Identifier}},
 	"user": {SimpleRelation: {Person, Organization}},
+	// A bug-bounty program's published page and the assets its scope lists.
+	"program_page": {SimpleRelation: {URL}},
+	"in_scope":     {SimpleRelation: {FQDN, Netblock, URL}},
 }
 
 var autnumRecordRels = map[string]map[RelationType][]AssetType{

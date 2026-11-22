@@ -13,6 +13,9 @@ import (
 // Known account types.
 const (
 	Checking = "checking" // Checking bank account
+	// BugBountyProgram is a public bug-bounty or vulnerability disclosure
+	// program; its unique ID is "<platform>:<handle>", such as "hackerone:acme".
+	BugBountyProgram = "bug_bounty_program"
 )
 
 // Account represents an account managed by an organization.

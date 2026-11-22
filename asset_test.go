@@ -125,3 +125,14 @@ func TestResponseHeaderServiceRelations(t *testing.T) {
 		}
 	}
 }
+
+func TestBugBountyProgramRelations(t *testing.T) {
+	for _, dest := range []AssetType{FQDN, Netblock, URL} {
+		if !ValidRelationship(Account, "in_scope", SimpleRelation, dest) {
+			t.Errorf("in_scope should allow Account --SimpleRelation--> %s", dest)
+		}
+	}
+	if !ValidRelationship(Account, "program_page", SimpleRelation, URL) {
+		t.Error("program_page should allow Account --SimpleRelation--> URL")
+	}
+}
