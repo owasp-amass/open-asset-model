@@ -219,6 +219,9 @@ var serviceRels = map[string]map[RelationType][]AssetType{
 	"security_encryption":      {SimpleRelation: {URL}},
 	"security_acknowledgments": {SimpleRelation: {URL}},
 	"security_hiring":          {SimpleRelation: {URL}},
+	// The Tor onion service address the service advertises for itself in its
+	// Onion-Location response header: the same site, reachable over Tor.
+	"onion_location": {SimpleRelation: {URL}},
 }
 
 var storageBucketRels = map[string]map[RelationType][]AssetType{

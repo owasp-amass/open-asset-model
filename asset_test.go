@@ -106,3 +106,13 @@ func TestSecurityTxtServiceRelations(t *testing.T) {
 		t.Error("security_contact should allow Service --SimpleRelation--> ContactRecord")
 	}
 }
+
+func TestOnionLocationServiceRelation(t *testing.T) {
+	found := false
+	for _, r := range GetAssetOutgoingRelations(Service) {
+		found = found || r == "onion_location"
+	}
+	if !found || !ValidRelationship(Service, "onion_location", SimpleRelation, URL) {
+		t.Error("onion_location should allow Service --SimpleRelation--> URL")
+	}
+}
