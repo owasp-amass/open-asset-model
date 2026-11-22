@@ -124,6 +124,12 @@ func TestURLContactRelation(t *testing.T) {
 	}
 }
 
+func TestAccountContactRelation(t *testing.T) {
+	if !ValidRelationship(Account, "contact", SimpleRelation, ContactRecord) {
+		t.Error("contact should allow Account --SimpleRelation--> ContactRecord")
+	}
+}
+
 func TestPackageNamespaceRelations(t *testing.T) {
 	if !ValidRelationship(Account, "package", SimpleRelation, Product) {
 		t.Error("package should allow Account --SimpleRelation--> Product")
@@ -136,6 +142,9 @@ func TestPackageNamespaceRelations(t *testing.T) {
 func TestRoutingRegistryNetblockRelations(t *testing.T) {
 	if !ValidRelationship(Netblock, "irr_maintainer", SimpleRelation, Identifier) {
 		t.Error("irr_maintainer should allow Netblock --SimpleRelation--> Identifier")
+	}
+	if !ValidRelationship(Netblock, "irr_origin", SimpleRelation, AutonomousSystem) {
+		t.Error("irr_origin should allow Netblock --SimpleRelation--> AutonomousSystem")
 	}
 	if !ValidRelationship(Netblock, "rpki_origin", SimpleRelation, AutonomousSystem) {
 		t.Error("rpki_origin should allow Netblock --SimpleRelation--> AutonomousSystem")

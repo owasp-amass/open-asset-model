@@ -20,6 +20,10 @@ const (
 	// as a Maven Central groupId or an npm scope; its unique ID is
 	// "<registry>:<namespace>", such as "maven:com.example" or "npm:@example".
 	PackageNamespace = "package_namespace"
+	// AdsSeller is a seller account on an advertising system, as the ad
+	// system's sellers.json lists it; its unique ID is "<ad system
+	// domain>:<seller ID>", such as "google.com:pub-1234567890".
+	AdsSeller = "ads_seller"
 )
 
 // Account represents an account managed by an organization.

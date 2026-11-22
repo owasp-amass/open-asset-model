@@ -39,6 +39,10 @@ var accountRels = map[string]map[RelationType][]AssetType{
 	// the email addresses that maintain an npm namespace.
 	"package":          {SimpleRelation: {Product}},
 	"namespace_domain": {SimpleRelation: {FQDN}},
+	// Contact information published for the account: the maintainers of a
+	// package namespace, a bug-bounty program's website, or the business
+	// name and domain an ad system's sellers.json lists for a seller account.
+	"contact": {SimpleRelation: {ContactRecord}},
 }
 
 var autnumRecordRels = map[string]map[RelationType][]AssetType{
@@ -176,8 +180,10 @@ var netblockRels = map[string]map[RelationType][]AssetType{
 	"provider":     {SimpleRelation: {Organization}},
 	"registration": {SimpleRelation: {IPNetRecord}},
 	// The maintainer of the netblock's routing registry (IRR) route object,
-	// and each autonomous system a valid RPKI ROA authorizes to announce it.
+	// the origin autonomous system that route object names, and each
+	// autonomous system a valid RPKI ROA authorizes to announce it.
 	"irr_maintainer": {SimpleRelation: {Identifier}},
+	"irr_origin":     {SimpleRelation: {AutonomousSystem}},
 	"rpki_origin":    {SimpleRelation: {AutonomousSystem}},
 }
 
