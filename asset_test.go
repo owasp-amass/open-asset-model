@@ -88,25 +88,6 @@ func TestAssetTypeConstants(t *testing.T) {
 	}
 }
 
-func TestSecurityTxtServiceRelations(t *testing.T) {
-	got := map[string]bool{}
-	for _, r := range GetAssetOutgoingRelations(Service) {
-		got[r] = true
-	}
-	for _, label := range []string{"security_policy", "security_canonical", "security_encryption",
-		"security_acknowledgments", "security_hiring"} {
-		if !got[label] {
-			t.Errorf("Service is missing the %q relation", label)
-		}
-		if !ValidRelationship(Service, label, SimpleRelation, URL) {
-			t.Errorf("%q should allow Service --SimpleRelation--> URL", label)
-		}
-	}
-	if !got["security_contact"] || !ValidRelationship(Service, "security_contact", SimpleRelation, ContactRecord) {
-		t.Error("security_contact should allow Service --SimpleRelation--> ContactRecord")
-	}
-}
-
 func TestOnionLocationServiceRelation(t *testing.T) {
 	found := false
 	for _, r := range GetAssetOutgoingRelations(Service) {
@@ -134,6 +115,12 @@ func TestBugBountyProgramRelations(t *testing.T) {
 	}
 	if !ValidRelationship(Account, "program_page", SimpleRelation, URL) {
 		t.Error("program_page should allow Account --SimpleRelation--> URL")
+	}
+}
+
+func TestURLContactRelation(t *testing.T) {
+	if !ValidRelationship(URL, "contact", SimpleRelation, ContactRecord) {
+		t.Error("contact should allow URL --SimpleRelation--> ContactRecord")
 	}
 }
 

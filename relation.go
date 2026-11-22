@@ -226,15 +226,9 @@ var serviceRels = map[string]map[RelationType][]AssetType{
 	// content hash, analytics identifier, SSH host key) as a shared Identifier,
 	// so services and hosts carrying the same value are one hop apart and can be
 	// pivoted on in the graph. The Identifier's id_type names the fingerprint.
-	"fingerprint":              {SimpleRelation: {Identifier}},
-	"terms_of_service":         {SimpleRelation: {File, URL}},
-	"product_used":             {SimpleRelation: {Product, ProductRelease}},
-	"security_contact":         {SimpleRelation: {ContactRecord}},
-	"security_policy":          {SimpleRelation: {URL}},
-	"security_canonical":       {SimpleRelation: {URL}},
-	"security_encryption":      {SimpleRelation: {URL}},
-	"security_acknowledgments": {SimpleRelation: {URL}},
-	"security_hiring":          {SimpleRelation: {URL}},
+	"fingerprint":      {SimpleRelation: {Identifier}},
+	"terms_of_service": {SimpleRelation: {File, URL}},
+	"product_used":     {SimpleRelation: {Product, ProductRelease}},
 	// The Tor onion service address the service advertises for itself in its
 	// Onion-Location response header: the same site, reachable over Tor.
 	"onion_location": {SimpleRelation: {URL}},
@@ -275,6 +269,10 @@ var urlRels = map[string]map[RelationType][]AssetType{
 	// A fingerprint (e.g. an analytics identifier) of the page at this URL, as a
 	// shared Identifier, mirroring the service fingerprint relation.
 	"fingerprint": {SimpleRelation: {Identifier}},
+	// Contact information the page or file at this URL publishes, such as
+	// the contacts a security.txt file lists or the owner domain and contact
+	// an ads.txt file names.
+	"contact": {SimpleRelation: {ContactRecord}},
 }
 
 // GetAssetOutgoingRelations returns the relation types allowed to be used
