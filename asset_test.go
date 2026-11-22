@@ -145,3 +145,14 @@ func TestRoutingRegistryNetblockRelations(t *testing.T) {
 		t.Error("rpki_origin should allow Netblock --SimpleRelation--> AutonomousSystem")
 	}
 }
+
+func TestSOAAndSPFRangeRelations(t *testing.T) {
+	if !ValidRelationship(FQDN, "soa_rname", SimpleRelation, Identifier) {
+		t.Error("soa_rname should allow FQDN --SimpleRelation--> Identifier")
+	}
+	for _, dest := range []AssetType{FQDN, Netblock, IPAddress} {
+		if !ValidRelationship(FQDN, "spf_authorizes", SimpleRelation, dest) {
+			t.Errorf("spf_authorizes should allow FQDN --SimpleRelation--> %s", dest)
+		}
+	}
+}

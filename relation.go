@@ -108,9 +108,13 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	// A domain's published mail policy names other domains: its SPF record
 	// authorizes a domain's senders (include:/redirect=), and its DMARC record
 	// sends reports to a domain (rua/ruf mailto). The raw policy stays in the
-	// TXT record; these edges make the references pivotable.
-	"spf_authorizes":   {SimpleRelation: {FQDN}},
+	// TXT record; these edges make the references pivotable. An SPF record's
+	// ip4:/ip6: terms authorize address ranges and single addresses.
+	"spf_authorizes":   {SimpleRelation: {FQDN, Netblock, IPAddress}},
 	"dmarc_reports_to": {SimpleRelation: {FQDN}},
+	// The zone administrator's mailbox from the domain's SOA record (RNAME),
+	// as an email Identifier.
+	"soa_rname": {SimpleRelation: {Identifier}},
 	// Identity-fabric relations: the domain's identity tenant (an Entra tenant
 	// GUID or Okta org, as an Identifier) and the sibling domains that share the
 	// same tenant federation trust.
