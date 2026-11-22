@@ -48,6 +48,7 @@ const (
 	SWIFTCode             = "swift"           // Society for Worldwide Interbank Financial Telecommunication
 	TaxIDNumber           = "tin"             // Taxpayer Identification Number
 	TickerSymbol          = "ticker"          // Stock ticker symbol
+	TrademarkRegistration = "trademark"       // Trademark registration, as <country>:<registration number>
 	UPCNumberA            = "upc_a"           // Universal Product Code (UPC) Version A
 	UPCNumberE            = "upc_e"           // Universal Product Code (UPC) Version E
 	VersionNumber         = "version"         // Version number
