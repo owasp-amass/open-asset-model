@@ -116,3 +116,12 @@ func TestOnionLocationServiceRelation(t *testing.T) {
 		t.Error("onion_location should allow Service --SimpleRelation--> URL")
 	}
 }
+
+func TestResponseHeaderServiceRelations(t *testing.T) {
+	for label, dest := range map[string]AssetType{"content_source": FQDN, "allowed_origin": FQDN,
+		"report_endpoint": URL} {
+		if !ValidRelationship(Service, label, SimpleRelation, dest) {
+			t.Errorf("%q should allow Service --SimpleRelation--> %s", label, dest)
+		}
+	}
+}

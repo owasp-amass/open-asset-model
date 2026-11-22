@@ -222,6 +222,14 @@ var serviceRels = map[string]map[RelationType][]AssetType{
 	// The Tor onion service address the service advertises for itself in its
 	// Onion-Location response header: the same site, reachable over Tor.
 	"onion_location": {SimpleRelation: {URL}},
+	// Hosts the service's response headers name. content_source: a host its
+	// Content-Security-Policy lets it load scripts, frames, connections or
+	// other content from. allowed_origin: an origin its CORS
+	// Access-Control-Allow-Origin or CSP frame-ancestors lets call or embed
+	// it. report_endpoint: where it sends CSP, NEL and other browser reports.
+	"content_source":  {SimpleRelation: {FQDN}},
+	"allowed_origin":  {SimpleRelation: {FQDN}},
+	"report_endpoint": {SimpleRelation: {URL}},
 }
 
 var storageBucketRels = map[string]map[RelationType][]AssetType{
