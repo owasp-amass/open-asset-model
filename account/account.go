@@ -16,6 +16,10 @@ const (
 	// BugBountyProgram is a public bug-bounty or vulnerability disclosure
 	// program; its unique ID is "<platform>:<handle>", such as "hackerone:acme".
 	BugBountyProgram = "bug_bounty_program"
+	// PackageNamespace is a namespace on a software package registry, such
+	// as a Maven Central groupId or an npm scope; its unique ID is
+	// "<registry>:<namespace>", such as "maven:com.example" or "npm:@example".
+	PackageNamespace = "package_namespace"
 )
 
 // Account represents an account managed by an organization.

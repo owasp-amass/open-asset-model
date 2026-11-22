@@ -34,6 +34,11 @@ var accountRels = map[string]map[RelationType][]AssetType{
 	// A bug-bounty program's published page and the assets its scope lists.
 	"program_page": {SimpleRelation: {URL}},
 	"in_scope":     {SimpleRelation: {FQDN, Netblock, URL}},
+	// A package registry namespace's published packages, and the domain the
+	// namespace is tied to: the domain a Maven groupId names, or the domain of
+	// the email addresses that maintain an npm namespace.
+	"package":          {SimpleRelation: {Product}},
+	"namespace_domain": {SimpleRelation: {FQDN}},
 }
 
 var autnumRecordRels = map[string]map[RelationType][]AssetType{

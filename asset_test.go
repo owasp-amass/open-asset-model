@@ -137,6 +137,15 @@ func TestBugBountyProgramRelations(t *testing.T) {
 	}
 }
 
+func TestPackageNamespaceRelations(t *testing.T) {
+	if !ValidRelationship(Account, "package", SimpleRelation, Product) {
+		t.Error("package should allow Account --SimpleRelation--> Product")
+	}
+	if !ValidRelationship(Account, "namespace_domain", SimpleRelation, FQDN) {
+		t.Error("namespace_domain should allow Account --SimpleRelation--> FQDN")
+	}
+}
+
 func TestRoutingRegistryNetblockRelations(t *testing.T) {
 	if !ValidRelationship(Netblock, "irr_maintainer", SimpleRelation, Identifier) {
 		t.Error("irr_maintainer should allow Netblock --SimpleRelation--> Identifier")

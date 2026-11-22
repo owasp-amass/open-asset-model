@@ -42,6 +42,7 @@ const (
 	OktaOrg               = "okta_org"        // Okta organization slug / org identifier
 	OpenCorpID            = "ocid"            // OpenCorporates ID, identifier for a corporation in the OpenCorporates database
 	OrganizationName      = "org_name"        // Organization name
+	PackageURL            = "purl"            // Package URL (pkg:<type>/<namespace>/<name>), the software package identifier of github.com/package-url/purl-spec
 	SerialNumber          = "serial"          // Serial number
 	SICCode               = "sic"             // Standard Industrial Classification
 	SPGlobalCompanyID     = "spglobal"        // S&P Global Company ID, S&P Global Market Intelligence
