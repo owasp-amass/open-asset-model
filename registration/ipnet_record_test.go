@@ -12,7 +12,7 @@ import (
 )
 
 func TestIPNetRecordKey(t *testing.T) {
-	want := "NET-150-154-0-0-1"
+	want := "NET-198-51-100-0-1"
 	as := IPNetRecord{Handle: want}
 
 	if got := as.Key(); got != want {
@@ -33,14 +33,14 @@ func TestIPNetRecordAssetType(t *testing.T) {
 }
 func TestIPNetRecord(t *testing.T) {
 	record := IPNetRecord{
-		CIDR:         netip.MustParsePrefix("150.154.0.0/16"),
-		Handle:       "NET-150-154-0-0-1",
-		StartAddress: netip.MustParseAddr("150.154.0.0"),
-		EndAddress:   netip.MustParseAddr("150.154.255.255"),
+		CIDR:         netip.MustParsePrefix("198.51.100.0/24"),
+		Handle:       "NET-198-51-100-0-1",
+		StartAddress: netip.MustParseAddr("198.51.100.0"),
+		EndAddress:   netip.MustParseAddr("198.51.100.255"),
 		Type:         "IPv4",
-		Name:         "REV-MVCC",
+		Name:         "EXAMPLE-NET",
 		Method:       "DIRECT ALLOCATION",
-		ParentHandle: "NET-150-0-0-0-0",
+		ParentHandle: "NET-198-0-0-0-0",
 		WhoisServer:  "whois.arin.net",
 		CreatedDate:  "1991-05-20 04:00:00",
 		UpdatedDate:  "2024-03-28 18:47:50",
@@ -53,7 +53,7 @@ func TestIPNetRecord(t *testing.T) {
 	}
 
 	// Test JSON method
-	expectedJSON := `{"cidr":"150.154.0.0/16","handle":"NET-150-154-0-0-1","start_address":"150.154.0.0","end_address":"150.154.255.255","type":"IPv4","name":"REV-MVCC","method":"DIRECT ALLOCATION","parent_handle":"NET-150-0-0-0-0","whois_server":"whois.arin.net","created_date":"1991-05-20 04:00:00","updated_date":"2024-03-28 18:47:50","status":["active"]}`
+	expectedJSON := `{"cidr":"198.51.100.0/24","handle":"NET-198-51-100-0-1","start_address":"198.51.100.0","end_address":"198.51.100.255","type":"IPv4","name":"EXAMPLE-NET","method":"DIRECT ALLOCATION","parent_handle":"NET-198-0-0-0-0","whois_server":"whois.arin.net","created_date":"1991-05-20 04:00:00","updated_date":"2024-03-28 18:47:50","status":["active"]}`
 	json, err := record.JSON()
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
