@@ -57,6 +57,10 @@ var autnumRecordRels = map[string]map[RelationType][]AssetType{
 var autonomousSystemRels = map[string]map[RelationType][]AssetType{
 	"announces":    {SimpleRelation: {Netblock}},
 	"registration": {SimpleRelation: {AutnumRecord}},
+	// The operator record the network keeps about itself in an
+	// interconnection database (PeeringDB): the organization running it, its
+	// website and address.
+	"contact": {SimpleRelation: {ContactRecord}},
 }
 
 var contactRecordRels = map[string]map[RelationType][]AssetType{
