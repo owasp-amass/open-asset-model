@@ -55,6 +55,17 @@ const (
 	VersionNumber         = "version"         // Version number
 )
 
+// Identifiers of what was found exposed in collected content.
+const (
+	// AWSAccessKeyID is an AWS access key ID (AKIA… or ASIA…), the public
+	// half of a key pair; AWSAccountID an AWS account ID (12 digits).
+	AWSAccessKeyID = "aws_access_key_id"
+	AWSAccountID   = "aws_account_id"
+	// ExposedSecret is a credential found exposed, as <kind>:<SHA-256 of
+	// its value>. The value itself is never an Identifier.
+	ExposedSecret = "exposed_secret"
+)
+
 // Identifier identifies something that's a member of a system or organization that issues ID numbers or codes.
 // Should support relationships for the following:
 // - Registration agency (e.g., ContactRecord)

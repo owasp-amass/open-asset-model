@@ -90,6 +90,9 @@ var domainRecordRels = map[string]map[RelationType][]AssetType{
 }
 
 var fileRels = map[string]map[RelationType][]AssetType{
+	// A credential or cloud identifier found in what the asset published
+	// (an exposed secret, an AWS access key ID or account ID).
+	"discloses": {SimpleRelation: {Identifier}},
 	// What the document mentions in its content: names, addresses, ranges,
 	// links, identifiers (email addresses), phone numbers, people,
 	// organizations, places and embedded files, and the accounts its metadata
@@ -115,7 +118,10 @@ var fileRels = map[string]map[RelationType][]AssetType{
 }
 
 var fqdnRels = map[string]map[RelationType][]AssetType{
-	"port": {PortRelation: {Service}},
+	// A credential or cloud identifier found in what the asset published
+	// (an exposed secret, an AWS access key ID or account ID).
+	"discloses": {SimpleRelation: {Identifier}},
+	"port":      {PortRelation: {Service}},
 	"dns_record": {
 		BasicDNSRelation: {FQDN, IPAddress},
 		PrefDNSRelation:  {FQDN},
@@ -157,6 +163,8 @@ var fundsTransferRels = map[string]map[RelationType][]AssetType{
 }
 
 var identifierRels = map[string]map[RelationType][]AssetType{
+	// The cloud account an access key ID belongs to.
+	"cloud_account":       {SimpleRelation: {Identifier}},
 	"registration_agency": {SimpleRelation: {ContactRecord}},
 	"issuing_authority":   {SimpleRelation: {ContactRecord}},
 	"issuing_agent":       {SimpleRelation: {ContactRecord}},
@@ -241,6 +249,9 @@ var productReleaseRels = map[string]map[RelationType][]AssetType{
 }
 
 var serviceRels = map[string]map[RelationType][]AssetType{
+	// A credential or cloud identifier found in what the asset published
+	// (an exposed secret, an AWS access key ID or account ID).
+	"discloses":   {SimpleRelation: {Identifier}},
 	"provider":    {SimpleRelation: {Organization}},
 	"certificate": {SimpleRelation: {TLSCertificate}},
 	// A fingerprint of what the service served (favicon hash, JARM, page title,
@@ -283,6 +294,9 @@ var tlscertRels = map[string]map[RelationType][]AssetType{
 }
 
 var urlRels = map[string]map[RelationType][]AssetType{
+	// A credential or cloud identifier found in what the asset published
+	// (an exposed secret, an AWS access key ID or account ID).
+	"discloses":  {SimpleRelation: {Identifier}},
 	"domain":     {SimpleRelation: {FQDN}},
 	"ip_address": {SimpleRelation: {IPAddress}},
 	"port":       {PortRelation: {Service}},
