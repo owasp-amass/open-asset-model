@@ -24,6 +24,11 @@ const (
 	// system's sellers.json lists it; its unique ID is "<ad system
 	// domain>:<seller ID>", such as "google.com:pub-1234567890".
 	AdsSeller = "ads_seller"
+	// CodeHostOrganization is an organization on a code host, such as a
+	// GitHub organization or a GitLab group; CodeHostUser is a user there.
+	// Their unique IDs are "<host>:<handle>", such as "github:owasp".
+	CodeHostOrganization = "code_host_organization"
+	CodeHostUser         = "code_host_user"
 )
 
 // Account represents an account managed by an organization.

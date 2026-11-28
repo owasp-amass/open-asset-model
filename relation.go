@@ -35,10 +35,16 @@ var accountRels = map[string]map[RelationType][]AssetType{
 	"program_page": {SimpleRelation: {URL}},
 	"in_scope":     {SimpleRelation: {FQDN, Netblock, URL}},
 	// A package registry namespace's published packages, and the domain the
-	// namespace is tied to: the domain a Maven groupId names, or the domain of
-	// the email addresses that maintain an npm namespace.
+	// namespace or code-host organization is tied to: the domain a Maven
+	// groupId names, the domain of the email addresses that maintain an npm
+	// namespace, or the domain a code-host organization names as its website.
 	"package":          {SimpleRelation: {Product}},
 	"namespace_domain": {SimpleRelation: {FQDN}},
+	// A code-host organization's repositories (their pages), the websites it
+	// and its repositories name, and the users it lists as its members.
+	"repository": {SimpleRelation: {URL}},
+	"website":    {SimpleRelation: {URL}},
+	"member":     {SimpleRelation: {Account}},
 	// Contact information published for the account: the maintainers of a
 	// package namespace, a bug-bounty program's website, or the business
 	// name and domain an ad system's sellers.json lists for a seller account.
