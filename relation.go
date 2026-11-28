@@ -129,6 +129,11 @@ var fqdnRels = map[string]map[RelationType][]AssetType{
 	// same tenant federation trust.
 	"identity_tenant": {SimpleRelation: {Identifier}},
 	"federated_with":  {SimpleRelation: {FQDN}},
+	// The host the domain's users sign in at (a federation server, or an
+	// identity provider's tenant host such as an Okta or Auth0 name), and a
+	// certificate the host's federation metadata names for signing tokens.
+	"identity_provider":   {SimpleRelation: {FQDN}},
+	"signing_certificate": {SimpleRelation: {TLSCertificate}},
 	// An object-storage bucket this name resolves to (an S3/GCS/Azure Blob
 	// host), so a controlled name and the bucket it reaches are one hop apart.
 	"bucket": {SimpleRelation: {StorageBucket}},
